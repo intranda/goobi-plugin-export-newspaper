@@ -37,7 +37,9 @@ import ugh.exceptions.DocStructHasNoTypeException;
 import ugh.exceptions.MetadataTypeNotAllowedException;
 import ugh.exceptions.PreferencesException;
 import ugh.exceptions.ReadException;
+import ugh.exceptions.TypeNotAllowedAsChildException;
 import ugh.exceptions.TypeNotAllowedForParentException;
+import ugh.exceptions.UGHException;
 import ugh.exceptions.WriteException;
 import ugh.fileformats.mets.MetsModsImportExport;
 
@@ -87,12 +89,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         MetadataType zdbIdType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbid"));
         MetadataType identifierType = prefs.getMetadataTypeByName(config.getString("/metadata/identifier"));
         MetadataType dateType = prefs.getMetadataTypeByName(config.getString("/metadata/date"));
+        MetadataType labelType = prefs.getMetadataTypeByName("TitleDocMain");
 
-        DocStructType newspaperType = prefs.getDocStrctTypeByName("/docstruct/newspaper");
-        DocStructType yearType = prefs.getDocStrctTypeByName("/docstruct/year");
-        DocStructType monthType = prefs.getDocStrctTypeByName("/docstruct/month");
-        DocStructType dayType = prefs.getDocStrctTypeByName("/docstruct/day");
-        DocStructType issueType = prefs.getDocStrctTypeByName("/docstruct/issue");
+        DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
+        DocStructType yearType = prefs.getDocStrctTypeByName(config.getString("/docstruct/year"));
+        DocStructType monthType = prefs.getDocStrctTypeByName(config.getString("/docstruct/month"));
+        DocStructType dayType = prefs.getDocStrctTypeByName(config.getString("/docstruct/day"));
+        DocStructType issueType = prefs.getDocStrctTypeByName(config.getString("/docstruct/issue"));
 
         // read fileformat
         Fileformat fileformat = process.readMetadataFile();
@@ -135,8 +138,100 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         DocStruct newspaper = copyDocstruct(newspaperType, logical, dd);
         dd.setLogicalDocStruct(newspaper);
 
-        // create anchor file for year
+        // create volume for year
+
+        // create new anchor for the year
         // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0
+        DocStruct yearVolume = copyDocstruct(yearType, volume, dd);
+
+        try {
+            newspaper.addChild(yearVolume);
+        } catch (TypeNotAllowedAsChildException e) {
+            log.error(e);
+        }
+
+        for (DocStruct issue : issues) {
+            List<? extends Metadata> dates = issue.getAllMetadataByType(dateType);
+            if (dates == null || dates.isEmpty()) {
+                // TODO error?
+            }
+            String dateValue = dates.get(0).getValue();
+            if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                System.out.println(dateValue);
+                // TODO error
+            }
+
+            if (StringUtils.isBlank(yearVolume.getOrderLabel())) {
+                yearVolume.setOrderLabel(dateValue.substring(0, 4));
+            }
+
+            String monthValue = dateValue.substring(0, 7);
+
+            DocStruct currentMonth = null;
+            DocStruct currentDay = null;
+            if (yearVolume.getAllChildren() != null) {
+                for (DocStruct monthDocStruct : yearVolume.getAllChildren()) {
+                    String currentDate = monthDocStruct.getOrderLabel();
+                    if (monthValue.equals(currentDate)) {
+                        currentMonth = monthDocStruct;
+                        break;
+                    }
+                }
+            }
+            if (currentMonth == null) {
+                try {
+                    currentMonth = dd.createDocStruct(monthType);
+                    currentMonth.setOrderLabel(monthValue);
+
+                    yearVolume.addChild(currentMonth);
+                } catch (TypeNotAllowedAsChildException e) {
+                    log.error(e);
+                }
+            }
+            if (currentMonth.getAllChildren() != null) {
+                for (DocStruct dayDocStruct : currentMonth.getAllChildren()) {
+                    String currentDate = dayDocStruct.getOrderLabel();
+                    if (dateValue.equals(currentDate)) {
+                        currentDay = dayDocStruct;
+                        break;
+                    }
+                }
+            }
+            if (currentDay == null) {
+                try {
+                    currentDay = dd.createDocStruct(dayType);
+                    currentDay.setOrderLabel(dateValue);
+                    currentMonth.addChild(currentDay);
+                } catch (TypeNotAllowedAsChildException e) {
+                    log.error(e);
+                }
+            }
+            try {
+                DocStruct newIssue = dd.createDocStruct(issueType);
+                newIssue.setOrderLabel(dateValue);
+                currentDay.addChild(newIssue);
+                if (issue.getAllMetadata() != null) {
+                    for (Metadata md : issue.getAllMetadata()) {
+                        if (md.getType().equals(labelType)) {
+                            Metadata label = new Metadata(labelType);
+                            label.setValue(md.getValue());
+                            newIssue.addMetadata(label);
+
+                        }
+                    }
+                }
+                // generate identifier
+
+
+
+                newIssue.setLink("https://example.org/viewer/metsresolver?id=" + identifier + "_" + dateValue);
+
+            } catch (TypeNotAllowedAsChildException e) {
+                log.error(e);
+            }
+
+            // TODO create hierarchy for individual issue file
+        }
 
         // for each issue, get normalized date, parse it
         // check if month and day exist or create months and days in year struct
@@ -147,58 +242,83 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0
         // export each issue
 
-        // export year
+        // export newspaper and  year
+        // TODO export/save newspaperExport to temp folder
 
-        // export anchor
+        newspaperExport.write("/tmp/" + process.getTitel() + ".xml");
+
+        // open year file
+        //TODO   ORDERLABEL mptr
 
         return true;
     }
 
-    private DocStruct copyDocstruct(DocStructType docstructType, DocStruct oldDocstruct, DigitalDocument dd)
-            throws TypeNotAllowedForParentException, MetadataTypeNotAllowedException {
+    private DocStruct copyDocstruct(DocStructType docstructType, DocStruct oldDocstruct, DigitalDocument dd) {
 
         // create new docstruct
-        DocStruct newDocstruct = dd.createDocStruct(docstructType);
+        DocStruct newDocstruct = null;
+        try {
+            newDocstruct = dd.createDocStruct(docstructType);
+        } catch (TypeNotAllowedForParentException e1) {
+            log.error(e1);
+            return null;
+        }
 
         // copy metadata
         if (oldDocstruct.getAllMetadata() != null) {
             for (Metadata md : oldDocstruct.getAllMetadata()) {
-                Metadata clone = new Metadata(md.getType());
-                clone.setValue(md.getValue());
-                clone.setAutorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
-                newDocstruct.addMetadata(clone);
+                try {
+                    Metadata clone = new Metadata(md.getType());
+                    clone.setValue(md.getValue());
+                    clone.setAutorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
+                    newDocstruct.addMetadata(clone);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
             }
         }
 
         // copy persons
         if (oldDocstruct.getAllPersons() != null) {
             for (Person p : oldDocstruct.getAllPersons()) {
-                Person clone = new Person(p.getType());
-                clone.setFirstname(p.getFirstname());
-                clone.setLastname(p.getLastname());
-                clone.setAutorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
-                newDocstruct.addPerson(clone);
+                try {
+                    Person clone = new Person(p.getType());
+                    clone.setFirstname(p.getFirstname());
+                    clone.setLastname(p.getLastname());
+                    clone.setAutorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
+                    newDocstruct.addPerson(clone);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
             }
         }
 
         // copy corporates
         if (oldDocstruct.getAllCorporates() != null) {
             for (Corporate c : oldDocstruct.getAllCorporates()) {
-                Corporate clone = new Corporate(c.getType());
-                clone.setMainName(c.getMainName());
-                ;
-                clone.setPartName(c.getPartName());
-                clone.setSubNames(c.getSubNames());
-                clone.setAutorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
-                newDocstruct.addCorporate(clone);
+                try {
+                    Corporate clone = new Corporate(c.getType());
+                    clone.setMainName(c.getMainName());
+
+                    clone.setPartName(c.getPartName());
+                    clone.setSubNames(c.getSubNames());
+                    clone.setAutorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
+                    newDocstruct.addCorporate(clone);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
             }
         }
 
         // copy groups
         if (oldDocstruct.getAllMetadataGroups() != null) {
             for (MetadataGroup mg : oldDocstruct.getAllMetadataGroups()) {
-                MetadataGroup newMetadataGroup = cloneMetadataGroup(mg);
-                newDocstruct.addMetadataGroup(newMetadataGroup);
+                try {
+                    MetadataGroup newMetadataGroup = cloneMetadataGroup(mg);
+                    newDocstruct.addMetadataGroup(newMetadataGroup);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
             }
         }
 
