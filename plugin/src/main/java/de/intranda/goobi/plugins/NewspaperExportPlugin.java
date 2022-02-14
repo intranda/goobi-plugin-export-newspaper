@@ -94,15 +94,20 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         XMLConfiguration config = ConfigPlugins.getPluginConfig(title);
         config.setExpressionEngine(new XPathExpressionEngine());
 
-
-
-
-
         MetadataType zdbIdType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbid"));
         MetadataType identifierType = prefs.getMetadataTypeByName(config.getString("/metadata/identifier"));
         MetadataType issueDateType = prefs.getMetadataTypeByName(config.getString("/metadata/issueDate"));
         MetadataType yearDateType = prefs.getMetadataTypeByName(config.getString("/metadata/yearDate"));
-        MetadataType labelType = prefs.getMetadataTypeByName("TitleDocMain");
+
+        MetadataType labelType = prefs.getMetadataTypeByName(config.getString("/metadata/titleLabel"));
+        MetadataType mainTitleType = prefs.getMetadataTypeByName(config.getString("/metadata/modsTitle"));
+
+        MetadataType issueNumberType = prefs.getMetadataTypeByName(config.getString("/metadata/issueNumber"));
+        MetadataType sortNumberType = prefs.getMetadataTypeByName(config.getString("/metadata/sortNumber"));
+
+        MetadataType languageType = prefs.getMetadataTypeByName(config.getString("/metadata/language"));
+        MetadataType locationType = prefs.getMetadataTypeByName(config.getString("/metadata/location"));
+        MetadataType accessConditionType = prefs.getMetadataTypeByName(config.getString("/metadata/licence"));
 
         DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
         DocStructType yearType = prefs.getDocStrctTypeByName(config.getString("/docstruct/year"));
@@ -111,7 +116,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         DocStructType issueType = prefs.getDocStrctTypeByName(config.getString("/docstruct/issue"));
 
         DocStructType newspaperStubType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaperStub"));
-
 
         // read fileformat
         Fileformat fileformat = process.readMetadataFile();
@@ -128,7 +132,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
         String zdbId = null;
         String identifier = null;
-        String mainTitle= null;
+        String titleLabel = null;
+        String mainTitle = null;
+        String language = null;
+        String location = null;
+        String accessCondition = null;
 
         for (Metadata md : logical.getAllMetadata()) {
             //  get zdb id
@@ -139,26 +147,75 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             else if (md.getType().equals(identifierType)) {
                 identifier = md.getValue();
             } else if (md.getType().equals(labelType)) {
+                titleLabel = md.getValue();
+            } else if (md.getType().equals(mainTitleType)) {
                 mainTitle = md.getValue();
+            } else if (md.getType().equals(issueNumberType)) {
+                language = md.getValue();
+            } else if (md.getType().equals(locationType)) {
+                location = md.getValue();
+            } else if (md.getType().equals(accessConditionType)) {
+                accessCondition = md.getValue();
             }
-
         }
+        if (StringUtils.isBlank(mainTitle) && StringUtils.isNotBlank(titleLabel)) {
+            Metadata md = new Metadata(mainTitleType);
+            md.setValue(titleLabel);
+            logical.addMetadata(md);
+        }
+
         if (StringUtils.isBlank(zdbId) || StringUtils.isBlank(identifier)) {
             // TODO return error
         }
 
-        // list all issues
         DocStruct volume = logical.getAllChildren().get(0);
-
+        String volumeLabel = null;
+        String volumeTitle = null;
         String publicationYear = null;
-        for (Metadata md : volume.getAllMetadata()) {
+        String sortNumber = null;
+        String issueNumber = null;
 
+        for (Metadata md : volume.getAllMetadata()) {
             // get current year
             if (md.getType().equals(yearDateType)) {
                 publicationYear = md.getValue();
             }
+            if (md.getType().equals(labelType)) {
+                volumeLabel = md.getValue();
+            }
+            if (md.getType().equals(mainTitleType)) {
+                volumeTitle = md.getValue();
+            }
+            if (md.getType().equals(sortNumberType)) {
+                sortNumber = md.getValue();
+            }
+            if (md.getType().equals(issueNumberType)) {
+                issueNumber = md.getValue();
+            }
+            if (language == null && md.getType().equals(languageType)) {
+                language = md.getValue();
+            }
+            if (location == null && md.getType().equals(locationType)) {
+                location = md.getValue();
+            }
+            if (accessCondition == null && md.getType().equals(accessConditionType)) {
+                accessCondition = md.getValue();
+            }
         }
 
+        if (StringUtils.isBlank(volumeTitle) && StringUtils.isNotBlank(volumeLabel)) {
+            Metadata md = new Metadata(mainTitleType);
+            md.setValue(volumeLabel);
+            volume.addMetadata(md);
+        }
+
+        if (StringUtils.isBlank(sortNumber) && StringUtils.isNotBlank(issueNumber) && StringUtils.isNumeric(issueNumber)) {
+            Metadata md = new Metadata(sortNumberType);
+            md.setValue(issueNumber);
+            volume.addMetadata(md);
+        }
+
+        // list all issues
         List<DocStruct> issues = volume.getAllChildren();
 
         // create new anchor file for newspaper
@@ -225,11 +282,97 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0
             // export each issue
 
-            List<? extends Metadata> dates = issue.getAllMetadataByType(issueDateType);
-            if (dates == null || dates.isEmpty()) {
+            // check if required metadata is available, otherwise add it
+
+            String issueLabel = null;
+            String issueTitle = null;
+            String issueNo = null;
+            String issueSortingNumber = null;
+            String issueLanguage = null;
+            String issueLocation = null;
+            String issueLicence = null;
+            String issueZdbId = null;
+            String issueIdentifier = null;
+            String dateValue = null;
+            for (Metadata md : issue.getAllMetadata()) {
+                if (md.getType().equals(zdbIdType)) {
+                    issueZdbId = md.getValue();
+                }
+                if (md.getType().equals(identifierType)) {
+                    issueIdentifier = md.getValue();
+                }
+                if (md.getType().equals(labelType)) {
+                    issueLabel = md.getValue();
+                }
+                if (md.getType().equals(mainTitleType)) {
+                    issueTitle = md.getValue();
+                }
+                if (md.getType().equals(issueNumberType)) {
+                    issueNo = md.getValue();
+                }
+                if (md.getType().equals(sortNumberType)) {
+                    issueSortingNumber = md.getValue();
+                }
+                if (md.getType().equals(issueDateType)) {
+                    dateValue = md.getValue();
+                }
+                if (language == null && md.getType().equals(languageType)) {
+                    issueLanguage = md.getValue();
+                }
+                if (location == null && md.getType().equals(locationType)) {
+                    issueLocation = md.getValue();
+                }
+                if (accessCondition == null && md.getType().equals(accessConditionType)) {
+                    issueLicence = md.getValue();
+                }
+
+            }
+            // copy metadata from anchor into the issue
+            if (StringUtils.isBlank(issueTitle) && StringUtils.isNotBlank(issueLabel)) {
+                Metadata md = new Metadata(mainTitleType);
+                md.setValue(issueLabel);
+                issue.addMetadata(md);
+            }
+            if (StringUtils.isBlank(issueSortingNumber) && StringUtils.isNotBlank(issueNo) && StringUtils.isNumeric(issueNo)) {
+                Metadata md = new Metadata(sortNumberType);
+                md.setValue(issueNo);
+                issue.addMetadata(md);
+                issueSortingNumber=issueNo;
+            }
+            if (StringUtils.isBlank(issueLanguage) && StringUtils.isNotBlank(language)) {
+                Metadata md = new Metadata(languageType);
+                md.setValue(language);
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(issueLocation) && StringUtils.isNotBlank(location)) {
+                Metadata md = new Metadata(locationType);
+                md.setValue(location);
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(issueLicence) && StringUtils.isNotBlank(accessCondition)) {
+                Metadata md = new Metadata(accessConditionType);
+                md.setValue(accessCondition);
+                issue.addMetadata(md);
+            }
+            if (StringUtils.isBlank(issueZdbId) && StringUtils.isNotBlank(zdbId)) {
+                Metadata md = new Metadata(zdbIdType);
+                md.setValue(zdbId);
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(issueIdentifier)) {
+                issueIdentifier = identifier + "_" + dateValue + "_" + issueSortingNumber;
+                Metadata md = new Metadata(identifierType);
+                md.setValue(issueIdentifier);
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(dateValue)) {
                 // TODO error
             }
-            String dateValue = dates.get(0).getValue();
+
             if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 System.out.println(dateValue);
                 // TODO error
@@ -295,9 +438,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
                 // create identifier if missing, add zdb id if missing
-                String issueIdentifier = identifier + "_" + dateValue; // TODO use issuenumber?
                 dummyIssue.setLink("https://example.org/viewer/metsresolver?id=" + issueIdentifier);
-
 
                 ExportFileformat issueExport = new MetsModsImportExport(prefs);
 
@@ -333,7 +474,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 DocStruct dummyNewspaper = issueDigDoc.createDocStruct(newspaperStubType);
                 dummyNewspaper.setLink("https://example.org/viewer/metsresolver?id=" + identifier);
                 Metadata title = new Metadata(labelType);
-                title.setValue(mainTitle);
+                title.setValue(titleLabel);
                 dummyNewspaper.addMetadata(title);
                 // year
                 DocStruct issueYear = issueDigDoc.createDocStruct(yearType);
@@ -345,11 +486,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 dummyNewspaper.addChild(issueYear);
 
                 // month
-                DocStruct   issueMonth = issueDigDoc.createDocStruct(monthType);
+                DocStruct issueMonth = issueDigDoc.createDocStruct(monthType);
                 issueMonth.setOrderLabel(monthValue);
                 issueYear.addChild(issueMonth);
                 // day
-                DocStruct  issueDay = issueDigDoc.createDocStruct(dayType);
+                DocStruct issueDay = issueDigDoc.createDocStruct(dayType);
                 issueDay.setOrderLabel(dateValue);
                 issueMonth.addChild(issueDay);
 
@@ -359,6 +500,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                 // TODO check if identifier exist, otherwise add it
                 // TODO check id ZDB IDs exist, otherwise add it
+                //                CurrentNoSorting erzeugen, kann den selben Inhalt wie CurrentNo haben. Aber das eine darf nie ohne das andere existieren
+                //                CatalogIdDigital erzeugen, z.B. aus main identifier + Datum + CurrentNoSorting
+                //                TypeOfResource mit dem Wert "text" erzeugen (das Metadatum dazu muss ich noch erstellen)
+                //                Kür:
+                //                statt DateIssued (gibt es nur in diesem Regelsatz) PublicationYear verwenden (gibt es in allen Regelsätzen)
+                //                urn generieren (mache ich sonst später)
+                //                zusätzlich zu TitleDocMain auch MainTitle schreiben (gleicher Inhalt)
 
                 issueDigDoc.setLogicalDocStruct(dummyNewspaper);
 
@@ -370,7 +518,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 if (issue.getAllToReferences() != null) {
                     for (Reference ref : issue.getAllToReferences()) {
                         DocStruct oldPage = ref.getTarget();
-                        String filename =Paths.get(oldPage.getImageName()).getFileName().toString();
+                        String filename = Paths.get(oldPage.getImageName()).getFileName().toString();
 
                         DocStruct newPage = copyDocstruct(oldPage.getType(), oldPage, issueDigDoc);
                         newPage.setImageName(filename);
@@ -378,7 +526,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         // export images + ocr
                     }
                 }
-
 
                 boolean useOriginalFiles = false;
                 if (myFilegroups != null && myFilegroups.size() > 0) {
@@ -438,7 +585,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
 
-                issueExport.write("/tmp/" +issueIdentifier + ".xml");
+                issueExport.write("/tmp/" + issueIdentifier + ".xml");
 
             } catch (TypeNotAllowedAsChildException e) {
                 log.error(e);
@@ -573,7 +720,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return mg;
     }
 
-
     private VirtualFileGroup createFilegroup(VariableReplacer variableRplacer, ProjectFileGroup projectFileGroup) {
         VirtualFileGroup v = new VirtualFileGroup();
         v.setName(projectFileGroup.getName());
@@ -587,6 +733,5 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
         return v;
     }
-
 
 }
