@@ -226,8 +226,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         ExportFileformat newspaperExport = new MetsModsImportExport(prefs);
 
-        DigitalDocument dd = new DigitalDocument();
-        newspaperExport.setDigitalDocument(dd);
+        DigitalDocument anchorDigitalDocument = new DigitalDocument();
+        newspaperExport.setDigitalDocument(anchorDigitalDocument);
         newspaperExport.setGoobiID(goobiId);
 
         newspaperExport.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
@@ -255,12 +255,12 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         pointer = vp.replace(anchor);
         newspaperExport.setMptrAnchorUrl(pointer);
 
-        DocStruct newspaper = copyDocstruct(newspaperType, logical, dd);
-        dd.setLogicalDocStruct(newspaper);
+        DocStruct newspaper = copyDocstruct(newspaperType, logical, anchorDigitalDocument);
+        anchorDigitalDocument.setLogicalDocStruct(newspaper);
 
         // create volume for year
         // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0
-        DocStruct yearVolume = copyDocstruct(yearType, volume, dd);
+        DocStruct yearVolume = copyDocstruct(yearType, volume, anchorDigitalDocument);
         if (StringUtils.isNotBlank(publicationYear)) {
             yearVolume.setOrderLabel(publicationYear);
         }
@@ -412,7 +412,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
             if (currentMonth == null) {
                 try {
-                    currentMonth = dd.createDocStruct(monthType);
+                    currentMonth = anchorDigitalDocument.createDocStruct(monthType);
                     currentMonth.setOrderLabel(monthValue);
 
                     yearVolume.addChild(currentMonth);
@@ -431,7 +431,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
             if (currentDay == null) {
                 try {
-                    currentDay = dd.createDocStruct(dayType);
+                    currentDay = anchorDigitalDocument.createDocStruct(dayType);
                     currentDay.setOrderLabel(dateValue);
                     currentMonth.addChild(currentDay);
                 } catch (TypeNotAllowedAsChildException e) {
@@ -439,7 +439,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
             }
             try {
-                DocStruct dummyIssue = dd.createDocStruct(issueType);
+                DocStruct dummyIssue = anchorDigitalDocument.createDocStruct(issueType);
                 dummyIssue.setOrderLabel(dateValue);
                 currentDay.addChild(dummyIssue);
                 if (issue.getAllMetadata() != null) {
@@ -510,18 +510,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 issueMonth.addChild(issueDay);
 
                 // issue
-                DocStruct newIssue = copyDocstruct(issueType, issue, dd);
+                DocStruct newIssue = copyDocstruct(issueType, issue, issueDigDoc);
                 issueDay.addChild(newIssue);
-
-                // TODO check if identifier exist, otherwise add it
-                // TODO check id ZDB IDs exist, otherwise add it
-                //                CurrentNoSorting erzeugen, kann den selben Inhalt wie CurrentNo haben. Aber das eine darf nie ohne das andere existieren
-                //                CatalogIdDigital erzeugen, z.B. aus main identifier + Datum + CurrentNoSorting
-                //                TypeOfResource mit dem Wert "text" erzeugen (das Metadatum dazu muss ich noch erstellen)
-                //                Kür:
-                //                statt DateIssued (gibt es nur in diesem Regelsatz) PublicationYear verwenden (gibt es in allen Regelsätzen)
-                //                urn generieren (mache ich sonst später)
-                //                zusätzlich zu TitleDocMain auch MainTitle schreiben (gleicher Inhalt)
 
                 issueDigDoc.setLogicalDocStruct(dummyNewspaper);
 
@@ -568,11 +558,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                 if (useOriginalFiles) {
                     // check if media folder contains images
-                    // TODO only from sub group
                     List<Path> filesInFolder = StorageProvider.getInstance().listFiles(process.getImagesTifDirectory(false));
                     if (!filesInFolder.isEmpty()) {
                         // compare image names with files in mets file
-                        List<DocStruct> pages = dd.getPhysicalDocStruct().getAllChildren();
+                        List<DocStruct> pages = issueDigDoc.getPhysicalDocStruct().getAllChildren();
                         if (pages != null && pages.size() > 0) {
                             for (DocStruct page : pages) {
                                 Path completeNameInMets = Paths.get(page.getImageName());
@@ -595,7 +584,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                                     }
                                 }
                             }
-                            // replace filename in mets file
                         }
                     }
                 }
