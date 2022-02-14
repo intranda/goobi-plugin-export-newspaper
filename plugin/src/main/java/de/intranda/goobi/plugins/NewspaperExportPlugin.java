@@ -1,6 +1,8 @@
 package de.intranda.goobi.plugins;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +10,15 @@ import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.lang.StringUtils;
 import org.goobi.beans.Process;
+import org.goobi.beans.ProjectFileGroup;
 import org.goobi.beans.Step;
 import org.goobi.production.enums.PluginType;
 import org.goobi.production.plugin.interfaces.IExportPlugin;
 import org.goobi.production.plugin.interfaces.IPlugin;
 
 import de.sub.goobi.config.ConfigPlugins;
+import de.sub.goobi.helper.StorageProvider;
+import de.sub.goobi.helper.VariableReplacer;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.helper.exceptions.ExportFileException;
 import de.sub.goobi.helper.exceptions.SwapException;
@@ -26,6 +31,7 @@ import ugh.dl.Corporate;
 import ugh.dl.DigitalDocument;
 import ugh.dl.DocStruct;
 import ugh.dl.DocStructType;
+import ugh.dl.ExportFileformat;
 import ugh.dl.Fileformat;
 import ugh.dl.Metadata;
 import ugh.dl.MetadataGroup;
@@ -33,6 +39,8 @@ import ugh.dl.MetadataType;
 import ugh.dl.NamePart;
 import ugh.dl.Person;
 import ugh.dl.Prefs;
+import ugh.dl.Reference;
+import ugh.dl.VirtualFileGroup;
 import ugh.exceptions.DocStructHasNoTypeException;
 import ugh.exceptions.MetadataTypeNotAllowedException;
 import ugh.exceptions.PreferencesException;
@@ -86,9 +94,14 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         XMLConfiguration config = ConfigPlugins.getPluginConfig(title);
         config.setExpressionEngine(new XPathExpressionEngine());
 
+
+
+
+
         MetadataType zdbIdType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbid"));
         MetadataType identifierType = prefs.getMetadataTypeByName(config.getString("/metadata/identifier"));
-        MetadataType dateType = prefs.getMetadataTypeByName(config.getString("/metadata/date"));
+        MetadataType issueDateType = prefs.getMetadataTypeByName(config.getString("/metadata/issueDate"));
+        MetadataType yearDateType = prefs.getMetadataTypeByName(config.getString("/metadata/yearDate"));
         MetadataType labelType = prefs.getMetadataTypeByName("TitleDocMain");
 
         DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
@@ -97,11 +110,17 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         DocStructType dayType = prefs.getDocStrctTypeByName(config.getString("/docstruct/day"));
         DocStructType issueType = prefs.getDocStrctTypeByName(config.getString("/docstruct/issue"));
 
+        DocStructType newspaperStubType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaperStub"));
+
+
         // read fileformat
         Fileformat fileformat = process.readMetadataFile();
         DigitalDocument digitalDocument = fileformat.getDigitalDocument();
         DocStruct logical = digitalDocument.getLogicalDocStruct();
-        DocStruct physical = digitalDocument.getPhysicalDocStruct();
+        DocStruct oldPhysical = digitalDocument.getPhysicalDocStruct();
+
+        VariableReplacer vp = new VariableReplacer(digitalDocument, prefs, process, null);
+        List<ProjectFileGroup> myFilegroups = process.getProjekt().getFilegroups();
 
         // check if it is a newspaper
         if (!logical.getType().isAnchor()) {
@@ -109,6 +128,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
         String zdbId = null;
         String identifier = null;
+        String mainTitle= null;
 
         for (Metadata md : logical.getAllMetadata()) {
             //  get zdb id
@@ -118,7 +138,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             //  get identifier
             else if (md.getType().equals(identifierType)) {
                 identifier = md.getValue();
+            } else if (md.getType().equals(labelType)) {
+                mainTitle = md.getValue();
             }
+
         }
         if (StringUtils.isBlank(zdbId) || StringUtils.isBlank(identifier)) {
             // TODO return error
@@ -126,23 +149,70 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         // list all issues
         DocStruct volume = logical.getAllChildren().get(0);
+
+        String publicationYear = null;
+        for (Metadata md : volume.getAllMetadata()) {
+
+            // get current year
+            if (md.getType().equals(yearDateType)) {
+                publicationYear = md.getValue();
+            }
+        }
+
         List<DocStruct> issues = volume.getAllChildren();
 
         // create new anchor file for newspaper
         // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Gesamtaufnahme+Zeitung+1.0
 
-        Fileformat newspaperExport = new MetsModsImportExport(prefs);
+        ExportFileformat newspaperExport = new MetsModsImportExport(prefs);
+
         DigitalDocument dd = new DigitalDocument();
         newspaperExport.setDigitalDocument(dd);
         newspaperExport.setGoobiID(goobiId);
+
+        newspaperExport.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
+        newspaperExport.setRightsOwnerLogo(vp.replace(process.getProjekt().getMetsRightsOwnerLogo()));
+        newspaperExport.setRightsOwnerSiteURL(vp.replace(process.getProjekt().getMetsRightsOwnerSite()));
+        newspaperExport.setRightsOwnerContact(vp.replace(process.getProjekt().getMetsRightsOwnerMail()));
+        newspaperExport.setDigiprovPresentation(vp.replace(process.getProjekt().getMetsDigiprovPresentation()));
+        newspaperExport.setDigiprovReference(vp.replace(process.getProjekt().getMetsDigiprovReference()));
+        newspaperExport.setDigiprovPresentationAnchor(vp.replace(process.getProjekt().getMetsDigiprovPresentationAnchor()));
+        newspaperExport.setDigiprovReferenceAnchor(vp.replace(process.getProjekt().getMetsDigiprovReferenceAnchor()));
+
+        newspaperExport.setMetsRightsLicense(vp.replace(process.getProjekt().getMetsRightsLicense()));
+        newspaperExport.setMetsRightsSponsor(vp.replace(process.getProjekt().getMetsRightsSponsor()));
+        newspaperExport.setMetsRightsSponsorLogo(vp.replace(process.getProjekt().getMetsRightsSponsorLogo()));
+        newspaperExport.setMetsRightsSponsorSiteURL(vp.replace(process.getProjekt().getMetsRightsSponsorSiteURL()));
+
+        newspaperExport.setPurlUrl(vp.replace(process.getProjekt().getMetsPurl()));
+        newspaperExport.setContentIDs(vp.replace(process.getProjekt().getMetsContentIDs()));
+
+        String pointer = process.getProjekt().getMetsPointerPath();
+        pointer = vp.replace(pointer);
+        newspaperExport.setMptrUrl(pointer);
+
+        String anchor = process.getProjekt().getMetsPointerPathAnchor();
+        pointer = vp.replace(anchor);
+        newspaperExport.setMptrAnchorUrl(pointer);
+
         DocStruct newspaper = copyDocstruct(newspaperType, logical, dd);
         dd.setLogicalDocStruct(newspaper);
 
         // create volume for year
-
-        // create new anchor for the year
         // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0
         DocStruct yearVolume = copyDocstruct(yearType, volume, dd);
+        if (StringUtils.isNotBlank(publicationYear)) {
+            yearVolume.setOrderLabel(publicationYear);
+        }
+        String yearTitle = null;
+        String yearIdentifier = null;
+        for (Metadata md : yearVolume.getAllMetadata()) {
+            if (md.getType().equals(labelType)) {
+                yearTitle = md.getValue();
+            } else if (md.getType().equals(identifierType)) {
+                yearIdentifier = md.getValue();
+            }
+        }
 
         try {
             newspaper.addChild(yearVolume);
@@ -151,9 +221,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
 
         for (DocStruct issue : issues) {
-            List<? extends Metadata> dates = issue.getAllMetadataByType(dateType);
+            // create issues, link issues to day
+            // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0
+            // export each issue
+
+            List<? extends Metadata> dates = issue.getAllMetadataByType(issueDateType);
             if (dates == null || dates.isEmpty()) {
-                // TODO error?
+                // TODO error
             }
             String dateValue = dates.get(0).getValue();
             if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -207,48 +281,170 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
             }
             try {
-                DocStruct newIssue = dd.createDocStruct(issueType);
-                newIssue.setOrderLabel(dateValue);
-                currentDay.addChild(newIssue);
+                DocStruct dummyIssue = dd.createDocStruct(issueType);
+                dummyIssue.setOrderLabel(dateValue);
+                currentDay.addChild(dummyIssue);
                 if (issue.getAllMetadata() != null) {
                     for (Metadata md : issue.getAllMetadata()) {
                         if (md.getType().equals(labelType)) {
                             Metadata label = new Metadata(labelType);
                             label.setValue(md.getValue());
-                            newIssue.addMetadata(label);
+                            dummyIssue.addMetadata(label);
 
                         }
                     }
                 }
-                // generate identifier
+                // create identifier if missing, add zdb id if missing
+                String issueIdentifier = identifier + "_" + dateValue; // TODO use issuenumber?
+                dummyIssue.setLink("https://example.org/viewer/metsresolver?id=" + issueIdentifier);
 
 
+                ExportFileformat issueExport = new MetsModsImportExport(prefs);
 
-                newIssue.setLink("https://example.org/viewer/metsresolver?id=" + identifier + "_" + dateValue);
+                DigitalDocument issueDigDoc = new DigitalDocument();
+                issueExport.setDigitalDocument(issueDigDoc);
+
+                issueExport.setGoobiID(goobiId);
+
+                issueExport.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
+                issueExport.setRightsOwnerLogo(vp.replace(process.getProjekt().getMetsRightsOwnerLogo()));
+                issueExport.setRightsOwnerSiteURL(vp.replace(process.getProjekt().getMetsRightsOwnerSite()));
+                issueExport.setRightsOwnerContact(vp.replace(process.getProjekt().getMetsRightsOwnerMail()));
+                issueExport.setDigiprovPresentation(vp.replace(process.getProjekt().getMetsDigiprovPresentation()));
+                issueExport.setDigiprovReference(vp.replace(process.getProjekt().getMetsDigiprovReference()));
+                issueExport.setDigiprovPresentationAnchor(vp.replace(process.getProjekt().getMetsDigiprovPresentationAnchor()));
+                issueExport.setDigiprovReferenceAnchor(vp.replace(process.getProjekt().getMetsDigiprovReferenceAnchor()));
+
+                issueExport.setMetsRightsLicense(vp.replace(process.getProjekt().getMetsRightsLicense()));
+                issueExport.setMetsRightsSponsor(vp.replace(process.getProjekt().getMetsRightsSponsor()));
+                issueExport.setMetsRightsSponsorLogo(vp.replace(process.getProjekt().getMetsRightsSponsorLogo()));
+                issueExport.setMetsRightsSponsorSiteURL(vp.replace(process.getProjekt().getMetsRightsSponsorSiteURL()));
+
+                issueExport.setPurlUrl(vp.replace(process.getProjekt().getMetsPurl()));
+                issueExport.setContentIDs(vp.replace(process.getProjekt().getMetsContentIDs()));
+                issueExport.setMptrUrl(pointer);
+                issueExport.setMptrAnchorUrl(pointer);
+
+                issueExport.setWriteLocal(false);
+
+                // create hierarchy for individual issue file
+
+                // newspaper
+                DocStruct dummyNewspaper = issueDigDoc.createDocStruct(newspaperStubType);
+                dummyNewspaper.setLink("https://example.org/viewer/metsresolver?id=" + identifier);
+                Metadata title = new Metadata(labelType);
+                title.setValue(mainTitle);
+                dummyNewspaper.addMetadata(title);
+                // year
+                DocStruct issueYear = issueDigDoc.createDocStruct(yearType);
+                issueYear.setOrderLabel(dateValue.substring(0, 4));
+                issueYear.setLink("https://example.org/viewer/metsresolver?id=" + yearIdentifier);
+                title = new Metadata(labelType);
+                title.setValue(yearTitle);
+                issueYear.addMetadata(title);
+                dummyNewspaper.addChild(issueYear);
+
+                // month
+                DocStruct   issueMonth = issueDigDoc.createDocStruct(monthType);
+                issueMonth.setOrderLabel(monthValue);
+                issueYear.addChild(issueMonth);
+                // day
+                DocStruct  issueDay = issueDigDoc.createDocStruct(dayType);
+                issueDay.setOrderLabel(dateValue);
+                issueMonth.addChild(issueDay);
+
+                // issue
+                DocStruct newIssue = copyDocstruct(issueType, issue, dd);
+                issueDay.addChild(newIssue);
+
+                // TODO check if identifier exist, otherwise add it
+                // TODO check id ZDB IDs exist, otherwise add it
+
+                issueDigDoc.setLogicalDocStruct(dummyNewspaper);
+
+                // create physSequence
+                DocStruct physicalDocstruct = issueDigDoc.createDocStruct(oldPhysical.getType());
+                issueDigDoc.setPhysicalDocStruct(physicalDocstruct);
+
+                // add images
+                if (issue.getAllToReferences() != null) {
+                    for (Reference ref : issue.getAllToReferences()) {
+                        DocStruct oldPage = ref.getTarget();
+                        String filename =Paths.get(oldPage.getImageName()).getFileName().toString();
+
+                        DocStruct newPage = copyDocstruct(oldPage.getType(), oldPage, issueDigDoc);
+                        newPage.setImageName(filename);
+                        physicalDocstruct.addChild(newPage);
+                        // export images + ocr
+                    }
+                }
+
+
+                boolean useOriginalFiles = false;
+                if (myFilegroups != null && myFilegroups.size() > 0) {
+                    for (ProjectFileGroup pfg : myFilegroups) {
+                        if (pfg.isUseOriginalFiles()) {
+                            useOriginalFiles = true;
+                        }
+                        // check if source files exists
+                        if (pfg.getFolder() != null && pfg.getFolder().length() > 0) {
+                            String foldername = process.getMethodFromName(pfg.getFolder());
+                            if (foldername != null) {
+                                Path folder = Paths.get(process.getMethodFromName(pfg.getFolder()));
+                                if (folder != null && StorageProvider.getInstance().isFileExists(folder)
+                                        && !StorageProvider.getInstance().list(folder.toString()).isEmpty()) {
+                                    VirtualFileGroup v = createFilegroup(vp, pfg);
+                                    issueExport.getDigitalDocument().getFileSet().addVirtualFileGroup(v);
+                                }
+                            }
+                        } else {
+                            VirtualFileGroup v = createFilegroup(vp, pfg);
+                            issueExport.getDigitalDocument().getFileSet().addVirtualFileGroup(v);
+                        }
+                    }
+                }
+
+                if (useOriginalFiles) {
+                    // check if media folder contains images
+                    // TODO only from sub group
+                    List<Path> filesInFolder = StorageProvider.getInstance().listFiles(process.getImagesTifDirectory(false));
+                    if (!filesInFolder.isEmpty()) {
+                        // compare image names with files in mets file
+                        List<DocStruct> pages = dd.getPhysicalDocStruct().getAllChildren();
+                        if (pages != null && pages.size() > 0) {
+                            for (DocStruct page : pages) {
+                                Path completeNameInMets = Paths.get(page.getImageName());
+                                String filenameInMets = completeNameInMets.getFileName().toString();
+                                int dotIndex = filenameInMets.lastIndexOf('.');
+                                if (dotIndex != -1) {
+                                    filenameInMets = filenameInMets.substring(0, dotIndex);
+                                }
+                                for (Path imageNameInFolder : filesInFolder) {
+                                    String imageName = imageNameInFolder.getFileName().toString();
+                                    dotIndex = imageName.lastIndexOf('.');
+                                    if (dotIndex != -1) {
+                                        imageName = imageName.substring(0, dotIndex);
+                                    }
+
+                                    if (filenameInMets.toLowerCase().equals(imageName.toLowerCase())) {
+                                        // found matching filename
+                                        page.setImageName(imageNameInFolder.toString());
+                                        break;
+                                    }
+                                }
+                            }
+                            // replace filename in mets file
+                        }
+                    }
+                }
+
+                issueExport.write("/tmp/" +issueIdentifier + ".xml");
 
             } catch (TypeNotAllowedAsChildException e) {
                 log.error(e);
             }
-
-            // TODO create hierarchy for individual issue file
         }
-
-        // for each issue, get normalized date, parse it
-        // check if month and day exist or create months and days in year struct
-
-        // create identifier if missing, add zdb id if missing
-
-        // create issues, link issues to day
-        // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0
-        // export each issue
-
-        // export newspaper and  year
-        // TODO export/save newspaperExport to temp folder
-
         newspaperExport.write("/tmp/" + process.getTitel() + ".xml");
-
-        // open year file
-        //TODO   ORDERLABEL mptr
 
         return true;
     }
@@ -376,5 +572,21 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         return mg;
     }
+
+
+    private VirtualFileGroup createFilegroup(VariableReplacer variableRplacer, ProjectFileGroup projectFileGroup) {
+        VirtualFileGroup v = new VirtualFileGroup();
+        v.setName(projectFileGroup.getName());
+        v.setPathToFiles(variableRplacer.replace(projectFileGroup.getPath()));
+        v.setMimetype(projectFileGroup.getMimetype());
+        v.setFileSuffix(projectFileGroup.getSuffix().trim());
+        v.setFileExtensionsToIgnore(projectFileGroup.getIgnoreMimetypes());
+        v.setIgnoreConfiguredMimetypeAndSuffix(projectFileGroup.isUseOriginalFiles());
+        if (projectFileGroup.getName().equals("PRESENTATION")) {
+            v.setMainGroup(true);
+        }
+        return v;
+    }
+
 
 }
