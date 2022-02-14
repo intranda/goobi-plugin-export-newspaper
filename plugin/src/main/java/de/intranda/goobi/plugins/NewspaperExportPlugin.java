@@ -88,6 +88,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     SwapException, DAOException, TypeNotAllowedForParentException {
         problems = new ArrayList<>();
 
+        String exportFolder = process.getProjekt().getDmsImportRootPath();
+        if (!exportFolder.endsWith("/")) {
+            exportFolder = exportFolder + "/";
+        }
+
         String goobiId = String.valueOf(process.getId());
 
         Prefs prefs = process.getRegelsatz().getPreferences();
@@ -537,6 +542,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
 
                 boolean useOriginalFiles = false;
+
+                // TODO export images to a sub folder per issue
+                // TODO set paths to issue folder
+
                 if (myFilegroups != null && myFilegroups.size() > 0) {
                     for (ProjectFileGroup pfg : myFilegroups) {
                         if (pfg.isUseOriginalFiles()) {
@@ -592,13 +601,15 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
 
-                issueExport.write("/tmp/" + issueIdentifier + ".xml");
+                // export to configured folder
+
+                issueExport.write(exportFolder + issueIdentifier + ".xml");
 
             } catch (TypeNotAllowedAsChildException e) {
                 log.error(e);
             }
         }
-        newspaperExport.write("/tmp/" + process.getTitel() + ".xml");
+        newspaperExport.write(exportFolder + process.getTitel() + ".xml");
 
         return true;
     }
