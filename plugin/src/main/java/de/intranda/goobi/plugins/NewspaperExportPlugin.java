@@ -111,7 +111,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         MetadataType resourceType = prefs.getMetadataTypeByName(config.getString("/metadata/resourceType"));
 
-
         DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
         DocStructType yearType = prefs.getDocStrctTypeByName(config.getString("/docstruct/year"));
         DocStructType monthType = prefs.getDocStrctTypeByName(config.getString("/docstruct/month"));
@@ -131,7 +130,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         // check if it is a newspaper
         if (!logical.getType().isAnchor()) {
-            // TODO return error
+            problems.add(logical.getType().getName() + " has the wrong type. It is not an anchor.");
+            return false;
         }
         String zdbId = null;
         String identifier = null;
@@ -168,7 +168,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
 
         if (StringUtils.isBlank(zdbId) || StringUtils.isBlank(identifier)) {
-            // TODO return error
+            problems.add("Export aborted, ZDB id or record id are missing");
+            return false;
         }
 
         DocStruct volume = logical.getAllChildren().get(0);
@@ -277,7 +278,9 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         try {
             newspaper.addChild(yearVolume);
         } catch (TypeNotAllowedAsChildException e) {
+            problems.add("Cannot add year to newspaper");
             log.error(e);
+            return false;
         }
 
         for (DocStruct issue : issues) {
@@ -347,7 +350,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 Metadata md = new Metadata(sortNumberType);
                 md.setValue(issueNo);
                 issue.addMetadata(md);
-                issueSortingNumber=issueNo;
+                issueSortingNumber = issueNo;
             }
             if (StringUtils.isBlank(issueLanguage) && StringUtils.isNotBlank(language)) {
                 Metadata md = new Metadata(languageType);
@@ -385,12 +388,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
 
             if (StringUtils.isBlank(dateValue)) {
-                // TODO error
+                problems.add("Abort export, issue has no publication date");
+                return false;
             }
 
             if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                System.out.println(dateValue);
-                // TODO error
+                problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
+                return false;
             }
 
             if (StringUtils.isBlank(yearVolume.getOrderLabel())) {
