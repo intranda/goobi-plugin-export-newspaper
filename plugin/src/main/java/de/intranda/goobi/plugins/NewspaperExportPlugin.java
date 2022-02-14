@@ -109,6 +109,9 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         MetadataType locationType = prefs.getMetadataTypeByName(config.getString("/metadata/location"));
         MetadataType accessConditionType = prefs.getMetadataTypeByName(config.getString("/metadata/licence"));
 
+        MetadataType resourceType = prefs.getMetadataTypeByName(config.getString("/metadata/resourceType"));
+
+
         DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
         DocStructType yearType = prefs.getDocStrctTypeByName(config.getString("/docstruct/year"));
         DocStructType monthType = prefs.getDocStrctTypeByName(config.getString("/docstruct/month"));
@@ -294,6 +297,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             String issueZdbId = null;
             String issueIdentifier = null;
             String dateValue = null;
+            String resource = null;
+
             for (Metadata md : issue.getAllMetadata()) {
                 if (md.getType().equals(zdbIdType)) {
                     issueZdbId = md.getValue();
@@ -316,6 +321,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 if (md.getType().equals(issueDateType)) {
                     dateValue = md.getValue();
                 }
+
+                if (md.getType().equals(resourceType)) {
+                    resource = md.getValue();
+                }
+
                 if (language == null && md.getType().equals(languageType)) {
                     issueLanguage = md.getValue();
                 }
@@ -366,6 +376,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 issueIdentifier = identifier + "_" + dateValue + "_" + issueSortingNumber;
                 Metadata md = new Metadata(identifierType);
                 md.setValue(issueIdentifier);
+                issue.addMetadata(md);
+            }
+            if (StringUtils.isBlank(resource)) {
+                Metadata md = new Metadata(resourceType);
+                md.setValue("text");
                 issue.addMetadata(md);
             }
 
