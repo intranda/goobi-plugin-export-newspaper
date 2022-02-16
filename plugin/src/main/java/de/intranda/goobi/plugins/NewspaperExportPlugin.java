@@ -101,15 +101,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     SwapException, DAOException, TypeNotAllowedForParentException {
         problems = new ArrayList<>();
 
-        String imagesFolder = process.getImagesTifDirectory(false);
-
-        Path tmpExportFolder = Files.createTempDirectory("mets_export");
-
-        String exportFolder = process.getProjekt().getDmsImportRootPath();
-        if (!exportFolder.endsWith("/")) {
-            exportFolder = exportFolder + "/";
-        }
-
         String goobiId = String.valueOf(process.getId());
 
         Prefs prefs = process.getRegelsatz().getPreferences();
@@ -141,7 +132,17 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         DocStructType newspaperStubType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaperStub"));
 
-        boolean exportImagesSubfolder = config.getBoolean("/exportImagesSubfolder", false);
+        boolean subfolderPerIssue = config.getBoolean("/export/subfolderPerIssue", false);
+        boolean exportImages = config.getBoolean("/export/images", false);
+
+        String imagesFolder = process.getImagesTifDirectory(false);
+
+        Path tmpExportFolder = Files.createTempDirectory("mets_export");
+
+        String finalExportFolder = config.getString("/export/exportFolder");
+        if (!finalExportFolder.endsWith("/")) {
+            finalExportFolder = finalExportFolder + "/";
+        }
 
         // read fileformat
         Fileformat fileformat = process.readMetadataFile();
@@ -529,7 +530,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                 boolean useOriginalFiles = false;
 
-
                 if (myFilegroups != null && myFilegroups.size() > 0) {
                     for (ProjectFileGroup pfg : myFilegroups) {
                         if (pfg.isUseOriginalFiles()) {
@@ -542,12 +542,12 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                                 Path folder = Paths.get(process.getMethodFromName(pfg.getFolder()));
                                 if (folder != null && StorageProvider.getInstance().isFileExists(folder)
                                         && !StorageProvider.getInstance().list(folder.toString()).isEmpty()) {
-                                    VirtualFileGroup v = createFilegroup(vp, pfg, exportImagesSubfolder ? issueIdentifier : yearIdentifier);
+                                    VirtualFileGroup v = createFilegroup(vp, pfg, subfolderPerIssue ? issueIdentifier : yearIdentifier);
                                     issueExport.getDigitalDocument().getFileSet().addVirtualFileGroup(v);
                                 }
                             }
                         } else {
-                            VirtualFileGroup v = createFilegroup(vp, pfg, exportImagesSubfolder ? issueIdentifier : yearIdentifier);
+                            VirtualFileGroup v = createFilegroup(vp, pfg, subfolderPerIssue ? issueIdentifier : yearIdentifier);
                             issueExport.getDigitalDocument().getFileSet().addVirtualFileGroup(v);
                         }
                     }
@@ -602,7 +602,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         StorageProvider.getInstance().move(anchorPath, newAnchorPath);
 
         // check if newspaper anchor file exists in destination folder
-        Path existingAnchor = Paths.get(exportFolder, identifier + ".xml");
+        Path existingAnchor = Paths.get(finalExportFolder, identifier + ".xml");
         if (StorageProvider.getInstance().isFileExists(existingAnchor)) {
             // if yes: merge anchor with existing one
             // open anchor, run through structMap
@@ -618,7 +618,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         // move all files to export folder
         List<Path> files = StorageProvider.getInstance().listFiles(tmpExportFolder.toString());
         for (Path file : files) {
-            Path dest = Paths.get(exportFolder, file.getFileName().toString());
+            Path dest = Paths.get(finalExportFolder, file.getFileName().toString());
             StorageProvider.getInstance().move(file, dest);
         }
 

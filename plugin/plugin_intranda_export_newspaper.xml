@@ -1,6 +1,29 @@
 <config_plugin>
- 
-    <!-- sample parameter -->
-    <value>test</value>
-
+    <export>
+        <images>false</images>
+        <subfolderPerIssue>false</subfolderPerIssue>
+        <exportFolder>/tmp/export/</exportFolder>
+    </export>
+    <metadata>
+        <zdbid>CatalogIDPeriodicalDB</zdbid>
+        <identifier>CatalogIDDigital</identifier>
+        <issueDate>DateIssued</issueDate>
+        <yearDate>CurrentNoSorting</yearDate>
+        <titleLabel>TitleDocMain</titleLabel>
+        <modsTitle>MainTitle</modsTitle>
+        <issueNumber>CurrentNo</issueNumber>
+        <sortNumber>CurrentNoSorting</sortNumber>
+        <language>DocLangugae</language>
+        <location>PhysicalLocation</location>
+        <licence>UseAndReproductionLicense</licence>
+        <resourceType>TypeOfResource</resourceType>
+    </metadata>
+    <docstruct>
+        <newspaper>Newspaper</newspaper>
+        <year>Year</year>
+        <month>Month</month>
+        <day>Day</day>
+        <issue>NewspaperIssue</issue>
+        <newspaperStub>NewspaperStub</newspaperStub>
+    </docstruct>
 </config_plugin>
