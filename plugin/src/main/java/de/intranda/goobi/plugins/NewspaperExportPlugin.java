@@ -1,9 +1,13 @@
 package de.intranda.goobi.plugins;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.configuration.XMLConfiguration;
@@ -15,6 +19,13 @@ import org.goobi.beans.Step;
 import org.goobi.production.enums.PluginType;
 import org.goobi.production.plugin.interfaces.IExportPlugin;
 import org.goobi.production.plugin.interfaces.IPlugin;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.Namespace;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.helper.StorageProvider;
@@ -23,6 +34,8 @@ import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.helper.exceptions.ExportFileException;
 import de.sub.goobi.helper.exceptions.SwapException;
 import de.sub.goobi.helper.exceptions.UghHelperException;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -66,13 +79,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     @Getter
     private List<String> problems;
 
-    @Override
-    public void setExportFulltext(boolean arg0) {
-    }
+    @Setter
+    private boolean exportFulltext;
+    @Setter
+    private boolean exportImages;
 
-    @Override
-    public void setExportImages(boolean arg0) {
-    }
+    private static final Namespace metsNamespace = Namespace.getNamespace("mets", "http://www.loc.gov/METS/");
+    private static final Namespace xlink = Namespace.getNamespace("xlink", "http://www.w3.org/1999/xlink");
 
     @Override
     public boolean startExport(Process process) throws IOException, InterruptedException, DocStructHasNoTypeException, PreferencesException,
@@ -87,6 +100,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     PreferencesException, WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException,
     SwapException, DAOException, TypeNotAllowedForParentException {
         problems = new ArrayList<>();
+
+        String imagesFolder = process.getImagesTifDirectory(false);
+
+        Path tmpExportFolder = Files.createTempDirectory("mets_export");
 
         String exportFolder = process.getProjekt().getDmsImportRootPath();
         if (!exportFolder.endsWith("/")) {
@@ -123,6 +140,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         DocStructType issueType = prefs.getDocStrctTypeByName(config.getString("/docstruct/issue"));
 
         DocStructType newspaperStubType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaperStub"));
+
+        boolean exportImagesSubfolder = config.getBoolean("/exportImagesSubfolder", false);
 
         // read fileformat
         Fileformat fileformat = process.readMetadataFile();
@@ -234,32 +253,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         DigitalDocument anchorDigitalDocument = new DigitalDocument();
         newspaperExport.setDigitalDocument(anchorDigitalDocument);
-        newspaperExport.setGoobiID(goobiId);
-
-        newspaperExport.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
-        newspaperExport.setRightsOwnerLogo(vp.replace(process.getProjekt().getMetsRightsOwnerLogo()));
-        newspaperExport.setRightsOwnerSiteURL(vp.replace(process.getProjekt().getMetsRightsOwnerSite()));
-        newspaperExport.setRightsOwnerContact(vp.replace(process.getProjekt().getMetsRightsOwnerMail()));
-        newspaperExport.setDigiprovPresentation(vp.replace(process.getProjekt().getMetsDigiprovPresentation()));
-        newspaperExport.setDigiprovReference(vp.replace(process.getProjekt().getMetsDigiprovReference()));
-        newspaperExport.setDigiprovPresentationAnchor(vp.replace(process.getProjekt().getMetsDigiprovPresentationAnchor()));
-        newspaperExport.setDigiprovReferenceAnchor(vp.replace(process.getProjekt().getMetsDigiprovReferenceAnchor()));
-
-        newspaperExport.setMetsRightsLicense(vp.replace(process.getProjekt().getMetsRightsLicense()));
-        newspaperExport.setMetsRightsSponsor(vp.replace(process.getProjekt().getMetsRightsSponsor()));
-        newspaperExport.setMetsRightsSponsorLogo(vp.replace(process.getProjekt().getMetsRightsSponsorLogo()));
-        newspaperExport.setMetsRightsSponsorSiteURL(vp.replace(process.getProjekt().getMetsRightsSponsorSiteURL()));
-
-        newspaperExport.setPurlUrl(vp.replace(process.getProjekt().getMetsPurl()));
-        newspaperExport.setContentIDs(vp.replace(process.getProjekt().getMetsContentIDs()));
-
         String pointer = process.getProjekt().getMetsPointerPath();
         pointer = vp.replace(pointer);
-        newspaperExport.setMptrUrl(pointer);
+        setMetsParameter(process, goobiId, vp, pointer, newspaperExport);
 
         String anchor = process.getProjekt().getMetsPointerPathAnchor();
-        pointer = vp.replace(anchor);
-        newspaperExport.setMptrAnchorUrl(pointer);
+        anchor = vp.replace(anchor);
+        newspaperExport.setMptrAnchorUrl(anchor);
 
         DocStruct newspaper = copyDocstruct(newspaperType, logical, anchorDigitalDocument);
         anchorDigitalDocument.setLogicalDocStruct(newspaper);
@@ -469,28 +469,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 DigitalDocument issueDigDoc = new DigitalDocument();
                 issueExport.setDigitalDocument(issueDigDoc);
 
-                issueExport.setGoobiID(goobiId);
-
-                issueExport.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
-                issueExport.setRightsOwnerLogo(vp.replace(process.getProjekt().getMetsRightsOwnerLogo()));
-                issueExport.setRightsOwnerSiteURL(vp.replace(process.getProjekt().getMetsRightsOwnerSite()));
-                issueExport.setRightsOwnerContact(vp.replace(process.getProjekt().getMetsRightsOwnerMail()));
-                issueExport.setDigiprovPresentation(vp.replace(process.getProjekt().getMetsDigiprovPresentation()));
-                issueExport.setDigiprovReference(vp.replace(process.getProjekt().getMetsDigiprovReference()));
-                issueExport.setDigiprovPresentationAnchor(vp.replace(process.getProjekt().getMetsDigiprovPresentationAnchor()));
-                issueExport.setDigiprovReferenceAnchor(vp.replace(process.getProjekt().getMetsDigiprovReferenceAnchor()));
-
-                issueExport.setMetsRightsLicense(vp.replace(process.getProjekt().getMetsRightsLicense()));
-                issueExport.setMetsRightsSponsor(vp.replace(process.getProjekt().getMetsRightsSponsor()));
-                issueExport.setMetsRightsSponsorLogo(vp.replace(process.getProjekt().getMetsRightsSponsorLogo()));
-                issueExport.setMetsRightsSponsorSiteURL(vp.replace(process.getProjekt().getMetsRightsSponsorSiteURL()));
-
-                issueExport.setPurlUrl(vp.replace(process.getProjekt().getMetsPurl()));
-                issueExport.setContentIDs(vp.replace(process.getProjekt().getMetsContentIDs()));
-                issueExport.setMptrUrl(pointer);
-                issueExport.setMptrAnchorUrl(pointer);
-
-                issueExport.setWriteLocal(false);
+                setMetsParameter(process, goobiId, vp, pointer, issueExport);
 
                 // create hierarchy for individual issue file
 
@@ -537,14 +516,19 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         DocStruct newPage = copyDocstruct(oldPage.getType(), oldPage, issueDigDoc);
                         newPage.setImageName(filename);
                         physicalDocstruct.addChild(newPage);
-                        // export images + ocr
+                        // TODO export images to a sub folder per issue ?
+                        //                        if (exportImages) {
+                        //                            Path image = Paths.get(imagesFolder, filename);
+                        //                        }
+                        //                        if (exportFulltext) {
+                        //
+                        //                        }
+
                     }
                 }
 
                 boolean useOriginalFiles = false;
 
-                // TODO export images to a sub folder per issue
-                // TODO set paths to issue folder
 
                 if (myFilegroups != null && myFilegroups.size() > 0) {
                     for (ProjectFileGroup pfg : myFilegroups) {
@@ -558,12 +542,12 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                                 Path folder = Paths.get(process.getMethodFromName(pfg.getFolder()));
                                 if (folder != null && StorageProvider.getInstance().isFileExists(folder)
                                         && !StorageProvider.getInstance().list(folder.toString()).isEmpty()) {
-                                    VirtualFileGroup v = createFilegroup(vp, pfg);
+                                    VirtualFileGroup v = createFilegroup(vp, pfg, exportImagesSubfolder ? issueIdentifier : yearIdentifier);
                                     issueExport.getDigitalDocument().getFileSet().addVirtualFileGroup(v);
                                 }
                             }
                         } else {
-                            VirtualFileGroup v = createFilegroup(vp, pfg);
+                            VirtualFileGroup v = createFilegroup(vp, pfg, exportImagesSubfolder ? issueIdentifier : yearIdentifier);
                             issueExport.getDigitalDocument().getFileSet().addVirtualFileGroup(v);
                         }
                     }
@@ -602,16 +586,70 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
 
                 // export to configured folder
-
-                issueExport.write(exportFolder + issueIdentifier + ".xml");
+                String issueName = Paths.get(tmpExportFolder.toString(), issueIdentifier + ".xml").toString();
+                issueExport.write(issueName);
 
             } catch (TypeNotAllowedAsChildException e) {
                 log.error(e);
             }
         }
-        newspaperExport.write(exportFolder + process.getTitel() + ".xml");
+        String newspaperName = Paths.get(tmpExportFolder.toString(), yearIdentifier + ".xml").toString();
+        newspaperExport.write(newspaperName);
 
+        // rename anchor file
+        Path anchorPath = Paths.get(newspaperName.replace(".xml", "_anchor.xml"));
+        Path newAnchorPath = Paths.get(tmpExportFolder.toString(), identifier + ".xml");
+        StorageProvider.getInstance().move(anchorPath, newAnchorPath);
+
+        // check if newspaper anchor file exists in destination folder
+        Path existingAnchor = Paths.get(exportFolder, identifier + ".xml");
+        if (StorageProvider.getInstance().isFileExists(existingAnchor)) {
+            // if yes: merge anchor with existing one
+            // open anchor, run through structMap
+            try {
+                mergeAnchorWithVolumes(existingAnchor, newAnchorPath);
+            } catch (JDOMException | IOException e) {
+                log.error(e);
+            }
+            // remove anchor file from temp folder
+            StorageProvider.getInstance().deleteFile(newAnchorPath);
+        }
+
+        // move all files to export folder
+        List<Path> files = StorageProvider.getInstance().listFiles(tmpExportFolder.toString());
+        for (Path file : files) {
+            Path dest = Paths.get(exportFolder, file.getFileName().toString());
+            StorageProvider.getInstance().move(file, dest);
+        }
+
+        // delete targetDir
+        StorageProvider.getInstance().deleteDir(tmpExportFolder);
         return true;
+    }
+
+    private void setMetsParameter(Process process, String goobiId, VariableReplacer vp, String pointer, ExportFileformat fileFormat) {
+        fileFormat.setGoobiID(goobiId);
+
+        fileFormat.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
+        fileFormat.setRightsOwnerLogo(vp.replace(process.getProjekt().getMetsRightsOwnerLogo()));
+        fileFormat.setRightsOwnerSiteURL(vp.replace(process.getProjekt().getMetsRightsOwnerSite()));
+        fileFormat.setRightsOwnerContact(vp.replace(process.getProjekt().getMetsRightsOwnerMail()));
+        fileFormat.setDigiprovPresentation(vp.replace(process.getProjekt().getMetsDigiprovPresentation()));
+        fileFormat.setDigiprovReference(vp.replace(process.getProjekt().getMetsDigiprovReference()));
+        fileFormat.setDigiprovPresentationAnchor(vp.replace(process.getProjekt().getMetsDigiprovPresentationAnchor()));
+        fileFormat.setDigiprovReferenceAnchor(vp.replace(process.getProjekt().getMetsDigiprovReferenceAnchor()));
+
+        fileFormat.setMetsRightsLicense(vp.replace(process.getProjekt().getMetsRightsLicense()));
+        fileFormat.setMetsRightsSponsor(vp.replace(process.getProjekt().getMetsRightsSponsor()));
+        fileFormat.setMetsRightsSponsorLogo(vp.replace(process.getProjekt().getMetsRightsSponsorLogo()));
+        fileFormat.setMetsRightsSponsorSiteURL(vp.replace(process.getProjekt().getMetsRightsSponsorSiteURL()));
+
+        fileFormat.setPurlUrl(vp.replace(process.getProjekt().getMetsPurl()));
+        fileFormat.setContentIDs(vp.replace(process.getProjekt().getMetsContentIDs()));
+        fileFormat.setMptrUrl(pointer);
+        fileFormat.setMptrAnchorUrl(pointer);
+
+        fileFormat.setWriteLocal(false);
     }
 
     private DocStruct copyDocstruct(DocStructType docstructType, DocStruct oldDocstruct, DigitalDocument dd) {
@@ -738,10 +776,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return mg;
     }
 
-    private VirtualFileGroup createFilegroup(VariableReplacer variableRplacer, ProjectFileGroup projectFileGroup) {
+    private VirtualFileGroup createFilegroup(VariableReplacer variableRplacer, ProjectFileGroup projectFileGroup, String identifier) {
         VirtualFileGroup v = new VirtualFileGroup();
         v.setName(projectFileGroup.getName());
-        v.setPathToFiles(variableRplacer.replace(projectFileGroup.getPath()));
+        v.setPathToFiles(variableRplacer.replace(projectFileGroup.getPath().replace("$(meta.CatalogIDDigital)", identifier)));
         v.setMimetype(projectFileGroup.getMimetype());
         v.setFileSuffix(projectFileGroup.getSuffix().trim());
         v.setFileExtensionsToIgnore(projectFileGroup.getIgnoreMimetypes());
@@ -750,6 +788,203 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             v.setMainGroup(true);
         }
         return v;
+    }
+
+    private void mergeAnchorWithVolumes(Path oldAnchor, Path newAnchor) throws JDOMException, IOException {
+
+        List<Volume> volumes = new ArrayList<>();
+        SAXBuilder parser = new SAXBuilder();
+
+        // alten anchor einlesen
+        Document metsDoc = parser.build(oldAnchor.toFile());
+        Element metsRoot = metsDoc.getRootElement();
+        List<Element> structMapList = metsRoot.getChildren("structMap", metsNamespace);
+        for (Element structMap1 : structMapList) {
+            if (structMap1.getAttribute("TYPE") != null && "LOGICAL".equals(structMap1.getAttributeValue("TYPE"))) {
+                readFilesFromAnchor(volumes, structMap1);
+            }
+        }
+
+        // neuen anchor einlesen
+        Document newMetsDoc = parser.build(newAnchor.toFile());
+        Element newMetsRoot = newMetsDoc.getRootElement();
+
+        List<Element> newStructMapList = newMetsRoot.getChildren("structMap", metsNamespace);
+        for (Element structMap : newStructMapList) {
+            if (structMap.getAttribute("TYPE") != null && "LOGICAL".equals(structMap.getAttributeValue("TYPE"))) {
+                readFilesFromNewAnchor(volumes, structMap);
+            }
+        }
+
+        Collections.sort(volumes, volumeComperator);
+
+        for (Element structMap : structMapList) {
+            if (structMap.getAttribute("TYPE") != null && "LOGICAL".equals(structMap.getAttributeValue("TYPE"))) {
+                writeVolumesToAnchor(volumes, structMap);
+            }
+        }
+        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+
+        try (FileOutputStream output = new FileOutputStream(oldAnchor.toFile())) {
+            outputter.output(metsDoc, output);
+        }
+
+    }
+
+    private void readFilesFromAnchor(List<Volume> volumes, Element structMap1) {
+        Element anchorDiv = structMap1.getChild("div", metsNamespace);
+        List<Element> volumeDivList = anchorDiv.getChildren("div", metsNamespace);
+        for (Element volumeDiv : volumeDivList) {
+            String label = "";
+            String type = "";
+            String url = "";
+            String contentids = "";
+            String order = "";
+            if (volumeDiv.getAttribute("LABEL") != null) {
+                label = volumeDiv.getAttributeValue("LABEL");
+            }
+            if (volumeDiv.getAttribute("TYPE") != null) {
+                type = volumeDiv.getAttributeValue("TYPE");
+            }
+            if (volumeDiv.getAttribute("CONTENTIDS") != null) {
+                contentids = volumeDiv.getAttributeValue("CONTENTIDS");
+            }
+            if (volumeDiv.getAttribute("ORDER") != null) {
+                order = volumeDiv.getAttributeValue("ORDER");
+            }
+            Element mptr = volumeDiv.getChild("mptr", metsNamespace);
+            url = mptr.getAttributeValue("href", xlink);
+            boolean foundVolume = false;
+            for (Volume vol : volumes) {
+                if (vol.getUrl().equals(url)) {
+                    foundVolume = true;
+                }
+            }
+            if (!foundVolume) {
+                Volume v = this.new Volume(label, type, url, contentids, order);
+                volumes.add(v);
+            }
+        }
+    }
+
+    /**
+     * Reads and adds volumes from structMap which are not already present in provided volumes list to it
+     *
+     * @param volumes
+     * @param structMap
+     * @return
+     */
+    private boolean readFilesFromNewAnchor(List<Volume> volumes, Element structMap) {
+        Element anchorDiv = structMap.getChild("div", metsNamespace);
+        List<Element> volumeDivList = anchorDiv.getChildren("div", metsNamespace);
+        for (Element volumeDiv : volumeDivList) {
+            String label = "";
+            String type = "";
+            String url = "";
+            String contentids = "";
+            String order = "";
+            if (volumeDiv.getAttribute("LABEL") != null) {
+                label = volumeDiv.getAttributeValue("LABEL");
+            }
+            if (volumeDiv.getAttribute("TYPE") != null) {
+                type = volumeDiv.getAttributeValue("TYPE");
+            }
+            if (volumeDiv.getAttribute("CONTENTIDS") != null) {
+                contentids = volumeDiv.getAttributeValue("CONTENTIDS");
+            }
+            if (volumeDiv.getAttribute("ORDER") != null) {
+                order = volumeDiv.getAttributeValue("ORDER");
+            }
+            Element mptr = volumeDiv.getChild("mptr", metsNamespace);
+            url = mptr.getAttributeValue("href", xlink);
+            Volume v = this.new Volume(label, type, url, contentids, order);
+            for (Volume vol : volumes) {
+                if (vol.getUrl().replace(".xml", "").equals(url.replace(".xml", ""))) {
+                    // reexport, muss nicht gemerged werden
+                    return false;
+                }
+            }
+            volumes.add(v);
+        }
+        return true;
+    }
+
+    /**
+     * Adds the entry from the provided volumes List as sub elements to provided structMap Element
+     * 
+     * @param volumes
+     * @param structMap
+     */
+    static void writeVolumesToAnchor(List<Volume> volumes, Element structMap) {
+        Element anchorDiv = structMap.getChild("div", metsNamespace);
+        // clearing anchor document
+        anchorDiv.removeChildren("div", metsNamespace);
+        // creating new children
+        int logId = 1;
+        for (Volume vol : volumes) {
+            Element child = new Element("div", metsNamespace);
+
+            String strId = padIdString(logId);
+            child.setAttribute("ID", "LOG_" + strId);
+            logId++;
+            if (vol.getLabel() != null && vol.getLabel().length() > 0) {
+                child.setAttribute("LABEL", vol.getLabel());
+            }
+            if (vol.getContentids() != null && vol.getContentids().length() > 0) {
+                child.setAttribute("CONTENTIDS", vol.getContentids());
+            }
+            if (vol.getOrder() != null && vol.getOrder().length() > 0) {
+                child.setAttribute("ORDER", vol.getOrder());
+            }
+            child.setAttribute("TYPE", vol.getType());
+            anchorDiv.addContent(child);
+            Element mptr = new Element("mptr", metsNamespace);
+            mptr.setAttribute("LOCTYPE", "URL");
+            if (!vol.getUrl().endsWith(".xml")) {
+                vol.setUrl(vol.getUrl() + ".xml");
+            }
+            mptr.setAttribute("href", vol.getUrl(), xlink);
+            child.addContent(mptr);
+        }
+    }
+
+    /**
+     * adds 0 to front of passed id to ensure length of 4 digits
+     *
+     * @param logId
+     * @return
+     */
+    private static String padIdString(int logId) {
+        String strId = String.valueOf(logId);
+        if (logId < 10) {
+            strId = "000" + strId;
+        } else if (logId < 100) {
+            strId = "00" + strId;
+        } else if (logId < 1000) {
+            strId = "0" + strId;
+        }
+        return strId;
+    }
+
+    private static Comparator<Volume> volumeComperator = new Comparator<Volume>() {
+
+        @Override
+        public int compare(Volume o1, Volume o2) {
+            if (o1.getOrder() != null && o1.getOrder().length() > 0 && o2.getOrder() != null && o2.getOrder().length() > 0) {
+                return o1.getOrder().compareToIgnoreCase(o2.getOrder());
+            }
+            return o1.getUrl().compareToIgnoreCase(o2.getUrl());
+        }
+    };
+
+    @Data
+    @AllArgsConstructor
+    class Volume {
+        private String label;
+        private String type;
+        private String url;
+        private String contentids = null;
+        private String order = null;
     }
 
 }
