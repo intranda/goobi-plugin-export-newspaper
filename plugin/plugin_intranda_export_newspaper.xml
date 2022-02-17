@@ -3,6 +3,7 @@
         <images>false</images>
         <subfolderPerIssue>false</subfolderPerIssue>
         <exportFolder>/tmp/export/</exportFolder>
+        <metsUrl>https://example.org/viewer/metsresolver?id=</metsUrl>
     </export>
     <metadata>
         <zdbid>CatalogIDPeriodicalDB</zdbid>

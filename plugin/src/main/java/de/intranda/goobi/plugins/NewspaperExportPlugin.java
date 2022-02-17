@@ -134,6 +134,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         boolean subfolderPerIssue = config.getBoolean("/export/subfolderPerIssue", false);
         boolean exportImages = config.getBoolean("/export/images", false);
+        String metsResolverUrl = config.getString("/export/metsUrl", "");
 
         String imagesFolder = process.getImagesTifDirectory(false);
 
@@ -463,7 +464,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
                 // create identifier if missing, add zdb id if missing
-                dummyIssue.setLink("https://example.org/viewer/metsresolver?id=" + issueIdentifier);
+                dummyIssue.setLink(metsResolverUrl+ issueIdentifier);
 
                 ExportFileformat issueExport = new MetsModsImportExport(prefs);
 
@@ -476,14 +477,14 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                 // newspaper
                 DocStruct dummyNewspaper = issueDigDoc.createDocStruct(newspaperStubType);
-                dummyNewspaper.setLink("https://example.org/viewer/metsresolver?id=" + identifier);
+                dummyNewspaper.setLink(metsResolverUrl + identifier);
                 Metadata title = new Metadata(labelType);
                 title.setValue(titleLabel);
                 dummyNewspaper.addMetadata(title);
                 // year
                 DocStruct issueYear = issueDigDoc.createDocStruct(yearType);
                 issueYear.setOrderLabel(dateValue.substring(0, 4));
-                issueYear.setLink("https://example.org/viewer/metsresolver?id=" + yearIdentifier);
+                issueYear.setLink(metsResolverUrl + yearIdentifier);
                 title = new Metadata(labelType);
                 title.setValue(yearTitle);
                 issueYear.addMetadata(title);
