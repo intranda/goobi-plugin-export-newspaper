@@ -4,8 +4,12 @@
         <subfolderPerIssue>false</subfolderPerIssue>
         <exportFolder>/tmp/export/</exportFolder>
         <metsUrl>https://example.org/viewer/metsresolver?id=</metsUrl>
+        <resolverUrl>https://example.org/viewer/piresolver?id=</resolverUrl>        
     </export>
     <metadata>
+        <purl>_purl</purl>
+        <zdbiddigital>CatalogIDPeriodicalDBDigital</zdbiddigital>
+        <zdbidanalog>CatalogIDPeriodicalDB</zdbidanalog>    
         <zdbid>CatalogIDPeriodicalDB</zdbid>
         <identifier>CatalogIDDigital</identifier>
         <issueDate>DateIssued</issueDate>
@@ -18,6 +22,7 @@
         <location>PhysicalLocation</location>
         <licence>UseAndReproductionLicense</licence>
         <resourceType>TypeOfResource</resourceType>
+        <anchorId>AnchorID</anchorId>
     </metadata>
     <docstruct>
         <newspaper>Newspaper</newspaper>

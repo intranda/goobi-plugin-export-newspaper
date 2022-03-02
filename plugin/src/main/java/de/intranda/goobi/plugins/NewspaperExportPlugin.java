@@ -107,7 +107,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         XMLConfiguration config = ConfigPlugins.getPluginConfig(title);
         config.setExpressionEngine(new XPathExpressionEngine());
 
-        MetadataType zdbIdType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbid"));
+        MetadataType zdbIdAnalogType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbidanalog"));
+        MetadataType zdbIdDigitalType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbiddigital"));
+        MetadataType purlType = prefs.getMetadataTypeByName(config.getString("/metadata/purl"));
+
         MetadataType identifierType = prefs.getMetadataTypeByName(config.getString("/metadata/identifier"));
         MetadataType issueDateType = prefs.getMetadataTypeByName(config.getString("/metadata/issueDate"));
         MetadataType yearDateType = prefs.getMetadataTypeByName(config.getString("/metadata/yearDate"));
@@ -124,6 +127,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         MetadataType resourceType = prefs.getMetadataTypeByName(config.getString("/metadata/resourceType"));
 
+        MetadataType anchorIdType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorId"));
+        MetadataType anchorTitleType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorTitle"));
+        MetadataType anchorZDBIdAnalogType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorZDBIdAnalog"));
+        MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorZDBIdDigital"));
+
         DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
         DocStructType yearType = prefs.getDocStrctTypeByName(config.getString("/docstruct/year"));
         DocStructType monthType = prefs.getDocStrctTypeByName(config.getString("/docstruct/month"));
@@ -135,6 +143,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         boolean subfolderPerIssue = config.getBoolean("/export/subfolderPerIssue", false);
         boolean exportImages = config.getBoolean("/export/images", false);
         String metsResolverUrl = config.getString("/export/metsUrl", "");
+        String piResolverUrl = config.getString("/export/resolverUrl", "");
 
         String imagesFolder = process.getImagesTifDirectory(false);
 
@@ -159,7 +168,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             problems.add(logical.getType().getName() + " has the wrong type. It is not an anchor.");
             return false;
         }
-        String zdbId = null;
+        String zdbIdAnalog = null;
+        String zdbIdDigital = null;
         String identifier = null;
         String titleLabel = null;
         String mainTitle = null;
@@ -169,8 +179,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         for (Metadata md : logical.getAllMetadata()) {
             //  get zdb id
-            if (md.getType().equals(zdbIdType)) {
-                zdbId = md.getValue();
+            if (md.getType().equals(zdbIdAnalogType)) {
+                zdbIdAnalog = md.getValue();
+            }
+            if (md.getType().equals(zdbIdDigitalType)) {
+                zdbIdDigital = md.getValue();
             }
             //  get identifier
             else if (md.getType().equals(identifierType)) {
@@ -193,7 +206,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             logical.addMetadata(md);
         }
 
-        if (StringUtils.isBlank(zdbId) || StringUtils.isBlank(identifier)) {
+        if (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier)) {
             problems.add("Export aborted, ZDB id or record id are missing");
             return false;
         }
@@ -304,15 +317,31 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             String issueLanguage = null;
             String issueLocation = null;
             String issueLicence = null;
-            String issueZdbId = null;
+
             String issueIdentifier = null;
             String dateValue = null;
             String resource = null;
+            String purl = null;
+            String analogIssueZdbId = null;
+            String digitalIssueZdbId = null;
+            String anchorId = null;
+            String anchorTitle = null;
 
             for (Metadata md : issue.getAllMetadata()) {
-                if (md.getType().equals(zdbIdType)) {
-                    issueZdbId = md.getValue();
+                if (md.getType().equals(anchorZDBIdAnalogType)) {
+                    analogIssueZdbId = md.getValue();
                 }
+                if (md.getType().equals(anchorZDBIdDigitalType)) {
+                    digitalIssueZdbId = md.getValue();
+                }
+
+                if (md.getType().equals(anchorIdType)) {
+                    anchorId = md.getValue();
+                }
+                if (md.getType().equals(anchorTitleType)) {
+                    anchorTitle = md.getValue();
+                }
+
                 if (md.getType().equals(identifierType)) {
                     issueIdentifier = md.getValue();
                 }
@@ -335,14 +364,17 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 if (md.getType().equals(resourceType)) {
                     resource = md.getValue();
                 }
+                if (md.getType().equals(purlType)) {
+                    purl = md.getValue();
+                }
 
-                if (language == null && md.getType().equals(languageType)) {
+                if (md.getType().equals(languageType)) {
                     issueLanguage = md.getValue();
                 }
-                if (location == null && md.getType().equals(locationType)) {
+                if (md.getType().equals(locationType)) {
                     issueLocation = md.getValue();
                 }
-                if (accessCondition == null && md.getType().equals(accessConditionType)) {
+                if (md.getType().equals(accessConditionType)) {
                     issueLicence = md.getValue();
                 }
 
@@ -376,9 +408,14 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 md.setValue(accessCondition);
                 issue.addMetadata(md);
             }
-            if (StringUtils.isBlank(issueZdbId) && StringUtils.isNotBlank(zdbId)) {
-                Metadata md = new Metadata(zdbIdType);
-                md.setValue(zdbId);
+            if (StringUtils.isBlank(analogIssueZdbId) && StringUtils.isNotBlank(zdbIdAnalog)) {
+                Metadata md = new Metadata(anchorZDBIdAnalogType);
+                md.setValue(zdbIdAnalog);
+                issue.addMetadata(md);
+            }
+            if (StringUtils.isBlank(digitalIssueZdbId) && StringUtils.isNotBlank(zdbIdDigital)) {
+                Metadata md = new Metadata(anchorZDBIdDigitalType);
+                md.setValue(zdbIdDigital);
                 issue.addMetadata(md);
             }
 
@@ -391,6 +428,24 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             if (StringUtils.isBlank(resource)) {
                 Metadata md = new Metadata(resourceType);
                 md.setValue("text");
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(purl)) {
+                Metadata md = new Metadata(purlType);
+                md.setValue(piResolverUrl + issueIdentifier);
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(anchorId)) {
+                Metadata md = new Metadata(anchorIdType);
+                md.setValue(identifier);
+                issue.addMetadata(md);
+            }
+
+            if (StringUtils.isBlank(anchorTitle)) {
+                Metadata md = new Metadata(anchorTitleType);
+                md.setValue(titleLabel);
                 issue.addMetadata(md);
             }
 
@@ -464,7 +519,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
                 // create identifier if missing, add zdb id if missing
-                dummyIssue.setLink(metsResolverUrl+ issueIdentifier);
+                dummyIssue.setLink(metsResolverUrl + issueIdentifier);
 
                 ExportFileformat issueExport = new MetsModsImportExport(prefs);
 
@@ -525,6 +580,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         //                        if (exportFulltext) {
                         //
                         //                        }
+
+                        newIssue.addReferenceTo(newPage, "logical_physical");
 
                     }
                 }
@@ -594,6 +651,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 log.error(e);
             }
         }
+
+        // update/save generated data in goobi process
+        process.writeMetadataFile(fileformat);
+
         String newspaperName = Paths.get(tmpExportFolder.toString(), yearIdentifier + ".xml").toString();
         newspaperExport.write(newspaperName);
 
