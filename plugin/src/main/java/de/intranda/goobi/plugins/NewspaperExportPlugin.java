@@ -129,7 +129,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         MetadataType anchorIdType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorId"));
         MetadataType anchorTitleType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorTitle"));
-        MetadataType anchorZDBIdAnalogType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorZDBIdAnalog"));
         MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorZDBIdDigital"));
 
         DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
@@ -192,7 +191,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 titleLabel = md.getValue();
             } else if (md.getType().equals(mainTitleType)) {
                 mainTitle = md.getValue();
-            } else if (md.getType().equals(issueNumberType)) {
+            } else if (md.getType().equals(languageType)) {
                 language = md.getValue();
             } else if (md.getType().equals(locationType)) {
                 location = md.getValue();
@@ -328,11 +327,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             String anchorTitle = null;
 
             for (Metadata md : issue.getAllMetadata()) {
-                if (md.getType().equals(anchorZDBIdAnalogType)) {
-                    analogIssueZdbId = md.getValue();
-                }
                 if (md.getType().equals(anchorZDBIdDigitalType)) {
                     digitalIssueZdbId = md.getValue();
+                }
+                if (md.getType().equals(zdbIdAnalogType)) {
+                    analogIssueZdbId = md.getValue();
                 }
 
                 if (md.getType().equals(anchorIdType)) {
@@ -409,7 +408,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 issue.addMetadata(md);
             }
             if (StringUtils.isBlank(analogIssueZdbId) && StringUtils.isNotBlank(zdbIdAnalog)) {
-                Metadata md = new Metadata(anchorZDBIdAnalogType);
+                Metadata md = new Metadata(zdbIdAnalogType);
                 md.setValue(zdbIdAnalog);
                 issue.addMetadata(md);
             }
