@@ -1,0 +1,2595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Preferences>
+  <!-- ##########################################################################
+         ##  Metadata types for the physical structure                           ##
+         ########################################################################## -->
+  <!-- !!DO NOT CHANGE!! -->
+  <MetadataType>
+    <Name>_urn</Name>
+    <language name="de">urn</language>
+    <language name="en">urn</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_ucc_id</Name>
+    <language name="de">UCC_ID</language>
+    <language name="en">UCC_ID</language>
+    <language name="es">UCC_ID</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>URN</Name>
+    <language name="de">URN</language>
+    <language name="en">URN</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_representative</Name>
+    <language name="de">representative</language>
+    <language name="en">representative</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>physPageNumber</Name>
+    <language name="de">physische Seitenzahl (Imagenummer)</language>
+    <language name="en">physical page number</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>logicalPageNumber</Name>
+    <language name="de">logische Seitenzahl (gedruckte Zeitenzahl)</language>
+    <language name="en">logical page number</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>pagesize</Name>
+    <language name="de">Seitengröße / Format</language>
+    <language name="en">format of book</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>mediumsource</Name>
+    <language name="de">Vorlagenform</language>
+    <language name="en">Medium of source</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>shelfmarkarchiveimageset</Name>
+    <language name="de">Signatur des Archivierungsimagesets</language>
+    <language name="en">shelfmark of archive imageset</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>imagedescr</Name>
+    <language name="de">ImageDescription (TIFF-Header)</language>
+    <language name="en">image description of tiff header</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>datedigit</Name>
+    <language name="de">Datum Digitalisierung</language>
+    <language name="en">Date digitalization</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>pathimagefiles</Name>
+    <language name="de">Pfad der Imagedaten</language>
+    <language name="en">Path of image data</language>
+  </MetadataType>
+  <!-- !!DO NOT CHANGE!! -->
+  <!-- ##########################################################################
+         ##  Metadata types for the logical structure                            ##
+         ########################################################################## -->
+  <!-- They are fully configurable; make sure, that modules within GOOBI will be
+         reconfigured accordingly, if any changes are made here! -->
+  <MetadataType>
+    <Name>Sponsorship</Name>
+    <language name="de">Digitalisierungspate</language>
+    <language name="en">Sponsorship</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>ReportingYear</Name>
+    <language name="de">Berichtsjahr</language>
+    <language name="en">Reporting year</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PublisherName</Name>
+    <language name="de">Verleger/Verlag</language>
+    <language name="en">Publisher</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PlaceOfPublication</Name>
+    <language name="de">Erscheinungsort</language>
+    <language name="en">Place of publication</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>TitleDocSub1</Name>
+    <language name="de">Untertitel</language>
+    <language name="en">Subtitle</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CatalogIDPeriodicalDB</Name>
+    <language name="de">ZeitschriftenDB-ID Analog</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CatalogIDPeriodicalDBDigital</Name>
+    <language name="de">ZeitschriftenDB-ID Digital</language>
+  </MetadataType>
+
+  <MetadataType>
+    <Name>AnchorCatalogIDPeriodicalDBDigital</Name>
+    <language name="de">ZeitschriftenDB-ID Digital</language>
+  </MetadataType>
+
+
+  <MetadataType>
+    <Name>TitleDocMain</Name>
+    <language name="de">Haupttitel</language>
+    <language name="en">Main title</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>MainTitle</Name>
+    <language name="de">Haupttitel</language>
+    <language name="en">Main title</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>IdentifierRelatedWork</Name>
+    <language name="de">Identifier Bezugswerk</language>
+    <language name="en">Identifier rel. work</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CurrentNoSorting</Name>
+    <language name="de">Band/Heft-Nr (Sortierung)</language>
+    <language name="en">Sorting number</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CatalogIDSource</Name>
+    <language name="de">Identifier (Vorlage)</language>
+    <language name="en">Identifier (of source)</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>TitleDocMainShort</Name>
+    <language name="de">Haupttitel (Sortierung)</language>
+    <language name="en">Main title (sorting)</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CatalogIDPredecessorPeriodical</Name>
+    <language name="de">PPN des Vorgängers</language>
+  </MetadataType>
+  <MetadataType type="identifier">
+    <Name>CatalogIDDigital</Name>
+    <language name="de">Identifier (digital)</language>
+    <language name="en">Identifier</language>
+  </MetadataType>
+  <MetadataType type="identifier">
+    <Name>adisIdentifier</Name>
+    <language name="de">aDIS Nr.</language>
+    <language name="en">aDIS No.</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>RezenssionsZssDBID</Name>
+    <language name="de">ID aus Rezensionsdatenbank</language>
+    <language name="en">Review from Review database</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>ISSN</Name>
+    <language name="de">ISSN</language>
+    <language name="en">ISSN</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>SICI</Name>
+    <language name="de">SICI (identifier)</language>
+    <language name="en">SICI (identifier)</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>DOI</Name>
+    <language name="de">DOI</language>
+    <language name="en">DOI</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>singleDigCollection</Name>
+    <language name="de">Digitale Kollektion</language>
+    <language name="en">Digital collection</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>DocLanguage</Name>
+    <language name="de">Sprache</language>
+    <language name="en">Language</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>TitleDocParallel</Name>
+    <language name="de">Parallelsachtitel</language>
+    <language name="en">Parallel title</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>IllustratorArtist</Name>
+    <language name="de">Künstler-Illustrator</language>
+    <language name="en">Illustrator / Artist</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>OtherPerson</Name>
+    <language name="de">Beteiligte Person</language>
+    <language name="en">Other Person</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>Keyword</Name>
+    <language name="de">Schlagwort</language>
+    <language name="en">Keyword</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>Date</Name>
+    <language name="de">Datum</language>
+    <language name="en">Date</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>Translator</Name>
+    <language name="de">Übersetzer</language>
+    <language name="en">Translator</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>Creator</Name>
+    <language name="de">Ersteller (Creator)</language>
+    <language name="en">Creator</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PublicationYear</Name>
+    <language name="de">Erscheinungsjahr Band</language>
+    <language name="en">Publication year (Volume)</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CatalogIDSuccessorPeriodical</Name>
+    <language name="de">PPN der Nachfolger-Zeitschrift</language>
+    <language name="en">PPN of successor journal</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>Copyright</Name>
+    <language name="de">Copyright</language>
+    <language name="en">Copyright</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CurrentNo</Name>
+    <language name="de">Ausgabe-Nummer</language>
+    <language name="en">Issue number</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>VolumeNo</Name>
+    <language name="de">Band-Nummer</language>
+    <language name="en">Volume number</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>AnchorID</Name>
+    <language name="de">Zeitungsidentifier</language>
+    <language name="en">Newspaper identifier</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>AnchorTitle</Name>
+    <language name="de">Zeitungstitel</language>
+    <language name="en">Newspaper title</language>
+  </MetadataType>
+
+  <MetadataType>
+    <Name>PublicationRun</Name>
+    <language name="de">ErscheinungsVerlauf</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>FormatSourcePrint</Name>
+    <language name="de">Ausmasse/Dimension (Quelle)</language>
+    <language name="en">Dimensions</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>UseAndReproductionLicense</Name>
+    <language name="de">Lizenz</language>
+    <language name="en">License</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>SizeSourcePrint</Name>
+    <language name="de">Größe der Vorlage</language>
+    <language name="en">Size of source</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>shelfmarksource</Name>
+    <language name="de">Signatur der Quelle</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>copyrightimageset</Name>
+    <language name="de">Copyright</language>
+    <language name="en">Copyright</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CreatorsAllOrigin</Name>
+    <language name="de">Alle Autoren u. Beteiligte (orig.)</language>
+    <language name="en">All creators (original version)</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>Editor</Name>
+    <language name="en">Editor</language>
+    <language name="de">Herausgeber</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>Author</Name>
+    <language name="de">Autor</language>
+    <language name="en">Author</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>Photographer</Name>
+    <language name="de">Photograph</language>
+    <language name="en">Photographer</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>TSL_ATS</Name>
+    <language name="de">TSL/ATS</language>
+    <language name="en">TSL/ATS</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_purl</Name>
+    <language name="de">PURL</language>
+    <language name="en">PURL</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>BibliographicCitation</Name>
+    <language name="de">Bibliografische Zitate</language>
+    <language name="en">Bibliographic Citation</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>CatalogFieldVDeighteen</Name>
+    <language name="de">VD18 Nr.</language>
+    <language name="en">VD18 No.</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>Event</Name>
+    <language name="de">Ereignis</language>
+    <language name="en">Event</language>
+  </MetadataType>
+  <!-- ZVDD Metadata -->
+  <MetadataType>
+    <Name>_placeOfElectronicOrigin</Name>
+    <language name="de">Herkunft der digit. Ausgabe (Ort)</language>
+    <language name="en">Origin of Electronic ed.</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_electronicPublisher</Name>
+    <language name="de">Hersteller der digit. Ausgabe</language>
+    <language name="en">Publisher of Electronic ed.</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_electronicEdition</Name>
+    <language name="de">Electronic ed.</language>
+    <language name="en">Electronic ed.</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_dateDigitization</Name>
+    <language name="de">Datum Digitalisierung</language>
+    <language name="en">Date digitization</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PhysicalLocation</Name>
+    <language name="de">Physikalischer Standort</language>
+    <language name="en">Physical location</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_digitalOrigin</Name>
+    <language name="de">digitalOrigin</language>
+    <language name="en">digitalOrigin</language>
+  </MetadataType>
+
+  <MetadataType>
+    <Name>PartName</Name>
+    <language name="de">Ausgabename</language>
+    <language name="en">Part name</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PartNumber</Name>
+    <language name="de">Ausgabennummer</language>
+    <language name="en">Part number</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>DateIssued</Name>
+    <language name="de">Erscheinungsdatum</language>
+    <language name="en">Date issued</language>
+  </MetadataType>
+
+  <MetadataType>
+    <Name>TypeOfResource</Name>
+    <language name="de">Ressourcentyp</language>
+    <language name="en">TypeOfResource</language>
+  </MetadataType>
+  <DocStrctType>
+    <Name>page</Name>
+    <language name="de">Seite</language>
+    <language name="en">page</language>
+    <language name="rusdml">page</language>
+    <metadata num="1m">physPageNumber</metadata>
+    <metadata num="1m">logicalPageNumber</metadata>
+    <metadata num="1o">_urn</metadata>
+  </DocStrctType>
+  <DocStrctType>
+    <Name>BoundBook</Name>
+    <language name="de">gebundenes Buch</language>
+    <language name="en">bound Book</language>
+    <language name="rusdml">bound Book</language>
+    <metadata num="1o">copyrightimageset</metadata>
+    <metadata num="1o">mediumsource</metadata>
+    <metadata num="1o">shelfmarksource</metadata>
+    <metadata num="1o">shelfmarkarchiveimageset</metadata>
+    <metadata num="1o">imagedescr</metadata>
+    <metadata num="1o">FormatSourcePrint</metadata>
+    <metadata num="1o">datedigit</metadata>
+    <metadata num="1o">pathimagefiles</metadata>
+    <allowedchildtype>page</allowedchildtype>
+    <metadata num="1o">_representative</metadata>
+    <metadata num="1o">PhysicalLocation</metadata>
+    <metadata num="1o">_urn</metadata>
+  </DocStrctType>
+
+
+  <DocStrctType>
+    <Name>Year</Name>
+    <language name="de">Year</language>
+    <language name="en">Year</language>
+    <allowedchildtype>Month</allowedchildtype>
+    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
+    <metadata DefaultDisplay="true" num="1m">MainTitle</metadata>
+    <metadata num="*">TitleDocMainShort</metadata>
+    <metadata DefaultDisplay="true" num="1o">shelfmarksource</metadata>
+    <metadata num="1o">DateIssued</metadata>
+    <metadata DefaultDisplay="true" num="1m">CatalogIDDigital</metadata>
+    <metadata num="*">CatalogIDSource</metadata>
+    <metadata DefaultDisplay="true" num="+">singleDigCollection</metadata>
+    <metadata DefaultDisplay="true" num="1m">VolumeNo</metadata>
+    <metadata DefaultDisplay="true" num="1m">CurrentNoSorting</metadata>
+    <metadata num="*">_ucc_id</metadata>
+    <metadata num="1o">_dateDigitization</metadata>
+    <metadata num="1o">_placeOfElectronicOrigin</metadata>
+    <metadata num="1o">_electronicEdition</metadata>
+    <metadata num="1o">_electronicPublisher</metadata>
+    <metadata num="1o">_digitalOrigin</metadata>
+    <metadata num="1o">copyrightimageset</metadata>
+    <metadata num="1o">FormatSourcePrint</metadata>
+    <metadata num="1o">SizeSourcePrint</metadata>
+    <metadata DefaultDisplay="true" num="*">DocLanguage</metadata>
+    <metadata num="*">PhysicalLocation</metadata>
+    <metadata num="1m">URN</metadata>
+    <metadata num="1o">_urn</metadata>
+    <metadata num="1o">TypeOfResource</metadata>
+  </DocStrctType>
+
+
+  <DocStrctType>
+    <Name>NewspaperStub</Name>
+    <language name="de">Zeitung</language>
+    <language name="en">Newspaper</language>
+    <allowedchildtype>Year</allowedchildtype>
+    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
+
+  </DocStrctType>
+
+  <DocStrctType>
+    <Name>Month</Name>
+    <language name="de">Month</language>
+    <language name="en">Month</language>
+    <allowedchildtype>Day</allowedchildtype>
+    <metadata num="1o">TitleDocMain</metadata>
+
+  </DocStrctType>
+
+  <DocStrctType>
+    <Name>Day</Name>
+    <language name="de">Day</language>
+    <language name="en">Day</language>
+    <allowedchildtype>NewspaperIssue</allowedchildtype>
+    <metadata num="1o">TitleDocMain</metadata>
+
+  </DocStrctType>
+
+
+  <DocStrctType anchor="true">
+    <Name>Newspaper</Name>
+    <language name="de">Zeitung</language>
+    <language name="en">Newspaper</language>
+    <allowedchildtype>NewspaperVolume</allowedchildtype>
+    <allowedchildtype>Year</allowedchildtype>
+    <metadata DefaultDisplay="true" num="1m">TitleDocMain</metadata>
+    <metadata DefaultDisplay="true" num="1m">MainTitle</metadata>
+    <metadata DefaultDisplay="true" num="1o">TitleDocMainShort</metadata>
+    <metadata DefaultDisplay="true" num="1o">TitleDocSub1</metadata>
+    <metadata DefaultDisplay="true" num="1o">TitleDocParallel</metadata>
+    <metadata DefaultDisplay="true" num="1o">PlaceOfPublication</metadata>
+    <metadata DefaultDisplay="true" num="1o">PublisherName</metadata>
+    <metadata DefaultDisplay="true" num="1m">DocLanguage</metadata>
+    <metadata DefaultDisplay="true" num="1o">PublicationRun</metadata>
+    <metadata DefaultDisplay="true" num="1o">CatalogIDSource</metadata>
+    <metadata DefaultDisplay="true" num="1m">CatalogIDDigital</metadata>
+    <metadata DefaultDisplay="true" num="+">singleDigCollection</metadata>
+    <metadata num="1o">TSL_ATS</metadata>
+    <metadata num="1o">_dateDigitization</metadata>
+    <metadata num="1o">_placeOfElectronicOrigin</metadata>
+    <metadata num="1o">_electronicEdition</metadata>
+    <metadata num="1o">_electronicPublisher</metadata>
+    <metadata num="1o">_digitalOrigin</metadata>
+    <metadata DefaultDisplay="true" num="*">SizeSourcePrint</metadata>
+    <metadata num="*">_ucc_id</metadata>
+    <metadata num="1o">URN</metadata>
+    <metadata num="1o">_urn</metadata>
+    <metadata DefaultDisplay="true" num="1m">CatalogIDPeriodicalDB</metadata>
+    <metadata DefaultDisplay="true" num="1m">CatalogIDPeriodicalDBDigital</metadata>
+    <metadata DefaultDisplay="true" num="1m">UseAndReproductionLicense</metadata>
+    <metadata num="1o">TypeOfResource</metadata>
+  </DocStrctType>
+  <DocStrctType>
+    <Name>NewspaperEdition</Name>
+    <language name="de">Ausgabe</language>
+    <language name="en">Edition</language>
+    <allowedchildtype>NewspaperSupplement</allowedchildtype>
+    <metadata DefaultDisplay="true" num="1o">PartNumber</metadata>
+    <metadata DefaultDisplay="true" num="1o">PartName</metadata>
+    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
+    <metadata DefaultDisplay="true" num="1o">MainTitle</metadata>
+    <metadata num="*">_ucc_id</metadata>
+  </DocStrctType>
+  <DocStrctType>
+    <Name>NewspaperIssue</Name>
+    <language name="de">Ausgabe</language>
+    <language name="en">NewspaperIssue</language>
+    <!-- <allowedchildtype>NewspaperEdition</allowedchildtype> -->
+    <allowedchildtype>NewspaperSupplement</allowedchildtype>
+    <metadata num="1o">CatalogIDDigital</metadata>
+    <metadata DefaultDisplay="true" num="1o">PartNumber</metadata>
+    <metadata DefaultDisplay="true" num="1o">DateIssued</metadata>
+    <metadata num="*">CurrentNo</metadata>
+    <metadata DefaultDisplay="true" num="1m">CurrentNoSorting</metadata>
+    <metadata num="1o">TitleDocMain</metadata>
+    <metadata num="1o">MainTitle</metadata>
+    <metadata num="*">DocLanguage</metadata>
+    <metadata num="*">singleDigCollection</metadata>
+    <metadata num="*">_ucc_id</metadata>
+    <metadata num="1o">UseAndReproductionLicense</metadata>
+    <metadata num="1o">CatalogIDPeriodicalDB</metadata>
+    <metadata num="1o">AnchorCatalogIDPeriodicalDBDigital</metadata>
+    <metadata num="1o">_purl</metadata>
+    <metadata num="*">PhysicalLocation</metadata>
+    <metadata num="1o">TypeOfResource</metadata>
+    <metadata num="1o">AnchorID</metadata>
+    <metadata num="1o">AnchorTitle</metadata>
+  </DocStrctType>
+  <DocStrctType>
+    <Name>NewspaperSupplement</Name>
+    <language name="de">Beilage</language>
+    <language name="en">Supplement</language>
+    <allowedchildtype>NewspaperSupplement</allowedchildtype>
+    <metadata num="1o">CurrentNo</metadata>
+    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
+    <metadata DefaultDisplay="true" num="1o">MainTitle</metadata>
+    <metadata num="1o">PartNumber</metadata>
+    <metadata num="*">_ucc_id</metadata>
+    <metadata num="1o">TypeOfResource</metadata>
+  </DocStrctType>
+  <!-- Automatisch eingefügt für das Update auf Goobi 2.2 -->
+  <DocStrctType topStruct="true">
+    <Name>NewspaperVolume</Name>
+    <language name="de">Zeitungsband</language>
+    <language name="en">Newspaper volume</language>
+    <allowedchildtype>NewspaperIssue</allowedchildtype>
+    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
+    <metadata DefaultDisplay="true" num="1o">MainTitle</metadata>
+    <metadata num="*">TitleDocMainShort</metadata>
+    <metadata DefaultDisplay="true" num="1o">shelfmarksource</metadata>
+    <metadata num="1o">DateIssued</metadata>
+    <metadata DefaultDisplay="true" num="1m">CatalogIDDigital</metadata>
+    <metadata num="*">CatalogIDSource</metadata>
+    <metadata DefaultDisplay="true" num="+">singleDigCollection</metadata>
+    <metadata DefaultDisplay="true" num="1m">VolumeNo</metadata>
+    <metadata DefaultDisplay="true" num="1m">CurrentNoSorting</metadata>
+    <metadata num="*">_ucc_id</metadata>
+    <metadata num="1o">_dateDigitization</metadata>
+    <metadata num="1o">_placeOfElectronicOrigin</metadata>
+    <metadata num="1o">_electronicEdition</metadata>
+    <metadata num="1o">_electronicPublisher</metadata>
+    <metadata num="1o">_digitalOrigin</metadata>
+    <!-- Automatisch eingefügt für das Update auf Goobi 2.2 -->
+    <metadata num="1o">copyrightimageset</metadata>
+    <metadata num="1o">FormatSourcePrint</metadata>
+    <metadata num="1o">SizeSourcePrint</metadata>
+    <metadata DefaultDisplay="true" num="*">DocLanguage</metadata>
+    <metadata num="*">PhysicalLocation</metadata>
+
+    <metadata num="1o">TypeOfResource</metadata>
+    <metadata num="1o">URN</metadata>
+    <metadata num="1o">_urn</metadata>
+  </DocStrctType>
+
+
+  <!-- DO NOT CHANGE!! -->
+  <Formats>
+
+    <!-- ##########################################################################
+			 ##  The PicaPlus Section                                                ##
+			 ########################################################################## -->
+    <PicaPlus>
+      <!-- ##########################################################################
+				 ##  Person elements                                                     ##
+				 ########################################################################## -->
+      <Person>
+        <picaMainTag>028A</picaMainTag>
+        <Name>Author</Name>
+        <picaSubTag type="firstname">D</picaSubTag>
+        <picaSubTag type="lastname">A</picaSubTag>
+        <picaSubTag type="identifier">7</picaSubTag>
+      </Person>
+      <Person>
+        <picaMainTag>028B</picaMainTag>
+        <Name>Author</Name>
+        <picaSubTag type="firstname">D</picaSubTag>
+        <picaSubTag type="lastname">A</picaSubTag>
+        <picaSubTag type="identifier">7</picaSubTag>
+      </Person>
+      <Person>
+        <picaMainTag>028C</picaMainTag>
+        <Name>OtherPerson</Name>
+        <picaSubTag type="firstname">D</picaSubTag>
+        <picaSubTag type="lastname">A</picaSubTag>
+        <picaSubTag type="identifier">7</picaSubTag>
+      </Person>
+      <Person>
+        <picaMainTag>028F</picaMainTag>
+        <Name>Honoree</Name>
+        <picaSubTag type="firstname">D</picaSubTag>
+        <picaSubTag type="lastname">A</picaSubTag>
+        <picaSubTag type="identifier">7</picaSubTag>
+      </Person>
+      <!-- ##########################################################################
+				 ##  Metadata elements                                                   ##
+				 ########################################################################## -->
+      <Metadata>
+        <picaMainTag>010@</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>DocLanguage</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>044L</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>Keyword</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>011@</picaMainTag>
+        <picaSubTag>c</picaSubTag>
+        <Name>Date</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>021A</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>TitleDocMain</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>021A</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>MainTitle</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>021A</picaMainTag>
+        <picaSubTag>d</picaSubTag>
+        <Name>TitleDocSub1</Name>
+      </Metadata>
+      <Metadata>
+        <!-- this is the main title for a contained work | AttachedWord-->
+        <picaMainTag>021B</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>TitleDocMain</Name>
+      </Metadata>
+      <Metadata>
+        <!-- Identifier of a related work, just available for ContainedWorks | AttachedWorks -->
+        <picaMainTag>021B</picaMainTag>
+        <picaSubTag>b</picaSubTag>
+        <Name>IdentifierRelatedWork</Name>
+      </Metadata>
+      <Metadata>
+        <!-- Main title for volume (of multivolume work) -->
+        <picaMainTag>036C</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>TitleDocMain</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>036C</picaMainTag>
+        <picaSubTag>y</picaSubTag>
+        <Name>TitleDocSub1</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>036D</picaMainTag>
+        <picaSubTag>l</picaSubTag>
+        <Name>CurrentNo</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>033A</picaMainTag>
+        <picaSubTag>p</picaSubTag>
+        <Name>PlaceOfPublication</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>033A</picaMainTag>
+        <picaSubTag>n</picaSubTag>
+        <Name>PublisherName</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>034D</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>SizeSourcePrint</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>011@</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>PublicationYear</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>003@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <Name>CatalogIDDigital</Name>
+      </Metadata>
+
+      <Metadata>
+        <picaMainTag>039I</picaMainTag>
+        <picaSubTag>9</picaSubTag>
+        <Name>CatalogIDSource</Name>
+      </Metadata>
+      <Metadata>
+        <Name>TypeOfResource</Name>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>x</picaSubTag>
+      </Metadata>
+
+      <Metadata>
+        <picaMainTag>007S</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <Name>CatalogFieldVDeighteen</Name>
+      </Metadata>
+      <Metadata>
+        <picaMainTag>027A</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+        <Name>Event</Name>
+      </Metadata>
+      <!-- Automatisch eingefügt für das Update auf Goobi 2.2 -->
+      <Metadata>
+        <Name>copyrightimageset</Name>
+        <picaMainTag>037I</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+      </Metadata>
+      <Metadata>
+        <Name>ISSN</Name>
+        <picaMainTag>005A</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+      </Metadata>
+      <Metadata>
+        <Name>FormatSourcePrint</Name>
+        <picaMainTag>034I</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+      </Metadata>
+      <Metadata>
+        <Name>shelfmarksource</Name>
+        <picaMainTag>009A</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+      </Metadata>
+      <Metadata>
+        <Name>shelfmarksource</Name>
+        <picaMainTag>209A</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+      </Metadata>
+      <!-- ##########################################################################
+				 ##  DocStruct elements                                                  ##
+				 ########################################################################## -->
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Of</picaContent>
+        <Name>Volume</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Af</picaContent>
+        <Name>Volume</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>OF</picaContent>
+        <Name>Volume</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>AF</picaContent>
+        <Name>Volume</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Oc</picaContent>
+        <Name>MultiVolumeWork</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Ac</picaContent>
+        <Name>MultiVolumeWork</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Oa</picaContent>
+        <Name>Monograph</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Aa</picaContent>
+        <Name>Monograph</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>As</picaContent>
+        <Name>Monograph</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Os</picaContent>
+        <Name>Monograph</Name>
+      </DocStruct>
+      <DocStruct>
+        <Name>Newspaper</Name>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Ob</picaContent>
+      </DocStruct>
+      <DocStruct>
+        <Name>Newspaper</Name>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Ab</picaContent>
+      </DocStruct>
+    </PicaPlus>
+
+
+    <Marc>
+      <Metadata>
+        <!-- internal metadata name -->
+        <Name>TitleDocMain</Name>
+        <!-- repeatable field -->
+        <!-- wenn mehrere field Elemente definiert wurden, werden diese hintereinander abgearbeitet und durch das
+              in separator definierte Zeichen getrennt -->
+        <field>
+          <fieldMainTag>245</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <!-- number, blank or any -->
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+
+        <!-- The <subfield> for the identifier -->
+        <identifierField>0</identifierField>
+        <!-- check if identifier matches the condition. This is needed because all identifier are written to field
+              0, but only the one with (DE-588) is the gnd number -->
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <!-- run the regex and keep the value of $1 -->
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <!-- If <conditionField> is used, <conditionValue> must be used as well. Checks if the the subfield definied
+              in conditionField is filled and matches the regular expression of conditionValue. If this is not the case, the metadata will
+              not created. -->
+        <conditionField />
+        <conditionValue />
+        <!-- run the regex and keep the value of $1 -->
+        <fieldReplacement />
+        <separateEntries>false</separateEntries>
+        <separator> / </separator>
+      </Metadata>
+      <Metadata>
+        <Name>MainTitle</Name>
+        <field>
+          <fieldMainTag>245</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+        </field>
+        <field>
+          <fieldMainTag>245</fieldMainTag>
+          <fieldSubTag>c</fieldSubTag>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>TitleDocMainShort</Name>
+        <field>
+          <fieldMainTag>245</fieldMainTag>
+          <fieldSubTag>x</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>PublisherName</Name>
+        <field>
+          <fieldMainTag>260</fieldMainTag>
+          <fieldSubTag>b</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>PlaceOfPublication</Name>
+        <field>
+          <fieldMainTag>260</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>PublisherName</Name>
+        <field>
+          <fieldMainTag>264</fieldMainTag>
+          <fieldSubTag>b</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>PlaceOfPublication</Name>
+        <field>
+          <fieldMainTag>264</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>TitleDocSub1</Name>
+        <field>
+          <fieldMainTag>245</fieldMainTag>
+          <fieldSubTag>b</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>CatalogIDDigital</Name>
+        <field>
+          <fieldMainTag>001</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>CatalogIDSource</Name>
+        <field>
+          <fieldMainTag>776</fieldMainTag>
+          <fieldSubTag>w</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/\(.+\)//g</fieldReplacement>
+        <conditionField>w</conditionField>
+        <conditionValue>/DE-101/</conditionValue>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>CatalogIDPeriodicalDB</Name>
+        <field>
+          <fieldMainTag>016</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>7</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>false</separateEntries>
+        <fieldReplacement>s/.*;\s//g</fieldReplacement>
+      </Metadata>
+      <Metadata>
+        <Name>CatalogIDPeriodicalDBDigital</Name>
+        <field>
+          <fieldMainTag>776</fieldMainTag>
+          <fieldSubTag>w</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/\(.+\)//g</fieldReplacement>
+        <conditionField>w</conditionField>
+        <conditionValue>/DE-600/</conditionValue>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+
+
+      <Metadata>
+        <Name>PublisherName</Name>
+        <field>
+          <fieldMainTag>776</fieldMainTag>
+          <fieldSubTag>d</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <conditionField>d</conditionField>
+        <conditionValue>/:/</conditionValue>
+        <fieldReplacement>s/.* : (.*),.*/$1/g</fieldReplacement>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>PlaceOfPublication</Name>
+        <field>
+          <fieldMainTag>776</fieldMainTag>
+          <fieldSubTag>d</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/^(.+?)[ ]*[:;,].*$/$1/g</fieldReplacement>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <!--
+      <Metadata>
+          <Name>PublicationRun</Name>
+          <field>
+              <fieldMainTag>362</fieldMainTag>
+              <fieldSubTag>a</fieldSubTag>
+              <fieldInd1>any</fieldInd1>
+              <fieldInd2>any</fieldInd2>
+          </field>
+          <separateEntries>true</separateEntries>
+      </Metadata>
+-->
+      <Metadata>
+        <Name>PublicationRun</Name>
+        <field>
+          <fieldMainTag>776</fieldMainTag>
+          <fieldSubTag>d</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/.*, \[*([0-9]+)\??\]*/$1/g</fieldReplacement>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+
+
+      <Metadata>
+        <Name>CatalogIDPredecessor</Name>
+        <field>
+          <fieldMainTag>780</fieldMainTag>
+          <fieldSubTag>w</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <conditionField>w</conditionField>
+        <conditionValue>/DE-101/</conditionValue>
+        <fieldReplacement>s/\(.+\)//g</fieldReplacement>
+      </Metadata>
+      <Metadata>
+        <Name>CatalogIDSuccessor</Name>
+        <field>
+          <fieldMainTag>785</fieldMainTag>
+          <fieldSubTag>w</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <conditionField>w</conditionField>
+        <conditionValue>/DE-101/</conditionValue>
+        <fieldReplacement>s/\(.+\)//g</fieldReplacement>
+      </Metadata>
+      <Metadata>
+        <Name>DocLanguage</Name>
+        <field>
+          <fieldMainTag>041</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>ISSN</Name>
+        <field>
+          <fieldMainTag>022</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>copyrightimageset</Name>
+        <field>
+          <fieldMainTag>542</fieldMainTag>
+          <fieldSubTag>f</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>copyrightimageset</Name>
+        <field>
+          <fieldMainTag>542</fieldMainTag>
+          <fieldSubTag>f</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>OriginatorCorporate</Name>
+        <field>
+          <fieldMainTag>110</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>110</fieldMainTag>
+          <fieldSubTag>g</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>false</separateEntries>
+        <separator>; </separator>
+      </Metadata>
+      <Metadata>
+        <Name>PublicationYear</Name>
+        <field>
+          <fieldMainTag>008</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/.{7}(.{4}).*/$1/g</fieldReplacement>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>CurrentNo</Name>
+        <field>
+          <fieldMainTag>245</fieldMainTag>
+          <fieldSubTag>n</fieldSubTag>
+          <fieldInd1>1</fieldInd1>
+          <fieldInd2>0</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>800</fieldMainTag>
+          <fieldSubTag>9</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>SizeSourcePrint</Name>
+        <field>
+          <fieldMainTag>300</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>shelfmarksource</Name>
+        <field>
+          <fieldMainTag>852</fieldMainTag>
+          <fieldSubTag>c</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>954</fieldMainTag>
+          <fieldSubTag>d</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+      </Metadata>
+      <Metadata>
+        <Name>OriginatorCorporate</Name>
+        <field>
+          <fieldMainTag>110</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>710</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/org/</conditionValue>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>OriginatorCorporate</Name>
+        <field>
+          <fieldMainTag>110</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>710</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/aut/</conditionValue>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/cre/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/pra/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/rsp/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/aut/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/com/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/wac/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/lyr/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/win/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/aui/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/aft/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/wpr/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/wst/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/wal/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/wat/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>Author</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/dto/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/art/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/arc/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/scl/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/art/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/ill/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/ltg/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/etr/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <Person>
+        <Name>IllustratorArtist</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/egr/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+
+      <Person>
+        <Name>OtherPerson</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/dte/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>, </separator>
+      </Person>
+      <Person>
+        <Name>Translator</Name>
+        <field>
+          <fieldMainTag>100</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <field>
+          <fieldMainTag>700</fieldMainTag>
+          <firstname>c</firstname>
+          <firstname>b</firstname>
+          <expansion>a</expansion>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <identifierField>0</identifierField>
+        <identifierConditionField>/DE-588/</identifierConditionField>
+        <identifierReplacement>s/\(.+\)//g</identifierReplacement>
+        <conditionField>4</conditionField>
+        <conditionValue>/trl/</conditionValue>
+        <separateEntries>false</separateEntries>
+        <separator>,</separator>
+      </Person>
+      <DocStruct>
+        <Name>Volume</Name>
+        <leader6>a</leader6>
+        <leader7>m</leader7>
+        <leader19>b</leader19>
+      </DocStruct>
+      <DocStruct>
+        <Name>Volume</Name>
+        <leader6>a</leader6>
+        <leader7>m</leader7>
+        <leader19>c</leader19>
+      </DocStruct>
+      <DocStruct>
+        <Name>MultiVolumeWork</Name>
+        <leader6>a</leader6>
+        <leader7>m</leader7>
+        <leader19>a</leader19>
+      </DocStruct>
+      <DocStruct>
+        <Name>Manuscript</Name>
+        <leader6>t</leader6>
+        <leader7>m</leader7>
+      </DocStruct>
+      <DocStruct>
+        <Name>Monograph</Name>
+        <leader6>a</leader6>
+        <leader7>m</leader7>
+      </DocStruct>
+      <DocStruct>
+        <Name>Monograph</Name>
+        <leader6>m</leader6>
+        <leader7>m</leader7>
+      </DocStruct>
+      <DocStruct>
+        <Name>Newspaper</Name>
+        <leader6>a</leader6>
+        <leader7>s</leader7>
+        <leader19 />
+        <field007_0 />
+        <field007_1 />
+        <field008_21 />
+      </DocStruct>
+    </Marc>
+
+
+    <!-- ##########################################################################
+			 ##  METS/MODS                                                           ##
+			 ########################################################################## -->
+    <METS>
+      <!-- ##########################################################################
+				 ##  Only the <AnchorIdentifierMetadataType> is needed for internal      ##
+				 ##  METS storing.                                                       ##
+				 ########################################################################## -->
+      <AnchorIdentifierMetadataType>CatalogIDDigital</AnchorIdentifierMetadataType>
+      <XPathAnchorQuery>./mods:mods/mods:relatedItem[@type='host']/mods:recordInfo/mods:recordIdentifier[@source='zdb-ppn']</XPathAnchorQuery>
+      <!-- Additional namespaces used in the mapping below -->
+      <NamespaceDefinition>
+        <URI>http://gdz.sub.uni-goettingen.de/</URI>
+        <prefix>gdz</prefix>
+      </NamespaceDefinition>
+      <!-- ##########################################################################
+                 ##  Metadata mapping definition                                         ##
+                 ########################################################################## -->
+      <Metadata>
+        <InternalName>URN</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='urn']</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>datedigit</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateCaptured[@encoding='iso8601']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>singleDigCollection</InternalName>
+        <WriteXPath>./mods:mods/#mods:classification[@authority='ivdcc']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>CatalogIDDigital</InternalName>
+        <WriteXPath>./mods:mods/mods:recordInfo/#mods:recordIdentifier[@source='zdb-ppn']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>CatalogFieldVDeighteen</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='vd18']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>_purl</InternalName>
+        <WriteXPath>./mods:mods/mods:identifier[@type='purl']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>CatalogIDSource</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='PPNanalog']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>RezensionsZssDBID</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='ReviewDB']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>BibliographicCitation</InternalName>
+        <WriteXPath>./mods:mods/mods:identifier[@type='VD-ID']</WriteXPath>
+      </Metadata>
+      <!--
+      <Metadata>
+        <InternalName>TitleDocMain</InternalName>
+        <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
+      </Metadata>
+-->
+      <Metadata>
+        <InternalName>MainTitle</InternalName>
+        <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>PartNumber</InternalName>
+        <WriteXPath>./mods:mods/mods:titleInfo/#mods:partName</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>TitleDocSub1</InternalName>
+        <WriteXPath>./mods:mods/mods:titleInfo/#mods:subTitle</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>TitleDocParallel</InternalName>
+        <WriteXPath>./mods:mods/#mods:titleInfo[@type='alternative']/mods:title</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>CurrentNoSorting</InternalName>
+        <WriteXPath>./mods:mods/#mods:part/@order</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>VolumeNo</InternalName>
+        <WriteXPath>./mods:mods/mods:part/mods:detail[@type="volume"]/mods:number</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>CurrentNo</InternalName>
+        <WriteXPath>./mods:mods/mods:part/mods:detail[@type="issue"]/mods:number</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>AnchorID</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:recordInfo/mods:recordIdentifier[@source='zdb-ppn']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>AnchorTitle</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:titleInfo/mods:title</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>AnchorCatalogIDPeriodicalDBDigital</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type='zdb']</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>DocLanguage</InternalName>
+        <WriteXPath>./mods:mods/#mods:language/mods:languageTerm[@type='code'][@authority='iso639-2b']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>PlaceOfPublication</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:place/mods:placeTerm[@type='text']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>PublicationYear</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateIssued[@encoding='iso8601'][@keyDate='yes']</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>DateIssued</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateIssued[@encoding='iso8601'][@keyDate='yes']</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>PublisherName</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:publisher</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>PublicationRun</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateOther</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>IdentifierRelatedWork</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem/#mods:identifier[@type='IdentifierRelatedWork']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>ISSN</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='ISSN']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>SICI</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='SICI']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>DOI</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='DOI']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Sponsorship</InternalName>
+        <WriteXPath>./mods:mods/mods:extension/gdz:gdz/#gdz:sponsorship</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Keyword</InternalName>
+        <WriteXPath>./mods:mods/mods:subject/#mods:topic</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Date</InternalName>
+        <WriteXPath>./mods:mods/mods:subject/#mods:temporal</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Author</InternalName>
+        <MODSName>Person</MODSName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="aut"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>OtherPerson</InternalName>
+        <MODSName>Person</MODSName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="oth"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Editor</InternalName>
+        <MODSName>Person</MODSName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="edt"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>IllustratorArtist</InternalName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="ill"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Photographer</InternalName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="pht"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Printer</InternalName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="prt"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+
+      </Metadata>
+      <Metadata>
+        <InternalName>Translator</InternalName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="trl"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Creator</InternalName>
+        <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="cre"[@authority='marcrelator'][@type='code']]
+                </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>PhysicalLocation</InternalName>
+        <WriteXPath>./mods:mods/mods:location/#mods:physicalLocation</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>shelfmarksource</InternalName>
+        <WriteXPath>./mods:mods/mods:location/#mods:shelfLocator</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>_placeOfElectronicOrigin</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[2]/#mods:place/mods:placeTerm[@type='text']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>_electronicPublisher</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[2]/#mods:publisher</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>_electronicEdition</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[2]/#mods:edition</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>_dateDigitization</InternalName>
+        <WriteXPath>./mods:mods/mods:originInfo[2]/#mods:dateCaptured[@encoding='iso8601']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>_digitalOrigin</InternalName>
+        <WriteXPath>./mods:mods/mods:physicalDescription/#mods:digitalOrigin/</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>SizeSourcePrint</InternalName>
+        <WriteXPath>./mods:mods/mods:physicalDescription/#mods:extent</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>Event</InternalName>
+        <WriteXPath>./mods:mods/#mods:note[@type='event']</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>CatalogIDPeriodicalDB</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='original']/#mods:identifier[@type='zdb']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>CatalogIDPeriodicalDBDigital</InternalName>
+        <WriteXPath>./mods:mods/#mods:identifier[@type='zdb']</WriteXPath>
+      </Metadata>
+
+
+      <Metadata>
+        <InternalName>TypeOfResource</InternalName>
+        <WriteXPath>./mods:mods/mods:typeOfResource</WriteXPath>
+      </Metadata>
+
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^PDM$/</ValueCondition>
+        <ValueRegExp>s/PDM/Public Domain Mark 1.0/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/publicdomain/mark/1.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC0$/</ValueCondition>
+        <ValueRegExp>s/CC0/CC0 1.0 Universal (CC0 1.0) Public Domain Dedication/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/publicdomain/zero/1.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC BY$/</ValueCondition>
+        <ValueRegExp>s/CC BY/Attribution 4.0 International (CC BY 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC BY-SA$/</ValueCondition>
+        <ValueRegExp>s/CC BY-SA/Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-sa/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC BY-ND$/</ValueCondition>
+        <ValueRegExp>s/CC BY-ND/Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nd/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC BY-NC$/</ValueCondition>
+        <ValueRegExp>s/CC BY-NC/Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC BY-NC-SA$/</ValueCondition>
+        <ValueRegExp>s/CC BY-NC-SA/Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc-sa/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^CC BY-NC-ND$/</ValueCondition>
+        <ValueRegExp>s/CC BY-NC-ND/Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc-nd/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>UseAndReproductionLicense</InternalName>
+        <ValueCondition>/^reserved$/</ValueCondition>
+        <ValueRegExp>s/reserved/In Copyright 1.0/</ValueRegExp>
+        <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@href='https://rightsstatements.org/vocab/InC/1.0/']</WriteXPath>
+      </Metadata>
+
+
+      <!-- Do NOT map this metadata field. -->
+      <!--Metadata>
+				<InternalName>CreatorsAllOrigin</InternalName>
+				<MODSName skipping="yes">xxx</MODSName>
+			</Metadata-->
+      <!-- ##########################################################################
+                 ##  Declare the mapping between DocStructs - physical and logical       ##
+                 ########################################################################## -->
+      <!-- DO NOT CHANGE!! -->
+      <DocStruct>
+        <InternalName>BoundBook</InternalName>
+        <MetsType>physSequence</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>page</InternalName>
+        <MetsType>page</MetsType>
+      </DocStruct>
+      <!-- DO NOT CHANGE!! -->
+      <!-- ##########################################################################
+                 ##  Logical structure entities                                          ##
+                 ########################################################################## -->
+      <DocStruct>
+        <InternalName>Monograph</InternalName>
+        <MetsType>monograph</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Acknowledgment</InternalName>
+        <MetsType>Acknowledgment</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Article</InternalName>
+        <MetsType>Article</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Epilogue</InternalName>
+        <MetsType>Epilogue</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>PeriodicalVolume</InternalName>
+        <MetsType>PeriodicalVolume</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Appendix</InternalName>
+        <MetsType>Appendix</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>PeriodicalPart</InternalName>
+        <MetsType>PeriodicalPart</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Advertising</InternalName>
+        <MetsType>Advertising</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>TableDescription</InternalName>
+        <MetsType>TableDescription</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IllustrationDescription</InternalName>
+        <MetsType>IllustrationDescription</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Chapter</InternalName>
+        <MetsType>Chapter</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Periodical</InternalName>
+        <MetsType>periodical</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Prepage</InternalName>
+        <MetsType>Prepage</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Errata</InternalName>
+        <MetsType>Errata</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Index</InternalName>
+        <MetsType>Index</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>TitlePage</InternalName>
+        <MetsType>TitlePage</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>OtherDocStrct</InternalName>
+        <MetsType>OtherDocStrct</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Bibliography</InternalName>
+        <MetsType>Bibliography</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>SheetMusic</InternalName>
+        <MetsType>SheetMusic</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Dedication</InternalName>
+        <MetsType>Dedication</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>CurriculumVitae</InternalName>
+        <MetsType>CurriculumVitae</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Preface</InternalName>
+        <MetsType>Preface</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Supplement</InternalName>
+        <MetsType>Supplement</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>PeriodicalIssue</InternalName>
+        <MetsType>PeriodicalIssue</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Introduction</InternalName>
+        <MetsType>Introduction</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Imprint</InternalName>
+        <MetsType>Imprint</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ContainedWork</InternalName>
+        <MetsType>ContainedWork</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>AttachedWork</InternalName>
+        <MetsType>AttachedWork</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>PartOfWork</InternalName>
+        <MetsType>PartOfWork</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>MultiVolumeWork</InternalName>
+        <MetsType>multivolume_work</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Volume</InternalName>
+        <MetsType>volume</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Obituary</InternalName>
+        <MetsType>Obituary</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Figure</InternalName>
+        <MetsType>Figure</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Table</InternalName>
+        <MetsType>Table</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Map</InternalName>
+        <MetsType>Map</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Theses</InternalName>
+        <MetsType>Theses</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Headword</InternalName>
+        <MetsType>Headword</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Letter</InternalName>
+        <MetsType>Letter</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Headword</InternalName>
+        <MetsType>Headword</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Addendum</InternalName>
+        <MetsType>Addendum</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Cover</InternalName>
+        <MetsType>Cover</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Remarks</InternalName>
+        <MetsType>Remarks</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ListOfMaps</InternalName>
+        <MetsType>ListOfMaps</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ListOfIllustrations</InternalName>
+        <MetsType>ListOfIllustrations</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ListOfTables</InternalName>
+        <MetsType>ListOfTables</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>TableOfLiteratureRefs</InternalName>
+        <MetsType>TableOfLiteratureRefs</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>TableOfContents</InternalName>
+        <MetsType>TableOfContents</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>TableOfAbbreviations</InternalName>
+        <MetsType>TableOfAbbreviations</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexAuthor</InternalName>
+        <MetsType>IndexAuthor</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexOverall</InternalName>
+        <MetsType>IndexOverall</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexPersons</InternalName>
+        <MetsType>IndexPersons</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexLocation</InternalName>
+        <MetsType>IndexLocation</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexSubject</InternalName>
+        <MetsType>IndexSubject</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexSpecial</InternalName>
+        <MetsType>IndexSpecial</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexVolume</InternalName>
+        <MetsType>IndexVolume</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>IndexOfChronology</InternalName>
+        <MetsType>IndexOfChronology</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Invitation</InternalName>
+        <MetsType>Invitation</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Ticket</InternalName>
+        <MetsType>Ticket</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Festschrift</InternalName>
+        <MetsType>Festschrift</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Insertion</InternalName>
+        <MetsType>Insertion</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Brochure</InternalName>
+        <MetsType>Brochure</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Poster</InternalName>
+        <MetsType>Poster</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Programme</InternalName>
+        <MetsType>Programme</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ProgrammeBook</InternalName>
+        <MetsType>ProgrammeBook</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ProgrammeIssue</InternalName>
+        <MetsType>ProgrammeIssue</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ProgrammeNote</InternalName>
+        <MetsType>ProgrammeNote</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Prospect</InternalName>
+        <MetsType>Prospect</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>ConcertReview</InternalName>
+        <MetsType>ConcertReview</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Review</InternalName>
+        <MetsType>Review</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>SeasonPreview</InternalName>
+        <MetsType>SeasonPreview</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Textbook</InternalName>
+        <MetsType>Textbook</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Preview</InternalName>
+        <MetsType>Preview</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Newspaper</InternalName>
+        <MetsType>newspaper</MetsType>
+      </DocStruct>
+
+      <DocStruct>
+        <InternalName>NewspaperStub</InternalName>
+        <MetsType>newspaper</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>NewspaperVolume</InternalName>
+        <MetsType>volume</MetsType>
+      </DocStruct>
+
+      <DocStruct>
+        <InternalName>NewspaperEdition</InternalName>
+        <MetsType>edition</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>NewspaperIssue</InternalName>
+        <MetsType>issue</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>NewspaperSupplement</InternalName>
+        <MetsType>supplement</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Year</InternalName>
+        <MetsType>year</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Month</InternalName>
+        <MetsType>month</MetsType>
+      </DocStruct>
+      <DocStruct>
+        <InternalName>Day</InternalName>
+        <MetsType>day</MetsType>
+      </DocStruct>
+    </METS>
+  </Formats>
+</Preferences>
