@@ -10,12 +10,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.SubnodeConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.lang.StringUtils;
 import org.goobi.beans.Process;
 import org.goobi.beans.ProjectFileGroup;
-import org.goobi.beans.Step;
 import org.goobi.production.enums.PluginType;
 import org.goobi.production.plugin.interfaces.IExportPlugin;
 import org.goobi.production.plugin.interfaces.IPlugin;
@@ -30,6 +31,7 @@ import org.jdom2.output.XMLOutputter;
 import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.helper.StorageProvider;
 import de.sub.goobi.helper.VariableReplacer;
+import de.sub.goobi.helper.XmlTools;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.helper.exceptions.ExportFileException;
 import de.sub.goobi.helper.exceptions.SwapException;
@@ -68,13 +70,11 @@ import ugh.fileformats.mets.MetsModsImportExport;
 @Log4j2
 public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
+    private static final long serialVersionUID = 7249755051578684102L;
     @Getter
     private String title = "intranda_export_newspaper";
     @Getter
     private PluginType type = PluginType.Export;
-    @Getter
-    @Setter
-    private Step step;
 
     @Getter
     private List<String> problems;
@@ -101,54 +101,69 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     SwapException, DAOException, TypeNotAllowedForParentException {
         problems = new ArrayList<>();
 
+        String projectName = process.getProjekt().getTitel();
         String goobiId = String.valueOf(process.getId());
 
         Prefs prefs = process.getRegelsatz().getPreferences();
-        XMLConfiguration config = ConfigPlugins.getPluginConfig(title);
-        config.setExpressionEngine(new XPathExpressionEngine());
+        XMLConfiguration globalSettings = ConfigPlugins.getPluginConfig(title);
+        globalSettings.setExpressionEngine(new XPathExpressionEngine());
 
-        MetadataType zdbIdAnalogType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbidanalog"));
-        MetadataType zdbIdDigitalType = prefs.getMetadataTypeByName(config.getString("/metadata/zdbiddigital"));
-        MetadataType purlType = prefs.getMetadataTypeByName(config.getString("/metadata/purl"));
+        SubnodeConfiguration projectSettings = null;
+        // order of configuration is:
+        // 1.) project name and step name matches
+        // 2.) step name matches and project is *
+        // 3.) project name matches and step name is *
+        // 4.) project name and step name are *
+        try {
+            projectSettings = globalSettings.configurationAt("//config[./project = '" + projectName + "']");
+        } catch (IllegalArgumentException e) {
+            try {
+                projectSettings = globalSettings.configurationAt("//config[./project = '*']");
+            } catch (IllegalArgumentException e1) {
+                log.error(e1);
+            }
+        }
 
-        MetadataType identifierType = prefs.getMetadataTypeByName(config.getString("/metadata/identifier"));
-        MetadataType issueDateType = prefs.getMetadataTypeByName(config.getString("/metadata/issueDate"));
-        MetadataType yearDateType = prefs.getMetadataTypeByName(config.getString("/metadata/yearDate"));
+        MetadataType zdbIdAnalogType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbidanalog"));
+        MetadataType zdbIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbiddigital"));
+        MetadataType purlType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/purl"));
 
-        MetadataType labelType = prefs.getMetadataTypeByName(config.getString("/metadata/titleLabel"));
-        MetadataType mainTitleType = prefs.getMetadataTypeByName(config.getString("/metadata/modsTitle"));
+        MetadataType identifierType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/identifier"));
+        MetadataType issueDateType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueDate"));
+        MetadataType yearDateType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/yearDate"));
 
-        MetadataType issueNumberType = prefs.getMetadataTypeByName(config.getString("/metadata/issueNumber"));
-        MetadataType sortNumberType = prefs.getMetadataTypeByName(config.getString("/metadata/sortNumber"));
+        MetadataType labelType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/titleLabel"));
+        MetadataType mainTitleType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/modsTitle"));
 
-        MetadataType languageType = prefs.getMetadataTypeByName(config.getString("/metadata/language"));
-        MetadataType locationType = prefs.getMetadataTypeByName(config.getString("/metadata/location"));
-        MetadataType accessConditionType = prefs.getMetadataTypeByName(config.getString("/metadata/licence"));
+        MetadataType issueNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueNumber"));
+        MetadataType sortNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/sortNumber"));
 
-        MetadataType resourceType = prefs.getMetadataTypeByName(config.getString("/metadata/resourceType"));
+        MetadataType languageType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/language"));
+        MetadataType locationType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/location"));
+        MetadataType accessConditionType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/licence"));
 
-        MetadataType anchorIdType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorId"));
-        MetadataType anchorTitleType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorTitle"));
-        MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(config.getString("/metadata/anchorZDBIdDigital"));
+        MetadataType resourceType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/resourceType"));
 
-        DocStructType newspaperType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaper"));
-        DocStructType yearType = prefs.getDocStrctTypeByName(config.getString("/docstruct/year"));
-        DocStructType monthType = prefs.getDocStrctTypeByName(config.getString("/docstruct/month"));
-        DocStructType dayType = prefs.getDocStrctTypeByName(config.getString("/docstruct/day"));
-        DocStructType issueType = prefs.getDocStrctTypeByName(config.getString("/docstruct/issue"));
+        MetadataType anchorIdType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorId"));
+        MetadataType anchorTitleType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorTitle"));
+        MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorZDBIdDigital"));
 
-        DocStructType newspaperStubType = prefs.getDocStrctTypeByName(config.getString("/docstruct/newspaperStub"));
+        DocStructType newspaperType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/newspaper"));
+        DocStructType yearType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/year"));
+        DocStructType monthType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/month"));
+        DocStructType dayType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/day"));
+        DocStructType issueType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/issue"));
 
-        boolean subfolderPerIssue = config.getBoolean("/export/subfolderPerIssue", false);
-        boolean exportImages = config.getBoolean("/export/images", false);
-        String metsResolverUrl = config.getString("/export/metsUrl", "");
-        String piResolverUrl = config.getString("/export/resolverUrl", "");
+        DocStructType newspaperStubType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/newspaperStub"));
 
-        String imagesFolder = process.getImagesTifDirectory(false);
+        boolean subfolderPerIssue = projectSettings.getBoolean("/export/subfolderPerIssue", false);
+        exportImages = projectSettings.getBoolean("/export/images", false);
+        String metsResolverUrl = projectSettings.getString("/metsUrl");
+        String piResolverUrl = projectSettings.getString("/resolverUrl");
 
         Path tmpExportFolder = Files.createTempDirectory("mets_export");
 
-        String finalExportFolder = config.getString("/export/exportFolder");
+        String finalExportFolder = projectSettings.getString("/export/exportFolder");
         if (!finalExportFolder.endsWith("/")) {
             finalExportFolder = finalExportFolder + "/";
         }
@@ -160,7 +175,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         DocStruct oldPhysical = digitalDocument.getPhysicalDocStruct();
 
         VariableReplacer vp = new VariableReplacer(digitalDocument, prefs, process, null);
-        List<ProjectFileGroup> myFilegroups = process.getProjekt().getFilegroups();
+        List<ProjectFileGroup> myFilegroups = getProjectFileGroups(projectSettings, process.getProjekt().getFilegroups());
 
         // check if it is a newspaper
         if (!logical.getType().isAnchor()) {
@@ -267,9 +282,9 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         DigitalDocument anchorDigitalDocument = new DigitalDocument();
         newspaperExport.setDigitalDocument(anchorDigitalDocument);
-        String pointer = process.getProjekt().getMetsPointerPath();
+        String pointer = projectSettings.getString("metsPointerPath", process.getProjekt().getMetsPointerPath());
         pointer = vp.replace(pointer);
-        setMetsParameter(process, goobiId, vp, pointer, newspaperExport);
+        setMetsParameter(process, projectSettings, goobiId, vp, pointer, newspaperExport);
 
         String anchor = process.getProjekt().getMetsPointerPathAnchor();
         anchor = vp.replace(anchor);
@@ -281,6 +296,9 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         // create volume for year
         // https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0
         DocStruct yearVolume = copyDocstruct(yearType, volume, anchorDigitalDocument);
+        if (newspaper == null || yearVolume == null) {
+            return false;
+        }
         if (StringUtils.isNotBlank(publicationYear)) {
             yearVolume.setOrderLabel(publicationYear);
         }
@@ -525,23 +543,23 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 DigitalDocument issueDigDoc = new DigitalDocument();
                 issueExport.setDigitalDocument(issueDigDoc);
 
-                setMetsParameter(process, goobiId, vp, pointer, issueExport);
+                setMetsParameter(process, projectSettings, goobiId, vp, pointer, issueExport);
 
                 // create hierarchy for individual issue file
 
                 // newspaper
                 DocStruct dummyNewspaper = issueDigDoc.createDocStruct(newspaperStubType);
                 dummyNewspaper.setLink(metsResolverUrl + identifier);
-                Metadata title = new Metadata(labelType);
-                title.setValue(titleLabel);
-                dummyNewspaper.addMetadata(title);
+                Metadata titleMd = new Metadata(labelType);
+                titleMd.setValue(titleLabel);
+                dummyNewspaper.addMetadata(titleMd);
                 // year
                 DocStruct issueYear = issueDigDoc.createDocStruct(yearType);
                 issueYear.setOrderLabel(dateValue.substring(0, 4));
                 issueYear.setLink(metsResolverUrl + yearIdentifier);
-                title = new Metadata(labelType);
-                title.setValue(yearTitle);
-                issueYear.addMetadata(title);
+                titleMd = new Metadata(labelType);
+                titleMd.setValue(yearTitle);
+                issueYear.addMetadata(titleMd);
                 dummyNewspaper.addChild(issueYear);
 
                 // month
@@ -570,24 +588,18 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         String filename = Paths.get(oldPage.getImageName()).getFileName().toString();
 
                         DocStruct newPage = copyDocstruct(oldPage.getType(), oldPage, issueDigDoc);
-                        newPage.setImageName(filename);
-                        physicalDocstruct.addChild(newPage);
-                        // TODO export images to a sub folder per issue ?
-                        //                        if (exportImages) {
-                        //                            Path image = Paths.get(imagesFolder, filename);
-                        //                        }
-                        //                        if (exportFulltext) {
-                        //
-                        //                        }
+                        if (newPage != null) {
+                            newPage.setImageName(filename);
+                            physicalDocstruct.addChild(newPage);
 
-                        newIssue.addReferenceTo(newPage, "logical_physical");
-
+                            newIssue.addReferenceTo(newPage, "logical_physical");
+                        }
                     }
                 }
 
                 boolean useOriginalFiles = false;
 
-                if (myFilegroups != null && myFilegroups.size() > 0) {
+                if (myFilegroups != null && !myFilegroups.isEmpty()) {
                     for (ProjectFileGroup pfg : myFilegroups) {
                         if (pfg.isUseOriginalFiles()) {
                             useOriginalFiles = true;
@@ -616,7 +628,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     if (!filesInFolder.isEmpty()) {
                         // compare image names with files in mets file
                         List<DocStruct> pages = issueDigDoc.getPhysicalDocStruct().getAllChildren();
-                        if (pages != null && pages.size() > 0) {
+                        if (pages != null && !pages.isEmpty()) {
                             for (DocStruct page : pages) {
                                 Path completeNameInMets = Paths.get(page.getImageName());
                                 String filenameInMets = completeNameInMets.getFileName().toString();
@@ -631,7 +643,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                                         imageName = imageName.substring(0, dotIndex);
                                     }
 
-                                    if (filenameInMets.toLowerCase().equals(imageName.toLowerCase())) {
+                                    if (filenameInMets.equalsIgnoreCase(imageName)) {
                                         // found matching filename
                                         page.setImageName(imageNameInFolder.toString());
                                         break;
@@ -645,6 +657,38 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 // export to configured folder
                 String issueName = Paths.get(tmpExportFolder.toString(), issueIdentifier + ".xml").toString();
                 issueExport.write(issueName);
+
+                if (exportImages) {
+                    String imagesFolder = process.getImagesTifDirectory(false);
+                    String exportFolder = projectSettings.getString("/export/exportImageFolder")
+                            .replace("$(meta.CatalogIDDigital)", subfolderPerIssue ? issueIdentifier : yearIdentifier);
+                    List<DocStruct> pages = issueDigDoc.getPhysicalDocStruct().getAllChildren();
+                    if (pages != null && !pages.isEmpty()) {
+                        for (DocStruct page : pages) {
+                            Path imageDestination = Paths.get(exportFolder, page.getImageName());
+                            if (!StorageProvider.getInstance().isDirectory(imageDestination.getParent())) {
+                                StorageProvider.getInstance().createDirectories(imageDestination.getParent());
+                            }
+                            StorageProvider.getInstance().copyFile(Paths.get(imagesFolder, page.getImageName()), imageDestination);
+                        }
+                    }
+                }
+                if (exportFulltext) {
+                    String altoFolder = process.getOcrAltoDirectory();
+                    String exportFolder = projectSettings.getString("/export/exportAltoFolder")
+                            .replace("$(meta.CatalogIDDigital)", subfolderPerIssue ? issueIdentifier : yearIdentifier);
+                    List<DocStruct> pages = issueDigDoc.getPhysicalDocStruct().getAllChildren();
+                    if (pages != null && !pages.isEmpty()) {
+                        for (DocStruct page : pages) {
+                            Path imageDestination = Paths.get(exportFolder, page.getImageName());
+                            if (!StorageProvider.getInstance().isDirectory(imageDestination.getParent())) {
+                                StorageProvider.getInstance().createDirectories(imageDestination.getParent());
+                            }
+                            StorageProvider.getInstance().copyFile(Paths.get(altoFolder, page.getImageName()), imageDestination);
+                        }
+                    }
+
+                }
 
             } catch (TypeNotAllowedAsChildException e) {
                 log.error(e);
@@ -688,25 +732,46 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return true;
     }
 
-    private void setMetsParameter(Process process, String goobiId, VariableReplacer vp, String pointer, ExportFileformat fileFormat) {
+    private List<ProjectFileGroup> getProjectFileGroups(SubnodeConfiguration projectSettings, List<ProjectFileGroup> defaultFilegroups) {
+        List<ProjectFileGroup> answer = new ArrayList<>();
+        for (HierarchicalConfiguration hc : projectSettings.configurationsAt("/filegroups/filegroup")) {
+            ProjectFileGroup pfg = new ProjectFileGroup();
+            pfg.setName(hc.getString("@name"));
+            pfg.setPath(hc.getString("@path"));
+            pfg.setMimetype(hc.getString("@mimetype"));
+            pfg.setSuffix(hc.getString("@suffix"));
+            pfg.setFolder(hc.getString("@foldername"));
+            pfg.setIgnoreMimetypes(hc.getString("@filesToIgnore"));
+            pfg.setUseOriginalFiles(hc.getBoolean("@mimetypeFromFilename"));
+        }
+        return answer.isEmpty() ? defaultFilegroups : answer;
+    }
+
+    private void setMetsParameter(Process process, SubnodeConfiguration projectSettings, String goobiId, VariableReplacer vp, String pointer,
+            ExportFileformat fileFormat) {
         fileFormat.setGoobiID(goobiId);
 
-        fileFormat.setRightsOwner(vp.replace(process.getProjekt().getMetsRightsOwner()));
-        fileFormat.setRightsOwnerLogo(vp.replace(process.getProjekt().getMetsRightsOwnerLogo()));
-        fileFormat.setRightsOwnerSiteURL(vp.replace(process.getProjekt().getMetsRightsOwnerSite()));
-        fileFormat.setRightsOwnerContact(vp.replace(process.getProjekt().getMetsRightsOwnerMail()));
-        fileFormat.setDigiprovPresentation(vp.replace(process.getProjekt().getMetsDigiprovPresentation()));
-        fileFormat.setDigiprovReference(vp.replace(process.getProjekt().getMetsDigiprovReference()));
-        fileFormat.setDigiprovPresentationAnchor(vp.replace(process.getProjekt().getMetsDigiprovPresentationAnchor()));
-        fileFormat.setDigiprovReferenceAnchor(vp.replace(process.getProjekt().getMetsDigiprovReferenceAnchor()));
+        fileFormat.setRightsOwner(vp.replace(projectSettings.getString("/rightsOwner", process.getProjekt().getMetsRightsOwner())));
+        fileFormat.setRightsOwnerLogo(vp.replace(projectSettings.getString("/rightsOwnerLogo", process.getProjekt().getMetsRightsOwnerLogo())));
+        fileFormat.setRightsOwnerSiteURL(vp.replace(projectSettings.getString("/rightsOwnerSiteURL", process.getProjekt().getMetsRightsOwnerSite())));
+        fileFormat.setRightsOwnerContact(vp.replace(projectSettings.getString("/rightsOwnerContact", process.getProjekt().getMetsRightsOwnerMail())));
+        fileFormat.setDigiprovPresentation(
+                vp.replace(projectSettings.getString("/digiprovPresentation", process.getProjekt().getMetsDigiprovPresentation())));
+        fileFormat.setDigiprovReference(vp.replace(projectSettings.getString("/digiprovReference", process.getProjekt().getMetsDigiprovReference())));
+        fileFormat.setDigiprovPresentationAnchor(
+                vp.replace(projectSettings.getString("/digiprovPresentationAnchor", process.getProjekt().getMetsDigiprovPresentationAnchor())));
+        fileFormat.setDigiprovReferenceAnchor(
+                vp.replace(projectSettings.getString("/digiprovReferenceAnchor", process.getProjekt().getMetsDigiprovReferenceAnchor())));
 
-        fileFormat.setMetsRightsLicense(vp.replace(process.getProjekt().getMetsRightsLicense()));
-        fileFormat.setMetsRightsSponsor(vp.replace(process.getProjekt().getMetsRightsSponsor()));
-        fileFormat.setMetsRightsSponsorLogo(vp.replace(process.getProjekt().getMetsRightsSponsorLogo()));
-        fileFormat.setMetsRightsSponsorSiteURL(vp.replace(process.getProjekt().getMetsRightsSponsorSiteURL()));
+        fileFormat.setMetsRightsLicense(vp.replace(projectSettings.getString("/rightsLicense", process.getProjekt().getMetsRightsLicense())));
+        fileFormat.setMetsRightsSponsor(vp.replace(projectSettings.getString("/rightsSponsor", process.getProjekt().getMetsRightsSponsor())));
+        fileFormat.setMetsRightsSponsorLogo(
+                vp.replace(projectSettings.getString("/rightsSponsorLogo", process.getProjekt().getMetsRightsSponsorLogo())));
+        fileFormat.setMetsRightsSponsorSiteURL(
+                vp.replace(projectSettings.getString("/rightsSponsorSiteURL", process.getProjekt().getMetsRightsSponsorSiteURL())));
 
-        fileFormat.setPurlUrl(vp.replace(process.getProjekt().getMetsPurl()));
-        fileFormat.setContentIDs(vp.replace(process.getProjekt().getMetsContentIDs()));
+        fileFormat.setPurlUrl(vp.replace(projectSettings.getString("/purl", process.getProjekt().getMetsPurl())));
+        fileFormat.setContentIDs(vp.replace(projectSettings.getString("/contentIds", process.getProjekt().getMetsContentIDs())));
         fileFormat.setMptrUrl(pointer);
         fileFormat.setMptrAnchorUrl(pointer);
 
@@ -854,7 +919,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     private void mergeAnchorWithVolumes(Path oldAnchor, Path newAnchor) throws JDOMException, IOException {
 
         List<Volume> volumes = new ArrayList<>();
-        SAXBuilder parser = new SAXBuilder();
+        SAXBuilder parser = XmlTools.getSAXBuilder();
 
         // alten anchor einlesen
         Document metsDoc = parser.build(oldAnchor.toFile());
@@ -897,7 +962,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         List<Element> volumeDivList = anchorDiv.getChildren("div", metsNamespace);
         for (Element volumeDiv : volumeDivList) {
             String label = "";
-            String type = "";
+            String volumeType = "";
             String url = "";
             String contentids = "";
             String order = "";
@@ -905,7 +970,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 label = volumeDiv.getAttributeValue("LABEL");
             }
             if (volumeDiv.getAttribute("TYPE") != null) {
-                type = volumeDiv.getAttributeValue("TYPE");
+                volumeType = volumeDiv.getAttributeValue("TYPE");
             }
             if (volumeDiv.getAttribute("CONTENTIDS") != null) {
                 contentids = volumeDiv.getAttributeValue("CONTENTIDS");
@@ -922,7 +987,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
             }
             if (!foundVolume) {
-                Volume v = this.new Volume(label, type, url, contentids, order);
+                Volume v = this.new Volume(label, volumeType, url, contentids, order);
                 volumes.add(v);
             }
         }
@@ -940,7 +1005,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         List<Element> volumeDivList = anchorDiv.getChildren("div", metsNamespace);
         for (Element volumeDiv : volumeDivList) {
             String label = "";
-            String type = "";
+            String volumeType = "";
             String url = "";
             String contentids = "";
             String order = "";
@@ -948,7 +1013,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 label = volumeDiv.getAttributeValue("LABEL");
             }
             if (volumeDiv.getAttribute("TYPE") != null) {
-                type = volumeDiv.getAttributeValue("TYPE");
+                volumeType = volumeDiv.getAttributeValue("TYPE");
             }
             if (volumeDiv.getAttribute("CONTENTIDS") != null) {
                 contentids = volumeDiv.getAttributeValue("CONTENTIDS");
@@ -958,7 +1023,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
             Element mptr = volumeDiv.getChild("mptr", metsNamespace);
             url = mptr.getAttributeValue("href", xlink);
-            Volume v = this.new Volume(label, type, url, contentids, order);
+            Volume v = this.new Volume(label, volumeType, url, contentids, order);
             for (Volume vol : volumes) {
                 if (vol.getUrl().replace(".xml", "").equals(url.replace(".xml", ""))) {
                     // reexport, muss nicht gemerged werden
@@ -1027,7 +1092,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return strId;
     }
 
-    private static Comparator<Volume> volumeComperator = new Comparator<Volume>() {
+    private static Comparator<Volume> volumeComperator = new Comparator<Volume>() { //NOSONAR
 
         @Override
         public int compare(Volume o1, Volume o2) {

@@ -1,11 +1,58 @@
 <config_plugin>
-    <export>
-        <images>false</images>
-        <subfolderPerIssue>false</subfolderPerIssue>
-        <exportFolder>/tmp/export/</exportFolder>
+    <config>
+        <!-- individual export setting per project -->
+        <project>*</project>
+        <export>
+            <images>true</images>
+            <fulltext>true</fulltext>
+            <subfolderPerIssue>true</subfolderPerIssue>
+            <exportFolder>/tmp/export/</exportFolder>
+            <exportImageFolder>/tmp/export/$(meta.CatalogIDDigital)_tif/</exportImageFolder>
+            <exportAltoFolder>/tmp/export/$(meta.CatalogIDDigital)_alto/</exportAltoFolder>
+        </export>
         <metsUrl>https://example.org/viewer/metsresolver?id=</metsUrl>
         <resolverUrl>https://example.org/viewer/piresolver?id=</resolverUrl>
-    </export>
+        
+        <!-- file groups -->
+        <!-- if no file group is set, the file groups from the project configuration are used -->
+        <filegroups>
+            <filegroup
+                name="DEFAULT"
+                path="https://example.org/viewer/content/$(meta.CatalogIDDigital)/1000/0/"
+                mimetype=""
+                suffix=""
+                foldername=""
+                filesToIgnore=""
+                mimetypeFromFilename="true" />
+            <filegroup
+                name="FULLTEXT"
+                path="https://example.org/viewer/rest/content/alto/$(meta.CatalogIDDigital)/"
+                mimetype="xml/alto"
+                suffix="xml"
+                foldername="getOcrDirectory"
+                filesToIgnore=""
+                mimetypeFromFilename="false" />
+        </filegroups>
+        <!-- mets parameter -->
+        <!-- if a field is empty or missing, project configuration is used -->
+        <metsPointerPath>https://example.org/viewer/metsresolver?id=$(meta.topstruct.CatalogIDDigital)</metsPointerPath>
+        <rightsOwner>Stiftung Haus Oberschlesien</rightsOwner>
+        <rightsOwnerLogo>https://example.org/viewer/resources/themes/digishelf/images/dfg_viewer_logo.png</rightsOwnerLogo>
+        <rightsOwnerSiteURL></rightsOwnerSiteURL>
+        <rightsOwnerContact></rightsOwnerContact>
+        <digiprovPresentation>https://example.org/viewer/ppnresolver?id=$(meta.CatalogIDDigital)</digiprovPresentation>
+        <digiprovReference></digiprovReference>
+        <digiprovPresentationAnchor>https://example.org/viewer/ppnresolver?id=$(meta.topstruct.CatalogIDDigital)</digiprovPresentationAnchor>
+        <digiprovReferenceAnchor></digiprovReferenceAnchor>
+        <rightsLicense>CC-BY</rightsLicense>
+        <rightsSponsor>Neustart Kultur 2021</rightsSponsor>
+        <rightsSponsorLogo></rightsSponsorLogo>
+        <rightsSponsorSiteURL></rightsSponsorSiteURL>
+        <purl></purl>
+        <contentIds></contentIds>
+    </config>
+    
+    <!-- global metadata settings -->
     <metadata>
         <purl>_purl</purl>
         <zdbiddigital>CatalogIDPeriodicalDBDigital</zdbiddigital>
