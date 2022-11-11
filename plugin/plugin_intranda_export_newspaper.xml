@@ -10,7 +10,7 @@
             <exportImageFolder>/tmp/export/$(meta.CatalogIDDigital)_tif/</exportImageFolder>
             <exportAltoFolder>/tmp/export/$(meta.CatalogIDDigital)_alto/</exportAltoFolder>
         </export>
-        <metsUrl>https://example.org/viewer/metsresolver?id=</metsUrl>
+        <metsUrl addFileExtension="true">https://example.org/viewer/metsresolver?id=</metsUrl>
         <resolverUrl>https://example.org/viewer/piresolver?id=</resolverUrl>
         
         <!-- file groups -->
@@ -35,7 +35,9 @@
         </filegroups>
         <!-- mets parameter -->
         <!-- if a field is empty or missing, project configuration is used -->
-        <metsPointerPath>https://example.org/viewer/metsresolver?id=$(meta.topstruct.CatalogIDDigital)</metsPointerPath>
+        <metsPointerPath>https://example.org/viewer/metsresolver?id=$(meta.topstruct.CatalogIDDigital).xml</metsPointerPath>
+        <metsPointerPathAnchor>https://example.org/viewer/metsresolver?id=$(meta.CatalogIDDigital).xml</metsPointerPathAnchor>
+        <metsPointerAddFileExtension>true</metsPointerAddFileExtension>        
         <rightsOwner>Stiftung Haus Oberschlesien</rightsOwner>
         <rightsOwnerLogo>https://example.org/viewer/resources/themes/digishelf/images/dfg_viewer_logo.png</rightsOwnerLogo>
         <rightsOwnerSiteURL></rightsOwnerSiteURL>

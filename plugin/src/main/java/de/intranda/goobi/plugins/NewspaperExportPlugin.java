@@ -84,6 +84,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     @Setter
     private boolean exportImages;
 
+    private boolean addFileExtension = true;
+
     private static final Namespace metsNamespace = Namespace.getNamespace("mets", "http://www.loc.gov/METS/");
     private static final Namespace xlink = Namespace.getNamespace("xlink", "http://www.w3.org/1999/xlink");
 
@@ -159,6 +161,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         boolean subfolderPerIssue = projectSettings.getBoolean("/export/subfolderPerIssue", false);
         exportImages = projectSettings.getBoolean("/export/images", false);
         String metsResolverUrl = projectSettings.getString("/metsUrl");
+        addFileExtension = projectSettings.getBoolean("/metsUrl/@addFileExtension", false);
         String piResolverUrl = projectSettings.getString("/resolverUrl");
 
         Path tmpExportFolder = Files.createTempDirectory("mets_export");
@@ -282,13 +285,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         DigitalDocument anchorDigitalDocument = new DigitalDocument();
         newspaperExport.setDigitalDocument(anchorDigitalDocument);
-        String pointer = projectSettings.getString("/metsPointerPath", process.getProjekt().getMetsPointerPath());
-        pointer = vp.replace(pointer);
-        setMetsParameter(process, projectSettings, goobiId, vp, pointer, newspaperExport);
-
-        String anchor = process.getProjekt().getMetsPointerPathAnchor();
+        String anchor = projectSettings.getString("/metsPointerPathAnchor", process.getProjekt().getMetsPointerPathAnchor());
         anchor = vp.replace(anchor);
         newspaperExport.setMptrAnchorUrl(anchor);
+        String pointer = projectSettings.getString("/metsPointerPath", process.getProjekt().getMetsPointerPath());
+        pointer = vp.replace(pointer);
+        setMetsParameter(process, projectSettings, goobiId, vp, pointer,anchor,  newspaperExport);
+
 
         DocStruct newspaper = copyDocstruct(newspaperType, logical, anchorDigitalDocument);
         anchorDigitalDocument.setLogicalDocStruct(newspaper);
@@ -536,27 +539,39 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
                 // create identifier if missing, add zdb id if missing
-                dummyIssue.setLink(metsResolverUrl + issueIdentifier);
-
+                if (addFileExtension) {
+                    dummyIssue.setLink(metsResolverUrl + issueIdentifier + ".xml");
+                } else {
+                    dummyIssue.setLink(metsResolverUrl + issueIdentifier);
+                }
                 ExportFileformat issueExport = new MetsModsImportExport(prefs);
 
                 DigitalDocument issueDigDoc = new DigitalDocument();
                 issueExport.setDigitalDocument(issueDigDoc);
 
-                setMetsParameter(process, projectSettings, goobiId, vp, pointer, issueExport);
+                setMetsParameter(process, projectSettings, goobiId, vp, pointer, anchor, issueExport);
 
                 // create hierarchy for individual issue file
 
                 // newspaper
                 DocStruct dummyNewspaper = issueDigDoc.createDocStruct(newspaperStubType);
-                dummyNewspaper.setLink(metsResolverUrl + identifier);
+                if (addFileExtension) {
+                    dummyNewspaper.setLink(metsResolverUrl + identifier + ".xml");
+                } else {
+                    dummyNewspaper.setLink(metsResolverUrl + identifier);
+                }
                 Metadata titleMd = new Metadata(labelType);
                 titleMd.setValue(titleLabel);
                 dummyNewspaper.addMetadata(titleMd);
                 // year
                 DocStruct issueYear = issueDigDoc.createDocStruct(yearType);
                 issueYear.setOrderLabel(dateValue.substring(0, 4));
-                issueYear.setLink(metsResolverUrl + yearIdentifier);
+
+                if (addFileExtension) {
+                    issueYear.setLink(metsResolverUrl + yearIdentifier + ".xml");
+                } else {
+                    issueYear.setLink(metsResolverUrl + yearIdentifier);
+                }
                 titleMd = new Metadata(labelType);
                 titleMd.setValue(yearTitle);
                 issueYear.addMetadata(titleMd);
@@ -747,7 +762,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return answer.isEmpty() ? defaultFilegroups : answer;
     }
 
-    private void setMetsParameter(Process process, SubnodeConfiguration projectSettings, String goobiId, VariableReplacer vp, String pointer,
+    private void setMetsParameter(Process process, SubnodeConfiguration projectSettings, String goobiId, VariableReplacer vp, String pointer, String anchorPointer,
             ExportFileformat fileFormat) {
         fileFormat.setGoobiID(goobiId);
 
@@ -773,8 +788,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         fileFormat.setPurlUrl(vp.replace(projectSettings.getString("/purl", process.getProjekt().getMetsPurl())));
         fileFormat.setContentIDs(vp.replace(projectSettings.getString("/contentIds", process.getProjekt().getMetsContentIDs())));
         fileFormat.setMptrUrl(pointer);
-        fileFormat.setMptrAnchorUrl(pointer);
-
+        fileFormat.setMptrAnchorUrl(anchorPointer);
         fileFormat.setWriteLocal(false);
     }
 
