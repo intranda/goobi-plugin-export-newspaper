@@ -282,7 +282,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         DigitalDocument anchorDigitalDocument = new DigitalDocument();
         newspaperExport.setDigitalDocument(anchorDigitalDocument);
-        String pointer = projectSettings.getString("metsPointerPath", process.getProjekt().getMetsPointerPath());
+        String pointer = projectSettings.getString("/metsPointerPath", process.getProjekt().getMetsPointerPath());
         pointer = vp.replace(pointer);
         setMetsParameter(process, projectSettings, goobiId, vp, pointer, newspaperExport);
 
