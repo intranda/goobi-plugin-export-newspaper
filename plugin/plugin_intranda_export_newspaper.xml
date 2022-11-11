@@ -10,15 +10,15 @@
             <exportImageFolder>/tmp/export/$(meta.CatalogIDDigital)_tif/</exportImageFolder>
             <exportAltoFolder>/tmp/export/$(meta.CatalogIDDigital)_alto/</exportAltoFolder>
         </export>
-        <metsUrl addFileExtension="true">https://example.org/viewer/metsresolver?id=</metsUrl>
-        <resolverUrl>https://example.org/viewer/piresolver?id=</resolverUrl>
+        <metsUrl addFileExtension="true">https://viewer.example.org/sourcefile?id=</metsUrl>
+        <resolverUrl>https://viewer.example.org/piresolver?id=</resolverUrl>
         
         <!-- file groups -->
         <!-- if no file group is set, the file groups from the project configuration are used -->
         <filegroups>
             <filegroup
                 name="DEFAULT"
-                path="https://example.org/viewer/content/$(meta.CatalogIDDigital)/1000/0/"
+                path="https://viewer.example.org/content/$(meta.CatalogIDDigital)/1000/0/"
                 mimetype=""
                 suffix=""
                 foldername=""
@@ -26,7 +26,7 @@
                 mimetypeFromFilename="true" />
             <filegroup
                 name="FULLTEXT"
-                path="https://example.org/viewer/rest/content/alto/$(meta.CatalogIDDigital)/"
+                path="https://viewer.example.org/api/v1/records/$(meta.CatalogIDDigital)/files/alto/"
                 mimetype="xml/alto"
                 suffix="xml"
                 foldername="getOcrDirectory"
@@ -35,23 +35,23 @@
         </filegroups>
         <!-- mets parameter -->
         <!-- if a field is empty or missing, project configuration is used -->
-        <metsPointerPath>https://example.org/viewer/metsresolver?id=$(meta.topstruct.CatalogIDDigital).xml</metsPointerPath>
-        <metsPointerPathAnchor>https://example.org/viewer/metsresolver?id=$(meta.CatalogIDDigital).xml</metsPointerPathAnchor>
+        <metsPointerPath>https://viewer.example.org/sourcefile?id=$(meta.topstruct.CatalogIDDigital).xml</metsPointerPath>
+        <metsPointerPathAnchor>https://viewer.example.org/sourcefile?id=$(meta.CatalogIDDigital).xml</metsPointerPathAnchor>
         <metsPointerAddFileExtension>true</metsPointerAddFileExtension>        
-        <rightsOwner>Stiftung Haus Oberschlesien</rightsOwner>
-        <rightsOwnerLogo>https://example.org/viewer/resources/themes/digishelf/images/dfg_viewer_logo.png</rightsOwnerLogo>
-        <rightsOwnerSiteURL></rightsOwnerSiteURL>
-        <rightsOwnerContact></rightsOwnerContact>
-        <digiprovPresentation>https://example.org/viewer/ppnresolver?id=$(meta.CatalogIDDigital)</digiprovPresentation>
-        <digiprovReference></digiprovReference>
-        <digiprovPresentationAnchor>https://example.org/viewer/ppnresolver?id=$(meta.topstruct.CatalogIDDigital)</digiprovPresentationAnchor>
-        <digiprovReferenceAnchor></digiprovReferenceAnchor>
-        <rightsLicense>CC-BY</rightsLicense>
-        <rightsSponsor>Neustart Kultur 2021</rightsSponsor>
-        <rightsSponsorLogo></rightsSponsorLogo>
-        <rightsSponsorSiteURL></rightsSponsorSiteURL>
-        <purl></purl>
-        <contentIds></contentIds>
+        <rightsOwner>Example institution</rightsOwner>
+        <rightsOwnerLogo>https://viewer.example.org/resources/themes/reference/images/dfg_viewer_logo.png</rightsOwnerLogo>
+        <rightsOwnerSiteURL />
+        <rightsOwnerContact />
+        <digiprovPresentation>https://viewer.example.org/piresolver?id=$(meta.CatalogIDDigital)</digiprovPresentation>
+        <digiprovReference />
+        <digiprovPresentationAnchor>https://viewer.example.org/piresolver?id=$(meta.topstruct.CatalogIDDigital)</digiprovPresentationAnchor>
+        <digiprovReferenceAnchor />
+        <rightsLicense />
+        <rightsSponsor />
+        <rightsSponsorLogo />
+        <rightsSponsorSiteURL />
+        <purl/>
+        <contentIds/>
     </config>
     
     <!-- global metadata settings -->
