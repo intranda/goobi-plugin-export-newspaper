@@ -91,16 +91,16 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
     @Override
     public boolean startExport(Process process) throws IOException, InterruptedException, DocStructHasNoTypeException, PreferencesException,
-    WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException, SwapException, DAOException,
-    TypeNotAllowedForParentException {
+            WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException, SwapException, DAOException,
+            TypeNotAllowedForParentException {
         String benutzerHome = process.getProjekt().getDmsImportImagesPath();
         return startExport(process, benutzerHome);
     }
 
     @Override
     public boolean startExport(Process process, String destination) throws IOException, InterruptedException, DocStructHasNoTypeException,
-    PreferencesException, WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException,
-    SwapException, DAOException, TypeNotAllowedForParentException {
+            PreferencesException, WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException,
+            SwapException, DAOException, TypeNotAllowedForParentException {
         problems = new ArrayList<>();
 
         String projectName = process.getProjekt().getTitel();
@@ -264,15 +264,23 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
 
         if (StringUtils.isBlank(volumeTitle) && StringUtils.isNotBlank(volumeLabel)) {
-            Metadata md = new Metadata(mainTitleType);
-            md.setValue(volumeLabel);
-            volume.addMetadata(md);
+            try {
+                Metadata md = new Metadata(mainTitleType);
+                md.setValue(volumeLabel);
+                volume.addMetadata(md);
+            } catch (UGHException e) {
+                log.info(e);
+            }
         }
 
         if (StringUtils.isBlank(sortNumber) && StringUtils.isNotBlank(issueNumber) && StringUtils.isNumeric(issueNumber)) {
-            Metadata md = new Metadata(sortNumberType);
-            md.setValue(issueNumber);
-            volume.addMetadata(md);
+            try {
+                Metadata md = new Metadata(sortNumberType);
+                md.setValue(issueNumber);
+                volume.addMetadata(md);
+            } catch (UGHException e) {
+                log.info(e);
+            }
         }
 
         // list all issues
@@ -290,8 +298,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         newspaperExport.setMptrAnchorUrl(anchor);
         String pointer = projectSettings.getString("/metsPointerPath", process.getProjekt().getMetsPointerPath());
         pointer = vp.replace(pointer);
-        setMetsParameter(process, projectSettings, goobiId, vp, pointer,anchor,  newspaperExport);
-
+        setMetsParameter(process, projectSettings, goobiId, vp, pointer, anchor, newspaperExport);
 
         DocStruct newspaper = copyDocstruct(newspaperType, logical, anchorDigitalDocument);
         anchorDigitalDocument.setLogicalDocStruct(newspaper);
@@ -401,9 +408,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
             // copy metadata from anchor into the issue
             if (StringUtils.isBlank(issueTitle) && StringUtils.isNotBlank(issueLabel)) {
-                Metadata md = new Metadata(mainTitleType);
-                md.setValue(issueLabel);
-                issue.addMetadata(md);
+                try {
+                    Metadata md = new Metadata(mainTitleType);
+                    md.setValue(issueLabel);
+                    issue.addMetadata(md);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
             }
             if (StringUtils.isBlank(issueSortingNumber) && StringUtils.isNotBlank(issueNo) && StringUtils.isNumeric(issueNo)) {
                 Metadata md = new Metadata(sortNumberType);
@@ -560,9 +571,14 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 } else {
                     dummyNewspaper.setLink(metsResolverUrl + identifier);
                 }
-                Metadata titleMd = new Metadata(labelType);
-                titleMd.setValue(titleLabel);
-                dummyNewspaper.addMetadata(titleMd);
+                Metadata titleMd = null;
+                try {
+                    titleMd = new Metadata(labelType);
+                    titleMd.setValue(titleLabel);
+                    dummyNewspaper.addMetadata(titleMd);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
                 // year
                 DocStruct issueYear = issueDigDoc.createDocStruct(yearType);
                 issueYear.setOrderLabel(dateValue.substring(0, 4));
@@ -574,7 +590,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
                 titleMd = new Metadata(labelType);
                 titleMd.setValue(yearTitle);
-                issueYear.addMetadata(titleMd);
+                try {
+                    issueYear.addMetadata(titleMd);
+                } catch (UGHException e) {
+                    log.info(e);
+                }
                 dummyNewspaper.addChild(issueYear);
 
                 // month
@@ -762,7 +782,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return answer.isEmpty() ? defaultFilegroups : answer;
     }
 
-    private void setMetsParameter(Process process, SubnodeConfiguration projectSettings, String goobiId, VariableReplacer vp, String pointer, String anchorPointer,
+    private void setMetsParameter(Process process, SubnodeConfiguration projectSettings, String goobiId, VariableReplacer vp, String pointer,
+            String anchorPointer,
             ExportFileformat fileFormat) {
         fileFormat.setGoobiID(goobiId);
 
@@ -924,7 +945,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         v.setFileSuffix(projectFileGroup.getSuffix().trim());
         v.setFileExtensionsToIgnore(projectFileGroup.getIgnoreMimetypes());
         v.setIgnoreConfiguredMimetypeAndSuffix(projectFileGroup.isUseOriginalFiles());
-        if (projectFileGroup.getName().equals("PRESENTATION")) {
+        if ("PRESENTATION".equals(projectFileGroup.getName())) {
             v.setMainGroup(true);
         }
         return v;
@@ -1075,6 +1096,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
             if (vol.getOrder() != null && vol.getOrder().length() > 0) {
                 child.setAttribute("ORDER", vol.getOrder());
+                child.setAttribute("ORDERLABEL", vol.getOrder());
             }
             child.setAttribute("TYPE", vol.getType());
             anchorDiv.addContent(child);
