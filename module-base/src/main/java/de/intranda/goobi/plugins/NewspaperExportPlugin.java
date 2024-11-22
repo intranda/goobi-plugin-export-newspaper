@@ -160,6 +160,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         boolean subfolderPerIssue = projectSettings.getBoolean("/export/subfolderPerIssue", false);
         exportImages = projectSettings.getBoolean("/export/images", false);
+        exportFulltext = projectSettings.getBoolean("/export/fulltext", false);
+
         String metsResolverUrl = projectSettings.getString("/metsUrl");
         addFileExtension = projectSettings.getBoolean("/metsUrl/@addFileExtension", false);
         String piResolverUrl = projectSettings.getString("/resolverUrl");
@@ -715,14 +717,15 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     List<DocStruct> pages = issueDigDoc.getPhysicalDocStruct().getAllChildren();
                     if (pages != null && !pages.isEmpty()) {
                         for (DocStruct page : pages) {
-                            Path imageDestination = Paths.get(exportFolder, page.getImageName());
+                            String filename = page.getImageName().substring(0, page.getImageName().indexOf(".")) + ".xml";
+                            Path imageDestination =
+                                    Paths.get(exportFolder, filename);
                             if (!StorageProvider.getInstance().isDirectory(imageDestination.getParent())) {
                                 StorageProvider.getInstance().createDirectories(imageDestination.getParent());
                             }
-                            StorageProvider.getInstance().copyFile(Paths.get(altoFolder, page.getImageName()), imageDestination);
+                            StorageProvider.getInstance().copyFile(Paths.get(altoFolder, filename), imageDestination);
                         }
                     }
-
                 }
 
             } catch (TypeNotAllowedAsChildException e) {
@@ -830,7 +833,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 try {
                     Metadata clone = new Metadata(md.getType());
                     clone.setValue(md.getValue());
-                    clone.setAutorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
+                    clone.setAuthorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
                     newDocstruct.addMetadata(clone);
                 } catch (UGHException e) {
                     log.info(e);
@@ -845,7 +848,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     Person clone = new Person(p.getType());
                     clone.setFirstname(p.getFirstname());
                     clone.setLastname(p.getLastname());
-                    clone.setAutorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
+                    clone.setAuthorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
                     newDocstruct.addPerson(clone);
                 } catch (UGHException e) {
                     log.info(e);
@@ -862,7 +865,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                     clone.setPartName(c.getPartName());
                     clone.setSubNames(c.getSubNames());
-                    clone.setAutorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
+                    clone.setAuthorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
                     newDocstruct.addCorporate(clone);
                 } catch (UGHException e) {
                     log.info(e);
@@ -892,7 +895,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             Metadata metadata = new Metadata(md.getType());
             metadata.setValue(md.getValue());
             if (StringUtils.isNotBlank(md.getAuthorityValue())) {
-                metadata.setAutorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
+                metadata.setAuthorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
             }
             mg.addMetadata(metadata);
         }
@@ -902,7 +905,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             Person person = new Person(p.getType());
             person.setFirstname(p.getFirstname());
             person.setLastname(p.getLastname());
-            person.setAutorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
+            person.setAuthorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
             if (p.getAdditionalNameParts() != null && !p.getAdditionalNameParts().isEmpty()) {
                 for (NamePart np : p.getAdditionalNameParts()) {
                     NamePart newNamePart = new NamePart(np.getType(), np.getValue());
@@ -923,7 +926,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
             corporate.setPartName(c.getPartName());
             if (c.getAuthorityID() != null && c.getAuthorityURI() != null && c.getAuthorityValue() != null) {
-                corporate.setAutorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
+                corporate.setAuthorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
             }
             mg.addCorporate(corporate);
         }
@@ -1128,7 +1131,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         return strId;
     }
 
-    private static Comparator<Volume> volumeComperator = new Comparator<Volume>() { //NOSONAR
+    private static Comparator<Volume> volumeComperator = new Comparator<>() { //NOSONAR
 
         @Override
         public int compare(Volume o1, Volume o2) {
