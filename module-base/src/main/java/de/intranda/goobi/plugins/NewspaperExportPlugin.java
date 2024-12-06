@@ -37,6 +37,7 @@ import ugh.dl.ExportFileformat;
 import ugh.dl.Fileformat;
 import ugh.dl.Metadata;
 import ugh.dl.MetadataGroup;
+import ugh.dl.MetadataGroupType;
 import ugh.dl.MetadataType;
 import ugh.dl.NamePart;
 import ugh.dl.Person;
@@ -71,6 +72,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     @Setter
     private boolean exportImages;
 
+    private Prefs prefs;
+
     @Override
     public boolean startExport(Process process) throws IOException, InterruptedException, DocStructHasNoTypeException, PreferencesException,
             WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException, SwapException, DAOException,
@@ -88,7 +91,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         String projectName = process.getProjekt().getTitel();
         String goobiId = String.valueOf(process.getId());
 
-        Prefs prefs = process.getRegelsatz().getPreferences();
+        prefs = process.getRegelsatz().getPreferences();
         XMLConfiguration globalSettings = ConfigPlugins.getPluginConfig(title);
         globalSettings.setExpressionEngine(new XPathExpressionEngine());
 
@@ -108,39 +111,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
         }
 
-        // TODO define export ruleset
-
-        // TODO create issue element with new ruleset
-        // TODO collect and copy newspaper metadata
-        // TODO collect and copy volume metadata
-        // TODO collect and copy issue metadata
-
-        MetadataType zdbIdAnalogType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbidanalog"));
-        MetadataType zdbIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbiddigital"));
-        MetadataType purlType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/purl"));
-
-        MetadataType identifierType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/identifier"));
-        MetadataType issueDateType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueDate"));
-        MetadataType yearDateType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/yearDate"));
-
-        MetadataType labelType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/titleLabel"));
-        MetadataType mainTitleType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/modsTitle"));
-
-        MetadataType issueNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueNumber"));
-        MetadataType sortNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/sortNumber"));
-
-        MetadataType languageType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/language"));
-        MetadataType locationType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/location"));
-        MetadataType accessConditionType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/licence"));
-
-        MetadataType resourceType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/resourceType"));
-
-        MetadataType anchorIdType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorId"));
-        MetadataType anchorTitleType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorTitle"));
-        MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorZDBIdDigital"));
-
-        DocStructType issueType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/issue"));
-
         exportImages = projectSettings.getBoolean("/export/images", false);
         exportFulltext = projectSettings.getBoolean("/export/fulltext", false);
 
@@ -156,17 +126,47 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         // read fileformat
         Fileformat fileformat = process.readMetadataFile();
         DigitalDocument digitalDocument = fileformat.getDigitalDocument();
-        DocStruct logical = digitalDocument.getLogicalDocStruct();
+
+        DocStruct newspaper = digitalDocument.getLogicalDocStruct();
+        DocStruct newspaperYear = newspaper.getAllChildren().get(0);
+        List<DocStruct> issues = newspaperYear.getAllChildren();
         DocStruct oldPhysical = digitalDocument.getPhysicalDocStruct();
+
+        // check if it is a newspaper
+        if (!newspaper.getType().isAnchor()) {
+            problems.add(newspaper.getType().getName() + " has the wrong type. It is not an anchor.");
+            return false;
+        }
+
+        // validate mandatory fields, check if they are available or can be created
+        MetadataType zdbIdAnalogType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbidanalog"));
+        MetadataType zdbIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbiddigital"));
+        MetadataType purlType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/purl"));
+        //
+        MetadataType identifierType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/identifier"));
+        MetadataType issueDateType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueDate"));
+        //
+        MetadataType labelType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/titleLabel"));
+        MetadataType mainTitleType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/modsTitle"));
+        //
+        MetadataType issueNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueNumber"));
+        MetadataType sortNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/sortNumber"));
+        //
+        MetadataType languageType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/language"));
+        MetadataType locationType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/location"));
+        MetadataType accessConditionType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/licence"));
+        //
+        MetadataType resourceType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/resourceType"));
+        //
+        MetadataType anchorIdType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorId"));
+        MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorZDBIdDigital"));
+        //
+        DocStructType issueType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/issue"));
+        DocStructType pageType = prefs.getDocStrctTypeByName("page");
 
         VariableReplacer vp = new VariableReplacer(digitalDocument, prefs, process, null);
         List<ProjectFileGroup> myFilegroups = getProjectFileGroups(projectSettings, process.getProjekt().getFilegroups());
 
-        // check if it is a newspaper
-        if (!logical.getType().isAnchor()) {
-            problems.add(logical.getType().getName() + " has the wrong type. It is not an anchor.");
-            return false;
-        }
         String zdbIdAnalog = null;
         String zdbIdDigital = null;
         String identifier = null;
@@ -176,7 +176,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         String location = null;
         String accessCondition = null;
 
-        for (Metadata md : logical.getAllMetadata()) {
+        for (Metadata md : newspaper.getAllMetadata()) {
             //  get zdb id
             if (md.getType().equals(zdbIdAnalogType)) {
                 zdbIdAnalog = md.getValue();
@@ -202,7 +202,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         if (StringUtils.isBlank(mainTitle) && StringUtils.isNotBlank(titleLabel)) {
             Metadata md = new Metadata(mainTitleType);
             md.setValue(titleLabel);
-            logical.addMetadata(md);
+            newspaper.addMetadata(md);
         }
 
         if (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier)) {
@@ -210,24 +210,12 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             return false;
         }
 
-        DocStruct volume = logical.getAllChildren().get(0);
-        String volumeLabel = null;
-        String volumeTitle = null;
-        String publicationYear = null;
         String sortNumber = null;
         String issueNumber = null;
 
-        for (Metadata md : volume.getAllMetadata()) {
+        for (Metadata md : newspaperYear.getAllMetadata()) {
             // get current year
-            if (md.getType().equals(yearDateType)) {
-                publicationYear = md.getValue();
-            }
-            if (md.getType().equals(labelType)) {
-                volumeLabel = md.getValue();
-            }
-            if (md.getType().equals(mainTitleType)) {
-                volumeTitle = md.getValue();
-            }
+
             if (md.getType().equals(sortNumberType)) {
                 sortNumber = md.getValue();
             }
@@ -245,33 +233,20 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
         }
 
-        if (StringUtils.isBlank(volumeTitle) && StringUtils.isNotBlank(volumeLabel)) {
-            try {
-                Metadata md = new Metadata(mainTitleType);
-                md.setValue(volumeLabel);
-                volume.addMetadata(md);
-            } catch (UGHException e) {
-                log.info(e);
-            }
-        }
-
         if (StringUtils.isBlank(sortNumber) && StringUtils.isNotBlank(issueNumber) && StringUtils.isNumeric(issueNumber)) {
             try {
                 Metadata md = new Metadata(sortNumberType);
                 md.setValue(issueNumber);
-                volume.addMetadata(md);
+                newspaperYear.addMetadata(md);
             } catch (UGHException e) {
                 log.info(e);
             }
         }
 
-        // list all issues
-        List<DocStruct> issues = volume.getAllChildren();
-
+        // check all issues
         for (DocStruct issue : issues) {
 
             // check if required metadata is available, otherwise add it
-
             String issueLabel = null;
             String issueTitle = null;
             String issueNo = null;
@@ -287,7 +262,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             String analogIssueZdbId = null;
             String digitalIssueZdbId = null;
             String anchorId = null;
-            String anchorTitle = null;
 
             for (Metadata md : issue.getAllMetadata()) {
                 if (md.getType().equals(anchorZDBIdDigitalType)) {
@@ -299,9 +273,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                 if (md.getType().equals(anchorIdType)) {
                     anchorId = md.getValue();
-                }
-                if (md.getType().equals(anchorTitleType)) {
-                    anchorTitle = md.getValue();
                 }
 
                 if (md.getType().equals(identifierType)) {
@@ -409,12 +380,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 issue.addMetadata(md);
             }
 
-            if (StringUtils.isBlank(anchorTitle)) {
-                Metadata md = new Metadata(anchorTitleType);
-                md.setValue(titleLabel);
-                issue.addMetadata(md);
-            }
-
             if (StringUtils.isBlank(dateValue)) {
                 problems.add("Abort export, issue has no publication date");
                 return false;
@@ -425,6 +390,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 return false;
             }
 
+            // issue is valid, start export
             try {
 
                 ExportFileformat issueExport = new MetsModsImportExport(prefs);
@@ -434,9 +400,13 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
                 setMetsParameter(process, projectSettings, goobiId, vp, issueExport);
 
-                DocStruct newIssue = copyDocstruct(issueType, issue, issueDigDoc);
-
+                DocStruct newIssue = createDocstruct(issueType, issueDigDoc);
+                copyMetadata("", issue, newIssue);
+                copyMetadata("year", newspaperYear, newIssue);
+                copyMetadata("newspaper", newspaper, newIssue);
                 issueDigDoc.setLogicalDocStruct(newIssue);
+
+                // TODO add supplements
 
                 // create physSequence
                 DocStruct physicalDocstruct = issueDigDoc.createDocStruct(oldPhysical.getType());
@@ -448,8 +418,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         DocStruct oldPage = ref.getTarget();
                         String filename = Paths.get(oldPage.getImageName()).getFileName().toString();
 
-                        DocStruct newPage = copyDocstruct(oldPage.getType(), oldPage, issueDigDoc);
+                        DocStruct newPage = createDocstruct(pageType, issueDigDoc);
+                        copyMetadata("", oldPage, newPage);
                         if (newPage != null) {
+
                             newPage.setImageName(filename);
                             physicalDocstruct.addChild(newPage);
 
@@ -616,7 +588,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         fileFormat.setWriteLocal(false);
     }
 
-    private DocStruct copyDocstruct(DocStructType docstructType, DocStruct oldDocstruct, DigitalDocument dd) {
+    private DocStruct createDocstruct(DocStructType docstructType, DigitalDocument dd) {
 
         // create new docstruct
         DocStruct newDocstruct = null;
@@ -626,17 +598,25 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             log.error(e1);
             return null;
         }
+        return newDocstruct;
+    }
+
+    private void copyMetadata(String prefix, DocStruct oldDocstruct, DocStruct newDocstruct) {
 
         // copy metadata
         if (oldDocstruct.getAllMetadata() != null) {
             for (Metadata md : oldDocstruct.getAllMetadata()) {
                 try {
-                    Metadata clone = new Metadata(md.getType());
-                    clone.setValue(md.getValue());
-                    clone.setAuthorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
-                    newDocstruct.addMetadata(clone);
+                    // check if new field is allowed in prefs
+                    MetadataType metadataType = prefs.getMetadataTypeByName(prefix + md.getType().getName());
+                    if (metadataType != null) {
+                        Metadata clone = new Metadata(metadataType);
+                        clone.setValue(md.getValue());
+                        clone.setAuthorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
+                        newDocstruct.addMetadata(clone);
+                    }
                 } catch (UGHException e) {
-                    log.info(e);
+                    log.trace(e);
                 }
             }
         }
@@ -645,13 +625,17 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         if (oldDocstruct.getAllPersons() != null) {
             for (Person p : oldDocstruct.getAllPersons()) {
                 try {
-                    Person clone = new Person(p.getType());
-                    clone.setFirstname(p.getFirstname());
-                    clone.setLastname(p.getLastname());
-                    clone.setAuthorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
-                    newDocstruct.addPerson(clone);
+                    // check if new field is allowed in prefs
+                    MetadataType metadataType = prefs.getMetadataTypeByName(prefix + p.getType().getName());
+                    if (metadataType != null) {
+                        Person clone = new Person(metadataType);
+                        clone.setFirstname(p.getFirstname());
+                        clone.setLastname(p.getLastname());
+                        clone.setAuthorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
+                        newDocstruct.addPerson(clone);
+                    }
                 } catch (UGHException e) {
-                    log.info(e);
+                    log.trace(e);
                 }
             }
         }
@@ -660,15 +644,18 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         if (oldDocstruct.getAllCorporates() != null) {
             for (Corporate c : oldDocstruct.getAllCorporates()) {
                 try {
-                    Corporate clone = new Corporate(c.getType());
-                    clone.setMainName(c.getMainName());
-
-                    clone.setPartName(c.getPartName());
-                    clone.setSubNames(c.getSubNames());
-                    clone.setAuthorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
-                    newDocstruct.addCorporate(clone);
+                    // check if new field is allowed in prefs
+                    MetadataType metadataType = prefs.getMetadataTypeByName(prefix + c.getType().getName());
+                    if (metadataType != null) {
+                        Corporate clone = new Corporate(metadataType);
+                        clone.setMainName(c.getMainName());
+                        clone.setPartName(c.getPartName());
+                        clone.setSubNames(c.getSubNames());
+                        clone.setAuthorityFile(c.getAuthorityID(), c.getAuthorityURI(), c.getAuthorityValue());
+                        newDocstruct.addCorporate(clone);
+                    }
                 } catch (UGHException e) {
-                    log.info(e);
+                    log.trace(e);
                 }
             }
         }
@@ -677,22 +664,22 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         if (oldDocstruct.getAllMetadataGroups() != null) {
             for (MetadataGroup mg : oldDocstruct.getAllMetadataGroups()) {
                 try {
-                    MetadataGroup newMetadataGroup = cloneMetadataGroup(mg);
+                    MetadataGroup newMetadataGroup = cloneMetadataGroup(prefix, mg);
                     newDocstruct.addMetadataGroup(newMetadataGroup);
                 } catch (UGHException e) {
-                    log.info(e);
+                    log.trace(e);
                 }
             }
         }
 
-        return newDocstruct;
     }
 
-    private MetadataGroup cloneMetadataGroup(MetadataGroup inGroup) throws MetadataTypeNotAllowedException {
-        MetadataGroup mg = new MetadataGroup(inGroup.getType());
+    private MetadataGroup cloneMetadataGroup(String prefix, MetadataGroup inGroup) throws MetadataTypeNotAllowedException {
+        MetadataGroupType mgt = prefs.getMetadataGroupTypeByName(prefix + inGroup.getType().getName());
+        MetadataGroup mg = new MetadataGroup(mgt);
         // copy metadata
         for (Metadata md : inGroup.getMetadataList()) {
-            Metadata metadata = new Metadata(md.getType());
+            Metadata metadata = new Metadata(prefs.getMetadataTypeByName(md.getType().getName()));
             metadata.setValue(md.getValue());
             if (StringUtils.isNotBlank(md.getAuthorityValue())) {
                 metadata.setAuthorityFile(md.getAuthorityID(), md.getAuthorityURI(), md.getAuthorityValue());
@@ -702,7 +689,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         // copy persons
         for (Person p : inGroup.getPersonList()) {
-            Person person = new Person(p.getType());
+            Person person = new Person(prefs.getMetadataTypeByName(p.getType().getName()));
             person.setFirstname(p.getFirstname());
             person.setLastname(p.getLastname());
             person.setAuthorityFile(p.getAuthorityID(), p.getAuthorityURI(), p.getAuthorityValue());
@@ -717,7 +704,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         // copy corporations
         for (Corporate c : inGroup.getCorporateList()) {
-            Corporate corporate = new Corporate(c.getType());
+            Corporate corporate = new Corporate(prefs.getMetadataTypeByName(c.getType().getName()));
             corporate.setMainName(c.getMainName());
             if (c.getSubNames() != null) {
                 for (NamePart subName : c.getSubNames()) {
@@ -733,7 +720,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         // copy sub groups
         for (MetadataGroup subGroup : inGroup.getAllMetadataGroups()) {
-            MetadataGroup copyOfSubGroup = cloneMetadataGroup(subGroup);
+            MetadataGroup copyOfSubGroup = cloneMetadataGroup(prefix, subGroup);
             mg.addMetadataGroup(copyOfSubGroup);
         }
 
