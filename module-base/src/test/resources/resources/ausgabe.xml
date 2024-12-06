@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets
+    xsi:schemaLocation="http://www.loc.gov/METS/ http://www.loc.gov/mets/mets.xsd
+                        http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mets="http://www.loc.gov/METS/"
+    xmlns:dv="http://dfg-viewer.de/" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:mods="http://www.loc.gov/mods/v3">
+    <mets:dmdSec ID="dmd_0001">
+        <mets:mdWrap MDTYPE="MODS">
+            <mets:xmlData>
+                <mods:mods>
+                    <!-- ISSUE METADATA -->
+
+                    <!-- type text, required -->
+                    <mods:typeOfResource>text</mods:typeOfResource>
+
+                    <!-- original publication date, must be yyyy-mm-dd, required -->
+                    <mods:originInfo eventType="publication">
+                        <mods:dateIssued encoding="iso8601">1879-02-17</mods:dateIssued>
+                    </mods:originInfo>
+
+                    <!-- date (required) and creator (optional) of the digitisation, can be year only -->
+                    <mods:originInfo eventType="digitization">
+                        <mods:dateCaptured encoding="iso8601">2017</mods:dateCaptured>
+                        <mods:publisher>SUB Göttingen</mods:publisher>
+                    </mods:originInfo>
+
+                    <!-- language code, required-->
+                    <mods:language>
+                        <mods:languageTerm authority="iso639-2b" type="code">ger</mods:languageTerm>
+                    </mods:language>
+
+                    <!-- size, extent, optional -->
+                    <mods:physicalDescription>
+                        <mods:extent>20 Seiten</mods:extent>
+                    </mods:physicalDescription>
+
+                    <!-- additional identifier (urn, handle, doi, purl, ...), urn OR purl is required-->
+                    <mods:identifier type="purl">http://resolver.staatsbibliothek-berlin.de/SNP27779154-19340510-20-0-0-0</mods:identifier>
+
+                    <!-- location (required) and shelfmark (optional)-->
+                    <mods:location>
+                        <mods:physicalLocation>SUB Göttingen</mods:physicalLocation>
+                        <mods:shelfLocator>Zt 23-3456</mods:shelfLocator>
+                    </mods:location>
+                    <!-- access license, required -->
+                    <mods:accessCondition type="use and reproduction" xlink:href="https://creativecommons.org/publicdomain/mark/1.0/">Public Domain Mark 1.0</mods:accessCondition>
+                    <!-- part order (required), number (required), title (optional) -->
+                    <mods:part order="1916011602">
+                        <mods:detail type="issue">
+                            <mods:number>Nr. 27, Band II, 2. Juli 1916</mods:number>
+                            <mods:title>Mittagsausgabe</mods:title>
+                        </mods:detail>
+                    </mods:part>
+                    <!-- identifier for this issue, required-->
+                    <mods:recordInfo>
+                        <mods:recordIdentifier source="gbv">123456789_1879021702</mods:recordIdentifier>
+                    </mods:recordInfo>
+
+
+                    <!-- NEWSPAPER METADATA -->
+                    <mods:relatedItem type="host">
+
+                        <!-- newspaper record ID (digital), required -->
+                        <mods:recordInfo>
+                            <mods:recordIdentifier source="gbv">749501820</mods:recordIdentifier>
+                        </mods:recordInfo>
+
+                        <!-- type text, required -->
+                        <mods:typeOfResource>text</mods:typeOfResource>
+
+                        <!-- publisher information, mods:dateIssued start/end are required, other information are optional-->
+                        <mods:originInfo eventType="publication">
+                            <mods:place>
+                                <mods:placeTerm type="text" valueURI="http://d-nb.info/gnd/4267463-3">Novo Mesto</mods:placeTerm>
+                            </mods:place>
+                            <mods:publisher>Verlagshaus Haus und Hof</mods:publisher>
+                            <mods:dateIssued point="start" encoding="iso8601">1888</mods:dateIssued>
+                            <mods:dateIssued point="end" encoding="iso8601">1919</mods:dateIssued>
+                            <mods:frequency>Daily</mods:frequency>
+                        </mods:originInfo>
+                        <mods:originInfo eventType="distribution">
+                            <mods:place>
+                                <mods:placeTerm type="text" valueURI="http://d-nb.info/gnd/4003860-9">Außereuropäische Länder</mods:placeTerm>
+                            </mods:place>
+                        </mods:originInfo>
+                        <!-- language, required-->
+                        <mods:language>
+                            <mods:languageTerm authority="iso639-2b" type="code">ger</mods:languageTerm>
+                        </mods:language>
+
+                        <!-- zdb id analog, required-->
+                        <mods:relatedItem type="original">
+                            <mods:identifier type="zdb">9304x</mods:identifier>
+                        </mods:relatedItem>
+
+
+                        <!-- licence, required-->
+                        <mods:accessCondition type="use and reproduction" xlink:href="https://creativecommons.org/publicdomain/mark/1.0/">Public Domain Mark 1.0</mods:accessCondition>
+
+
+                        <!-- zdb id digital, required-->
+                        <mods:identifier type="zdb">2746698X</mods:identifier>
+
+                        <!-- urn or purl, required-->
+                        <mods:identifier type="urn">urn:nbn:de:existiertnicht</mods:identifier>
+
+                        <!-- title information of the newspaper, main title is required -->
+                        <mods:titleInfo>
+                            <mods:title>Die Test-Zeitung</mods:title>
+                            <mods:subTitle>Nachrichten aus dem Nirgendwo</mods:subTitle>
+                            <mods:partNumber>Reihe A</mods:partNumber>
+                            <mods:partName>Wirtschaftsteil</mods:partName>
+                        </mods:titleInfo>
+
+                    </mods:relatedItem>
+                </mods:mods>
+            </mets:xmlData>
+        </mets:mdWrap>
+    </mets:dmdSec>
+    <mets:amdSec ID="amd_01">
+        <mets:rightsMD ID="rights_01">
+            <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="DVRIGHTS">
+                <mets:xmlData>
+                    <dv:rights>
+                        <dv:owner>Stadtbibliothek Kleinstadt</dv:owner>
+                        <dv:ownerLogo>http://beispiel.de/logo.gif</dv:ownerLogo>
+                        <dv:license>https://creativecommons.org/publicdomain/mark/1.0/</dv:license>
+                        <dv:aggregator>SLUB Dresden</dv:aggregator>
+                        <dv:aggregatorLogo>http://digital.slub-dresden.de/logo.gif</dv:aggregatorLogo>
+                    </dv:rights>
+                </mets:xmlData>
+            </mets:mdWrap>
+        </mets:rightsMD>
+        <mets:digiprovMD ID="digiprov_01">
+            <mets:mdWrap MDTYPE="OTHER" OTHERMDTYPE="DVLINKS">
+                <mets:xmlData>
+                    <dv:links>
+                        <dv:reference>https://mein.opac.de/1234567</dv:reference>
+                        <dv:presentation>https://mein.digiportal.de/1234567</dv:presentation>
+                    </dv:links>
+                </mets:xmlData>
+            </mets:mdWrap>
+        </mets:digiprovMD>
+    </mets:amdSec>
+    <mets:fileSec>
+        <mets:fileGrp USE="DEFAULT">
+            <mets:file ID="FILE_0001_DEFAULT" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000001.jpg" />
+            </mets:file>
+            <mets:file ID="FILE_0002_DEFAULT" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000002.jpg" />
+            </mets:file>
+            <mets:file ID="FILE_0003_DEFAULT" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000003.jpg" />
+            </mets:file>
+            <mets:file ID="FILE_0004_DEFAULT" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000004.jpg" />
+            </mets:file>
+        </mets:fileGrp>
+        <mets:fileGrp USE="FULLTEXT">
+            <mets:file ID="FILE_0001_FULLTEXT" MIMETYPE="text/xml">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumVolltext.de/00000001.xml" />
+            </mets:file>
+            <mets:file ID="FILE_0002_FULLTEXT" MIMETYPE="text/xml">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumVolltext.de/00000002.xml" />
+            </mets:file>
+            <mets:file ID="FILE_0003_FULLTEXT" MIMETYPE="text/xml">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumVolltext.de/00000003.xml" />
+            </mets:file>
+            <mets:file ID="FILE_0004_FULLTEXT" MIMETYPE="text/xml">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumVolltext.de/00000004.xml" />
+            </mets:file>
+        </mets:fileGrp>
+        <mets:fileGrp USE="THUMBS">
+            <mets:file ID="FILE_0001_THUMBS" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000001.jpg" />
+            </mets:file>
+            <mets:file ID="FILE_0002_THUMBS" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000002.jpg" />
+            </mets:file>
+            <mets:file ID="FILE_0003_THUMBS" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000003.jpg" />
+            </mets:file>
+            <mets:file ID="FILE_0004_THUMBS" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://linkzumImage.de/00000004.jpg" />
+            </mets:file>
+        </mets:fileGrp>
+    </mets:fileSec>
+    <mets:structMap TYPE="LOGICAL">
+        <mets:div ID="log_005" ADMID="amd_01" DMDID="dmd_0001" TYPE="issue" ORDERLABEL="1879-02-17" LABEL="17. Februar 1879, Mittagsausgabe" />
+    </mets:structMap>
+    <mets:structMap TYPE="PHYSICAL">
+        <mets:div ID="PHYS_0000" TYPE="physSequence">
+            <mets:div CONTENTIDS="urn:nbn:de:dieIstNichtEcht" ID="PHYS_0001" ORDER="1"
+                ORDERLABEL="I" TYPE="page">
+                <mets:fptr FILEID="FILE_0001_DEFAULT" />
+                <mets:fptr FILEID="FILE_0001_FULLTEXT" />
+                <mets:fptr FILEID="FILE_0001_THUMBS" />
+            </mets:div>
+            <mets:div CONTENTIDS="urn:nbn:de:dieIstAuchNichtEcht" ID="PHYS_0002" ORDER="2"
+                ORDERLABEL="II" TYPE="page">
+                <mets:fptr FILEID="FILE_0002_DEFAULT" />
+                <mets:fptr FILEID="FILE_0002_FULLTEXT" />
+                <mets:fptr FILEID="FILE_0002_THUMBS" />
+            </mets:div>
+            <mets:div CONTENTIDS="urn:nbn:de:dieIstErstRechtNichtEcht" ID="PHYS_0003" ORDER="3"
+                ORDERLABEL="III" TYPE="page">
+                <mets:fptr FILEID="FILE_0003_DEFAULT" />
+                <mets:fptr FILEID="FILE_0003_FULLTEXT" />
+                <mets:fptr FILEID="FILE_0003_THUMBS" />
+            </mets:div>
+            <mets:div CONTENTIDS="urn:nbn:de:undDieIstSowiesoNichtEcht" ID="PHYS_0004" ORDER="4"
+                ORDERLABEL="IV" TYPE="page">
+                <mets:fptr FILEID="FILE_0004_DEFAULT" />
+                <mets:fptr FILEID="FILE_0004_FULLTEXT" />
+                <mets:fptr FILEID="FILE_0004_THUMBS" />
+            </mets:div>
+        </mets:div>
+    </mets:structMap>
+    <mets:structLink>
+        <mets:smLink xlink:to="PHYS_0001" xlink:from="log_005" />
+        <mets:smLink xlink:to="PHYS_0002" xlink:from="log_005" />
+        <mets:smLink xlink:to="PHYS_0003" xlink:from="log_005" />
+        <mets:smLink xlink:to="PHYS_0004" xlink:from="log_005" />
+    </mets:structLink>
+</mets:mets>
