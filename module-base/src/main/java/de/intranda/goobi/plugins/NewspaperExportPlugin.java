@@ -68,8 +68,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     private List<String> problems;
 
     @Setter
+    @Getter
     private boolean exportFulltext;
     @Setter
+    @Getter
     private boolean exportImages;
 
     private Prefs prefs;

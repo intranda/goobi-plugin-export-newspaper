@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets OBJID="" xsi:schemaLocation="http://www.loc.gov/standards/premis/ http://www.loc.gov/standards/premis/v2/premis-v2-0.xsd http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/mets.xsd http://www.loc.gov/standards/mix/ http://www.loc.gov/standards/mix/mix.xsd" xmlns:mets="http://www.loc.gov/METS/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:goobi="http://meta.goobi.org/v1.5.1/" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <mets:metsHdr CREATEDATE="2024-12-06T12:49:19Z">
+      <mets:agent OTHERTYPE="SOFTWARE" ROLE="CREATOR" TYPE="OTHER">
+         <mets:name>Goobi -  - 2024-12-04T13:04:50Z</mets:name>
+      </mets:agent>
+   </mets:metsHdr>
+   <mets:dmdSec ID="DMDLOG_0001">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="TitleDocMain">St. Ingberter Anzeiger</goobi:metadata>
+                     <goobi:metadata name="MainTitle">St. Ingberter Anzeiger</goobi:metadata>
+                     <goobi:metadata name="TitleDocMainShort">St. Ingberter Anzeiger</goobi:metadata>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867</goobi:metadata>
+                     <goobi:metadata anchorId="true" name="CatalogIDDigital">301877785</goobi:metadata>
+                     <goobi:metadata name="CatalogIDSource">301877785_1867</goobi:metadata>
+                     <goobi:metadata name="singleDigCollection">DefaultCollection</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">1867</goobi:metadata>
+                     <goobi:metadata name="_electronicEdition">[Electronic ed.]</goobi:metadata>
+                     <goobi:metadata name="_digitalOrigin">reformatted digital</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0002">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-03_2</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 2.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-03</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">2</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">2</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 03. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 03. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005498694</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-03_2</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0003">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-05_3</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 3.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-05</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">3</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">3</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 05. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 05. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005597925</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-05_3</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0004">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-08_4</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 4.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-08</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">4</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">4</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 08. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 08. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005645485</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-08_4</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0005">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-10_5</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 5.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-10</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">5</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">5</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 10. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 10. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005682852</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-10_5</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0006">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-12_6</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 6.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-12</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">6</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">6</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 12. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 12. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005715108</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-12_6</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0007">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-15_7</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 7.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-15</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">7</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">7</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 15. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 15. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005741043</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-15_7</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0008">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-17_8</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 8.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-17</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">8</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">8</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 17. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 17. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005769975</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-17_8</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0009">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-19_9</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 9.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-19</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">9</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">9</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 19. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 19. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005919426</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-19_9</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0010">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-22_10</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 10.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-22</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">10</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">10</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 22. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 22. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708005948444</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-22_10</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0011">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-24_11</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 11.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-24</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">11</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">11</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 24. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 24. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708006083313</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-24_11</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0012">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-26_12</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 12.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-26</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">12</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">12</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 26. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 26. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708006114606</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-26_12</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0013">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-29_13</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 13.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-29</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">13</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">13</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 29. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 29. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708006298880</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-29_13</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDLOG_0014">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-31_14</goobi:metadata>
+                     <goobi:metadata name="PartNumber">Nro. 14.</goobi:metadata>
+                     <goobi:metadata name="DateIssued">1867-01-31</goobi:metadata>
+                     <goobi:metadata name="CurrentNo">14</goobi:metadata>
+                     <goobi:metadata name="CurrentNoSorting">14</goobi:metadata>
+                     <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 31. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 31. Januar 1867.</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1708006336103</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="_purl">301877785_1867-01-31_14</goobi:metadata>
+                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
+                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
+                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:dmdSec ID="DMDPHYS_0000">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="pathimagefiles">file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:fileSec>
+      <mets:fileGrp USE="LOCAL">
+         <mets:file ID="FILE_0001" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000001.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0002" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000002.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0003" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000003.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0004" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000004.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0005" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000005.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0006" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000006.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0007" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000007.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0008" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000008.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0009" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000009.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0010" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000010.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0011" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000011.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0012" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000012.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0013" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000013.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0014" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000014.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0015" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000015.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0016" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000016.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0017" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000017.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0018" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000018.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0019" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000019.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0020" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000020.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0021" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000021.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0022" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000022.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0023" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000023.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0024" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000024.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0025" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000025.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0026" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000026.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0027" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000027.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0028" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000028.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0029" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000029.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0030" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000030.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0031" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000031.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0032" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000032.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0033" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000033.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0034" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000034.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0035" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000035.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0036" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000036.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0037" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000037.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0038" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000038.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0039" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000039.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0040" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000040.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0041" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000041.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0042" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000042.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0043" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000043.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0044" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000044.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0045" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000045.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0046" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000046.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0047" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000047.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0048" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000048.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0049" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000049.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0050" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000050.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0051" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000051.jpg"/>
+         </mets:file>
+         <mets:file ID="FILE_0052" MIMETYPE="image/tiff">
+            <mets:FLocat LOCTYPE="URL" xlink:href="file:///opt/digiverso/goobi/metadata/39345/images/stinan_301877785_1867.jpg/00000052.jpg"/>
+         </mets:file>
+      </mets:fileGrp>
+   </mets:fileSec>
+   <mets:structMap TYPE="LOGICAL">
+      <mets:div ID="LOG_0002" TYPE="Newspaper">
+         <mets:mptr LOCTYPE="URL" xlink:href=""/>
+         <mets:div DMDID="DMDLOG_0001" ID="LOG_0003" TYPE="NewspaperVolume">
+            <mets:div DMDID="DMDLOG_0002" ID="LOG_0004" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0003" ID="LOG_0005" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0004" ID="LOG_0006" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0005" ID="LOG_0007" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0006" ID="LOG_0008" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0007" ID="LOG_0009" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0008" ID="LOG_0010" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0009" ID="LOG_0011" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0010" ID="LOG_0012" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0011" ID="LOG_0013" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0012" ID="LOG_0014" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0013" ID="LOG_0015" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0014" ID="LOG_0016" TYPE="NewspaperIssue"/>
+         </mets:div>
+      </mets:div>
+   </mets:structMap>
+   <mets:structMap TYPE="PHYSICAL">
+      <mets:div DMDID="DMDPHYS_0000" ID="PHYS_0000" TYPE="BoundBook">
+         <mets:div ID="PHYS_0001" ORDER="1" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0001"/>
+         </mets:div>
+         <mets:div ID="PHYS_0002" ORDER="2" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0002"/>
+         </mets:div>
+         <mets:div ID="PHYS_0003" ORDER="3" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0003"/>
+         </mets:div>
+         <mets:div ID="PHYS_0004" ORDER="4" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0004"/>
+         </mets:div>
+         <mets:div ID="PHYS_0005" ORDER="5" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0005"/>
+         </mets:div>
+         <mets:div ID="PHYS_0006" ORDER="6" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0006"/>
+         </mets:div>
+         <mets:div ID="PHYS_0007" ORDER="7" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0007"/>
+         </mets:div>
+         <mets:div ID="PHYS_0008" ORDER="8" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0008"/>
+         </mets:div>
+         <mets:div ID="PHYS_0009" ORDER="9" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0009"/>
+         </mets:div>
+         <mets:div ID="PHYS_0010" ORDER="10" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0010"/>
+         </mets:div>
+         <mets:div ID="PHYS_0011" ORDER="11" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0011"/>
+         </mets:div>
+         <mets:div ID="PHYS_0012" ORDER="12" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0012"/>
+         </mets:div>
+         <mets:div ID="PHYS_0013" ORDER="13" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0013"/>
+         </mets:div>
+         <mets:div ID="PHYS_0014" ORDER="14" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0014"/>
+         </mets:div>
+         <mets:div ID="PHYS_0015" ORDER="15" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0015"/>
+         </mets:div>
+         <mets:div ID="PHYS_0016" ORDER="16" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0016"/>
+         </mets:div>
+         <mets:div ID="PHYS_0017" ORDER="17" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0017"/>
+         </mets:div>
+         <mets:div ID="PHYS_0018" ORDER="18" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0018"/>
+         </mets:div>
+         <mets:div ID="PHYS_0019" ORDER="19" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0019"/>
+         </mets:div>
+         <mets:div ID="PHYS_0020" ORDER="20" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0020"/>
+         </mets:div>
+         <mets:div ID="PHYS_0021" ORDER="21" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0021"/>
+         </mets:div>
+         <mets:div ID="PHYS_0022" ORDER="22" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0022"/>
+         </mets:div>
+         <mets:div ID="PHYS_0023" ORDER="23" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0023"/>
+         </mets:div>
+         <mets:div ID="PHYS_0024" ORDER="24" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0024"/>
+         </mets:div>
+         <mets:div ID="PHYS_0025" ORDER="25" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0025"/>
+         </mets:div>
+         <mets:div ID="PHYS_0026" ORDER="26" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0026"/>
+         </mets:div>
+         <mets:div ID="PHYS_0027" ORDER="27" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0027"/>
+         </mets:div>
+         <mets:div ID="PHYS_0028" ORDER="28" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0028"/>
+         </mets:div>
+         <mets:div ID="PHYS_0029" ORDER="29" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0029"/>
+         </mets:div>
+         <mets:div ID="PHYS_0030" ORDER="30" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0030"/>
+         </mets:div>
+         <mets:div ID="PHYS_0031" ORDER="31" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0031"/>
+         </mets:div>
+         <mets:div ID="PHYS_0032" ORDER="32" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0032"/>
+         </mets:div>
+         <mets:div ID="PHYS_0033" ORDER="33" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0033"/>
+         </mets:div>
+         <mets:div ID="PHYS_0034" ORDER="34" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0034"/>
+         </mets:div>
+         <mets:div ID="PHYS_0035" ORDER="35" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0035"/>
+         </mets:div>
+         <mets:div ID="PHYS_0036" ORDER="36" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0036"/>
+         </mets:div>
+         <mets:div ID="PHYS_0037" ORDER="37" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0037"/>
+         </mets:div>
+         <mets:div ID="PHYS_0038" ORDER="38" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0038"/>
+         </mets:div>
+         <mets:div ID="PHYS_0039" ORDER="39" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0039"/>
+         </mets:div>
+         <mets:div ID="PHYS_0040" ORDER="40" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0040"/>
+         </mets:div>
+         <mets:div ID="PHYS_0041" ORDER="41" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0041"/>
+         </mets:div>
+         <mets:div ID="PHYS_0042" ORDER="42" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0042"/>
+         </mets:div>
+         <mets:div ID="PHYS_0043" ORDER="43" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0043"/>
+         </mets:div>
+         <mets:div ID="PHYS_0044" ORDER="44" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0044"/>
+         </mets:div>
+         <mets:div ID="PHYS_0045" ORDER="45" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0045"/>
+         </mets:div>
+         <mets:div ID="PHYS_0046" ORDER="46" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0046"/>
+         </mets:div>
+         <mets:div ID="PHYS_0047" ORDER="47" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0047"/>
+         </mets:div>
+         <mets:div ID="PHYS_0048" ORDER="48" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0048"/>
+         </mets:div>
+         <mets:div ID="PHYS_0049" ORDER="49" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0049"/>
+         </mets:div>
+         <mets:div ID="PHYS_0050" ORDER="50" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0050"/>
+         </mets:div>
+         <mets:div ID="PHYS_0051" ORDER="51" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0051"/>
+         </mets:div>
+         <mets:div ID="PHYS_0052" ORDER="52" ORDERLABEL="uncounted" TYPE="page">
+            <mets:fptr FILEID="FILE_0052"/>
+         </mets:div>
+      </mets:div>
+   </mets:structMap>
+   <mets:structLink>
+      <mets:smLink xlink:to="PHYS_0001" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0002" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0003" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0004" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0005" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0006" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0007" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0008" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0009" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0010" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0011" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0012" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0013" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0014" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0015" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0016" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0017" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0018" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0019" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0020" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0021" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0022" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0023" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0024" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0025" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0026" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0027" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0028" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0029" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0030" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0031" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0032" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0033" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0034" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0035" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0036" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0037" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0038" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0039" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0040" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0041" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0042" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0043" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0044" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0045" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0046" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0047" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0048" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0049" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0050" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0051" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0052" xlink:from="LOG_0003"/>
+      <mets:smLink xlink:to="PHYS_0001" xlink:from="LOG_0004"/>
+      <mets:smLink xlink:to="PHYS_0002" xlink:from="LOG_0004"/>
+      <mets:smLink xlink:to="PHYS_0003" xlink:from="LOG_0004"/>
+      <mets:smLink xlink:to="PHYS_0004" xlink:from="LOG_0004"/>
+      <mets:smLink xlink:to="PHYS_0005" xlink:from="LOG_0005"/>
+      <mets:smLink xlink:to="PHYS_0006" xlink:from="LOG_0005"/>
+      <mets:smLink xlink:to="PHYS_0007" xlink:from="LOG_0005"/>
+      <mets:smLink xlink:to="PHYS_0008" xlink:from="LOG_0005"/>
+      <mets:smLink xlink:to="PHYS_0009" xlink:from="LOG_0006"/>
+      <mets:smLink xlink:to="PHYS_0010" xlink:from="LOG_0006"/>
+      <mets:smLink xlink:to="PHYS_0011" xlink:from="LOG_0006"/>
+      <mets:smLink xlink:to="PHYS_0012" xlink:from="LOG_0006"/>
+      <mets:smLink xlink:to="PHYS_0013" xlink:from="LOG_0007"/>
+      <mets:smLink xlink:to="PHYS_0014" xlink:from="LOG_0007"/>
+      <mets:smLink xlink:to="PHYS_0015" xlink:from="LOG_0007"/>
+      <mets:smLink xlink:to="PHYS_0016" xlink:from="LOG_0007"/>      
+      <mets:smLink xlink:to="PHYS_0017" xlink:from="LOG_0008"/>
+      <mets:smLink xlink:to="PHYS_0018" xlink:from="LOG_0008"/>
+      <mets:smLink xlink:to="PHYS_0019" xlink:from="LOG_0008"/>
+      <mets:smLink xlink:to="PHYS_0020" xlink:from="LOG_0008"/>
+      <mets:smLink xlink:to="PHYS_0021" xlink:from="LOG_0009"/>
+      <mets:smLink xlink:to="PHYS_0022" xlink:from="LOG_0009"/>
+      <mets:smLink xlink:to="PHYS_0023" xlink:from="LOG_0009"/>
+      <mets:smLink xlink:to="PHYS_0024" xlink:from="LOG_0009"/>
+      <mets:smLink xlink:to="PHYS_0025" xlink:from="LOG_0010"/>
+      <mets:smLink xlink:to="PHYS_0026" xlink:from="LOG_0010"/>
+      <mets:smLink xlink:to="PHYS_0027" xlink:from="LOG_0010"/>
+      <mets:smLink xlink:to="PHYS_0028" xlink:from="LOG_0010"/>
+      <mets:smLink xlink:to="PHYS_0029" xlink:from="LOG_0011"/>
+      <mets:smLink xlink:to="PHYS_0030" xlink:from="LOG_0011"/>
+      <mets:smLink xlink:to="PHYS_0031" xlink:from="LOG_0011"/>
+      <mets:smLink xlink:to="PHYS_0032" xlink:from="LOG_0011"/>
+      <mets:smLink xlink:to="PHYS_0033" xlink:from="LOG_0012"/>
+      <mets:smLink xlink:to="PHYS_0034" xlink:from="LOG_0012"/>
+      <mets:smLink xlink:to="PHYS_0035" xlink:from="LOG_0012"/>
+      <mets:smLink xlink:to="PHYS_0036" xlink:from="LOG_0012"/>
+      <mets:smLink xlink:to="PHYS_0037" xlink:from="LOG_0013"/>
+      <mets:smLink xlink:to="PHYS_0038" xlink:from="LOG_0013"/>
+      <mets:smLink xlink:to="PHYS_0039" xlink:from="LOG_0013"/>
+      <mets:smLink xlink:to="PHYS_0040" xlink:from="LOG_0013"/>
+      <mets:smLink xlink:to="PHYS_0041" xlink:from="LOG_0014"/>
+      <mets:smLink xlink:to="PHYS_0042" xlink:from="LOG_0014"/>
+      <mets:smLink xlink:to="PHYS_0043" xlink:from="LOG_0014"/>
+      <mets:smLink xlink:to="PHYS_0044" xlink:from="LOG_0014"/>
+      <mets:smLink xlink:to="PHYS_0045" xlink:from="LOG_0015"/>
+      <mets:smLink xlink:to="PHYS_0046" xlink:from="LOG_0015"/>
+      <mets:smLink xlink:to="PHYS_0047" xlink:from="LOG_0015"/>
+      <mets:smLink xlink:to="PHYS_0048" xlink:from="LOG_0015"/>
+      <mets:smLink xlink:to="PHYS_0049" xlink:from="LOG_0016"/>
+      <mets:smLink xlink:to="PHYS_0050" xlink:from="LOG_0016"/>
+      <mets:smLink xlink:to="PHYS_0051" xlink:from="LOG_0016"/>
+      <mets:smLink xlink:to="PHYS_0052" xlink:from="LOG_0016"/>
+   </mets:structLink>
+</mets:mets>
