@@ -41,6 +41,10 @@
                         <goobi:mainName>Sankt Ingbert</goobi:mainName>
                         <goobi:subName/>
                      </goobi:metadata>
+                     <goobi:metadata name="Location" type="group">
+                        <goobi:metadata name="physicalLocation">SUB Göttingen</goobi:metadata>
+                        <goobi:metadata name="shelfLocator">Zt 23-3456</goobi:metadata>
+                     </goobi:metadata>                     
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
