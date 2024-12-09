@@ -65,7 +65,6 @@
         <issueNumber>CurrentNo</issueNumber>
         <sortNumber>CurrentNoSorting</sortNumber>
         <language>DocLanguage</language>
-        <location>PhysicalLocation</location>
         <licence>UseAndReproductionLicense</licence>
         <resourceType>TypeOfResource</resourceType>
         <anchorId>AnchorID</anchorId>
