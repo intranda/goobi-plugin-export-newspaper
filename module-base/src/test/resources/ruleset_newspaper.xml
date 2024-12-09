@@ -295,11 +295,16 @@
     <language name="de">Alle Autoren u. Beteiligte (orig.)</language>
     <language name="en">All creators (original version)</language>
   </MetadataType>
-  <MetadataType type="person">
+  <MetadataType normdata="true" type="person">
     <Name>Editor</Name>
     <language name="en">Editor</language>
     <language name="de">Herausgeber</language>
   </MetadataType>
+  <MetadataType normdata="true" type="corporate">
+    <Name>CorporateEditor</Name>
+    <language name="en">Corporate editor</language>
+    <language name="de">Heausgebendes Organ</language>
+  </MetadataType>  
   <MetadataType type="person">
     <Name>Author</Name>
     <language name="de">Autor</language>
@@ -474,7 +479,14 @@
     <Name>newspaperSizeSourcePrint</Name>
     <language name="de">newspaperSizeSourcePrint</language>
   </MetadataType>
-
+  <MetadataType>
+    <Name>newspaperEditor</Name>
+    <language name="de">newspaperEditor</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperCorporateEditor</Name>
+    <language name="de">newspaperCorporateEditor</language>
+  </MetadataType>
 
   <!-- END metadata for newspaper export -->
 
@@ -540,6 +552,8 @@
     <metadata DefaultDisplay="true" num="1m">UseAndReproductionLicense</metadata>
     <metadata num="1o">TypeOfResource</metadata>
     <metadata num="1o">PublicationFrequency</metadata>    
+    <metadata num="*">Editor</metadata>
+    <metadata num="*">CorporateEditor</metadata>
   </DocStrctType>
   <DocStrctType>
     <Name>NewspaperEdition</Name>
@@ -668,7 +682,8 @@
     <metadata DefaultDisplay="true" num="1m">newspaperCatalogIDPeriodicalDBDigital</metadata>
     <metadata DefaultDisplay="true" num="1m">newspaperUseAndReproductionLicense</metadata>
     <metadata num="1o">newspaperPublicationFrequency</metadata>
-
+    <metadata num="*">newspaperEditor</metadata>
+    <metadata num="*">newspaperCorporateEditor</metadata>
   </DocStrctType>
 
 
@@ -2969,10 +2984,6 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Newspaper</InternalName>
-        <MetsType>newspaper</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>NewspaperStub</InternalName>
         <MetsType>newspaper</MetsType>
       </DocStruct>
       <DocStruct>
