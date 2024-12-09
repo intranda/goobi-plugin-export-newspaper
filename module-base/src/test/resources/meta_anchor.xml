@@ -32,6 +32,15 @@
                      <goobi:metadata name="CatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
                      <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
                      <goobi:metadata name="PublicationFrequency">daily</goobi:metadata>
+                     <goobi:metadata name="Editor" type="person">
+                         <goobi:lastName>Editor</goobi:lastName>
+                         <goobi:firstName>Editor</goobi:firstName>
+                         <goobi:displayName>Editor, Editor</goobi:displayName>
+                     </goobi:metadata>
+                     <goobi:metadata name="CorporateEditor" type="corporate">
+                        <goobi:mainName>Sankt Ingbert</goobi:mainName>
+                        <goobi:subName/>
+                     </goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>

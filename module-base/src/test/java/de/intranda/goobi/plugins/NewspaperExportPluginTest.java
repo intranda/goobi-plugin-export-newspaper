@@ -261,7 +261,7 @@ public class NewspaperExportPluginTest {
         Fileformat ff = new MetsMods(prefs);
         ff.read(metaTarget.toString());
 
-        // TODO person, corporate, group
+        // TODO group
         // TODO supplements
 
         PowerMock.mockStatic(MetadatenHelper.class);
