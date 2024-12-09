@@ -155,7 +155,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         MetadataType sortNumberType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/sortNumber"));
         //
         MetadataType languageType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/language"));
-        MetadataType locationType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/location"));
         MetadataType accessConditionType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/licence"));
         //
         MetadataType resourceType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/resourceType"));
@@ -175,7 +174,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         String titleLabel = null;
         String mainTitle = null;
         String language = null;
-        String location = null;
         String accessCondition = null;
 
         for (Metadata md : newspaper.getAllMetadata()) {
@@ -195,8 +193,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 mainTitle = md.getValue();
             } else if (md.getType().equals(languageType)) {
                 language = md.getValue();
-            } else if (md.getType().equals(locationType)) {
-                location = md.getValue();
             } else if (md.getType().equals(accessConditionType)) {
                 accessCondition = md.getValue();
             }
@@ -227,9 +223,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             if (language == null && md.getType().equals(languageType)) {
                 language = md.getValue();
             }
-            if (location == null && md.getType().equals(locationType)) {
-                location = md.getValue();
-            }
+
             if (accessCondition == null && md.getType().equals(accessConditionType)) {
                 accessCondition = md.getValue();
             }
@@ -254,7 +248,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             String issueNo = null;
             String issueSortingNumber = null;
             String issueLanguage = null;
-            String issueLocation = null;
             String issueLicence = null;
 
             String issueIdentifier = null;
@@ -306,9 +299,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 if (md.getType().equals(languageType)) {
                     issueLanguage = md.getValue();
                 }
-                if (md.getType().equals(locationType)) {
-                    issueLocation = md.getValue();
-                }
+
                 if (md.getType().equals(accessConditionType)) {
                     issueLicence = md.getValue();
                 }
@@ -333,12 +324,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             if (StringUtils.isBlank(issueLanguage) && StringUtils.isNotBlank(language)) {
                 Metadata md = new Metadata(languageType);
                 md.setValue(language);
-                issue.addMetadata(md);
-            }
-
-            if (StringUtils.isBlank(issueLocation) && StringUtils.isNotBlank(location)) {
-                Metadata md = new Metadata(locationType);
-                md.setValue(location);
                 issue.addMetadata(md);
             }
 

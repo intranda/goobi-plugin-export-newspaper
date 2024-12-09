@@ -34,22 +34,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-03_2</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 2.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-03</goobi:metadata>
                      <goobi:metadata name="CurrentNo">2</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">2</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 03. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 03. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005498694</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-03_2</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -62,22 +51,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-05_3</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 3.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-05</goobi:metadata>
                      <goobi:metadata name="CurrentNo">3</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">3</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 05. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 05. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005597925</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-05_3</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -90,22 +68,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-08_4</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 4.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-08</goobi:metadata>
                      <goobi:metadata name="CurrentNo">4</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">4</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 08. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 08. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005645485</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-08_4</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -118,22 +85,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-10_5</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 5.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-10</goobi:metadata>
                      <goobi:metadata name="CurrentNo">5</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">5</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 10. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 10. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005682852</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-10_5</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -146,22 +102,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-12_6</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 6.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-12</goobi:metadata>
                      <goobi:metadata name="CurrentNo">6</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">6</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 12. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 12. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005715108</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-12_6</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -174,22 +119,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-15_7</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 7.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-15</goobi:metadata>
                      <goobi:metadata name="CurrentNo">7</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">7</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 15. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 15. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005741043</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-15_7</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -202,22 +136,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-17_8</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 8.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-17</goobi:metadata>
                      <goobi:metadata name="CurrentNo">8</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">8</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 17. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 17. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005769975</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-17_8</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -230,22 +153,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-19_9</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 9.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-19</goobi:metadata>
                      <goobi:metadata name="CurrentNo">9</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">9</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 19. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 19. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005919426</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-19_9</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -258,22 +170,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-22_10</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 10.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-22</goobi:metadata>
                      <goobi:metadata name="CurrentNo">10</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">10</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 22. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 22. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708005948444</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-22_10</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -286,22 +187,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-24_11</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 11.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-24</goobi:metadata>
                      <goobi:metadata name="CurrentNo">11</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">11</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 24. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 24. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708006083313</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-24_11</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -314,22 +204,12 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-26_12</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 12.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-26</goobi:metadata>
                      <goobi:metadata name="CurrentNo">12</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">12</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Samstag, den 26. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Samstag, den 26. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708006114606</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-26_12</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
+
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -342,22 +222,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-29_13</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 13.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-29</goobi:metadata>
                      <goobi:metadata name="CurrentNo">13</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">13</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Dienstag, den 29. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Dienstag, den 29. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708006298880</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-29_13</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>
@@ -370,22 +239,11 @@
             <mods:mods>
                <mods:extension>
                   <goobi:goobi>
-                     <goobi:metadata name="CatalogIDDigital">301877785_1867-01-31_14</goobi:metadata>
                      <goobi:metadata name="PartNumber">Nro. 14.</goobi:metadata>
                      <goobi:metadata name="DateIssued">1867-01-31</goobi:metadata>
                      <goobi:metadata name="CurrentNo">14</goobi:metadata>
-                     <goobi:metadata name="CurrentNoSorting">14</goobi:metadata>
                      <goobi:metadata name="TitleDocMain">Ausgabe vom Donnerstag, den 31. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="MainTitle">Ausgabe vom Donnerstag, den 31. Januar 1867.</goobi:metadata>
-                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
                      <goobi:metadata name="_ucc_id">1708006336103</goobi:metadata>
-                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
-                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
-                     <goobi:metadata name="AnchorCatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
-                     <goobi:metadata name="_purl">301877785_1867-01-31_14</goobi:metadata>
-                     <goobi:metadata name="TypeOfResource">text</goobi:metadata>
-                     <goobi:metadata name="AnchorID">301877785</goobi:metadata>
-                     <goobi:metadata name="AnchorTitle">St. Ingberter Anzeiger</goobi:metadata>
                   </goobi:goobi>
                </mods:extension>
             </mods:mods>

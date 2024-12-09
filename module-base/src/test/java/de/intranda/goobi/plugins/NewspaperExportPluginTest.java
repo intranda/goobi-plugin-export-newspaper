@@ -16,10 +16,13 @@ import java.util.List;
 import java.util.regex.MatchResult;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.SubnodeConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 import org.easymock.EasyMock;
 import org.goobi.beans.Process;
+import org.goobi.beans.Project;
+import org.goobi.beans.ProjectFileGroup;
 import org.goobi.beans.Ruleset;
 import org.goobi.beans.Step;
 import org.goobi.production.enums.PluginType;
@@ -38,18 +41,20 @@ import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.config.ConfigurationHelper;
 import de.sub.goobi.helper.VariableReplacer;
 import de.sub.goobi.metadaten.MetadatenHelper;
+import de.sub.goobi.persistence.managers.MetadataManager;
 import ugh.dl.Fileformat;
 import ugh.dl.Prefs;
 import ugh.fileformats.mets.MetsMods;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ MetadatenHelper.class, VariableReplacer.class, ConfigurationHelper.class, ConfigPlugins.class })
+@PrepareForTest({ MetadatenHelper.class, VariableReplacer.class, ConfigurationHelper.class, ConfigPlugins.class, MetadataManager.class })
 @PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.xml.*", "org.w3c.*", "javax.net.ssl.*", "jdk.internal.reflect.*" })
 public class NewspaperExportPluginTest {
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
     private File tempFolder;
+    private File exportFolder;
     private static String resourcesFolder;
 
     private File processDirectory;
@@ -74,7 +79,7 @@ public class NewspaperExportPluginTest {
     @Before
     public void setUp() throws Exception {
         tempFolder = folder.newFolder("tmp");
-
+        exportFolder = folder.newFolder("destination");
         resourcesFolder = "src/test/resources/"; // for junit tests in eclipse
 
         if (!Files.exists(Paths.get(resourcesFolder))) {
@@ -128,6 +133,12 @@ public class NewspaperExportPluginTest {
         assertTrue(plugin.isExportImages());
     }
 
+    //    @Test
+    public void testExport() throws Exception {
+        NewspaperExportPlugin plugin = new NewspaperExportPlugin();
+        plugin.startExport(process);
+    }
+
     private XMLConfiguration getConfig() {
         String file = "plugin_intranda_export_newspaper.xml";
         XMLConfiguration config = new XMLConfiguration();
@@ -137,6 +148,11 @@ public class NewspaperExportPluginTest {
         } catch (ConfigurationException e) {
         }
         config.setReloadingStrategy(new FileChangedReloadingStrategy());
+        // overwrite export destination with
+        SubnodeConfiguration sub = config.configurationAt("config.export");
+        sub.setProperty("exportFolder", exportFolder.toString() + "/");
+        sub.setProperty("exportImageFolder", exportFolder.toString() + "/$(meta.CatalogIDDigital)_tif/");
+        sub.setProperty("exportAltoFolder", exportFolder.toString() + "/$(meta.CatalogIDDigital)_alto/");
         return config;
     }
 
@@ -154,6 +170,9 @@ public class NewspaperExportPluginTest {
         Path anchorTarget = Paths.get(processDirectory.getAbsolutePath(), "meta_anchor.xml");
         Files.copy(anchorSource, anchorTarget);
 
+        // TODO prepare images + alto files
+
+        // mock configuration
         PowerMock.mockStatic(ConfigurationHelper.class);
         ConfigurationHelper configurationHelper = EasyMock.createMock(ConfigurationHelper.class);
         EasyMock.expect(ConfigurationHelper.getInstance()).andReturn(configurationHelper).anyTimes();
@@ -163,6 +182,7 @@ public class NewspaperExportPluginTest {
         EasyMock.expect(configurationHelper.isUseProxy()).andReturn(false).anyTimes();
         EasyMock.expect(configurationHelper.getGoobiContentServerTimeOut()).andReturn(60000).anyTimes();
         EasyMock.expect(configurationHelper.getMetadataFolder()).andReturn(metadataDirectoryName).anyTimes();
+        EasyMock.expect(configurationHelper.getNumberOfMetaBackups()).andReturn(0).anyTimes();
         EasyMock.expect(configurationHelper.getRulesetFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.expect(configurationHelper.getConfigurationFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.expect(configurationHelper.getTemporaryFolder()).andReturn(tempFolder.getAbsolutePath()).anyTimes();
@@ -176,8 +196,18 @@ public class NewspaperExportPluginTest {
         EasyMock.expect(configurationHelper.getScriptsFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.expect(configurationHelper.getGoobiFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.replay(configurationHelper);
-
         PowerMock.replay(ConfigurationHelper.class);
+        PowerMock.mockStatic(VariableReplacer.class);
+        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("master_processtitle_media");
+        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("processtitle_xml");
+        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("").anyTimes();
+        List<MatchResult> results = new ArrayList<>();
+        EasyMock.expect(VariableReplacer.findRegexMatches(EasyMock.anyString(), EasyMock.anyString())).andReturn(results).anyTimes();
+        PowerMock.replay(VariableReplacer.class);
+        PowerMock.mockStatic(MetadataManager.class);
+        MetadataManager.updateMetadata(1, Collections.emptyMap());
+        MetadataManager.updateJSONMetadata(1, Collections.emptyMap());
+        PowerMock.replay(MetadataManager.class);
 
         Process proc = new Process();
         proc.setId(1);
@@ -187,14 +217,6 @@ public class NewspaperExportPluginTest {
         r.setTitel("ruleset_newspaper.xml");
         proc.setRegelsatz(r);
 
-        PowerMock.mockStatic(VariableReplacer.class);
-        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("master_processtitle_media");
-        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("processtitle_xml");
-        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("").anyTimes();
-        List<MatchResult> results = new ArrayList<>();
-        EasyMock.expect(VariableReplacer.findRegexMatches(EasyMock.anyString(), EasyMock.anyString())).andReturn(results).anyTimes();
-
-        PowerMock.replay(VariableReplacer.class);
         prefs = new Prefs();
         prefs.loadPrefs(resourcesFolder + "ruleset_newspaper.xml");
         Fileformat ff = new MetsMods(prefs);
@@ -214,6 +236,29 @@ public class NewspaperExportPluginTest {
         List<Step> steplist = new ArrayList<>();
         steplist.add(step);
         proc.setSchritte(steplist);
+
+        Project project = new Project();
+        project.setId(1);
+        proc.setProjekt(project);
+        project.setDmsImportImagesPath(tempFolder.toString());
+
+        List<ProjectFileGroup> fileGroups = new ArrayList<>();
+        ProjectFileGroup images = new ProjectFileGroup();
+        images.setPath("$(meta.CatalogIDDigital)_tif/");
+        images.setMimetype("image/tiff");
+        images.setSuffix("tif");
+        images.setName("DEFAULT");
+        images.setProject(project);
+        fileGroups.add(images);
+        ProjectFileGroup alto = new ProjectFileGroup();
+        alto.setPath("$(meta.CatalogIDDigital)_xml/");
+        alto.setMimetype("application/xml");
+        alto.setSuffix("xml");
+        alto.setName("FULLTEXT");
+        alto.setProject(project);
+        fileGroups.add(alto);
+        project.setFilegroups(fileGroups);
+
         return proc;
     }
 
