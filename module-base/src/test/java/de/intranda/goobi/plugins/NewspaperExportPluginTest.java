@@ -20,6 +20,7 @@ import org.apache.commons.configuration.SubnodeConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 import org.easymock.EasyMock;
+import org.easymock.IAnswer;
 import org.goobi.beans.Process;
 import org.goobi.beans.Project;
 import org.goobi.beans.ProjectFileGroup;
@@ -162,6 +163,7 @@ public class NewspaperExportPluginTest {
         metadataDirectory = folder.newFolder("metadata");
         processDirectory = new File(metadataDirectory + File.separator + "1");
         processDirectory.mkdirs();
+
         String metadataDirectoryName = metadataDirectory.getAbsolutePath() + File.separator;
         Path metaSource = Paths.get(resourcesFolder, "meta.xml");
         Path metaTarget = Paths.get(processDirectory.getAbsolutePath(), "meta.xml");
@@ -170,7 +172,28 @@ public class NewspaperExportPluginTest {
         Path anchorTarget = Paths.get(processDirectory.getAbsolutePath(), "meta_anchor.xml");
         Files.copy(anchorSource, anchorTarget);
 
-        // TODO prepare images + alto files
+        // prepare images + alto files
+        File imageFolder = new File(processDirectory + File.separator + "images" + File.separator + "processtitle_media");
+        imageFolder.mkdirs();
+
+        File altoFolder = new File(processDirectory + File.separator + "ocr" + File.separator + "processtitle_xml");
+        altoFolder.mkdirs();
+
+        Path sourceImage = Paths.get(resourcesFolder, "00000005.tif");
+        Path sourceAlto = Paths.get(resourcesFolder, "00000005.xml");
+
+        for (int i = 1; i < 53; i++) {
+            String basename;
+            if (i < 10) {
+                basename = "0000000" + i;
+            } else {
+                basename = "000000" + i;
+            }
+            Path destinationImage = Paths.get(imageFolder.toString(), basename + ".tif");
+            Path destinationAlto = Paths.get(altoFolder.toString(), basename + ".xml");
+            Files.copy(sourceImage, destinationImage);
+            Files.copy(sourceAlto, destinationAlto);
+        }
 
         // mock configuration
         PowerMock.mockStatic(ConfigurationHelper.class);
@@ -180,6 +203,9 @@ public class NewspaperExportPluginTest {
         EasyMock.expect(configurationHelper.isAllowWhitespacesInFolder()).andReturn(false).anyTimes();
         EasyMock.expect(configurationHelper.useS3()).andReturn(false).anyTimes();
         EasyMock.expect(configurationHelper.isUseProxy()).andReturn(false).anyTimes();
+        EasyMock.expect(configurationHelper.isUseMasterDirectory()).andReturn(false).anyTimes();
+        EasyMock.expect(configurationHelper.isCreateMasterDirectory()).andReturn(false).anyTimes();
+
         EasyMock.expect(configurationHelper.getGoobiContentServerTimeOut()).andReturn(60000).anyTimes();
         EasyMock.expect(configurationHelper.getMetadataFolder()).andReturn(metadataDirectoryName).anyTimes();
         EasyMock.expect(configurationHelper.getNumberOfMetaBackups()).andReturn(0).anyTimes();
@@ -187,20 +213,33 @@ public class NewspaperExportPluginTest {
         EasyMock.expect(configurationHelper.getConfigurationFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.expect(configurationHelper.getTemporaryFolder()).andReturn(tempFolder.getAbsolutePath()).anyTimes();
         EasyMock.expect(configurationHelper.getProcessImagesMainDirectoryName()).andReturn("processtitle_media").anyTimes();
-        EasyMock.expect(configurationHelper.getProcessImagesMasterDirectoryName()).andReturn("master_processtitle_media").anyTimes();
-        EasyMock.expect(configurationHelper.getProcessOcrTxtDirectoryName()).andReturn("processtitle_txt").anyTimes();
-        EasyMock.expect(configurationHelper.getProcessOcrXmlDirectoryName()).andReturn("processtitle_xml").anyTimes();
-        EasyMock.expect(configurationHelper.getProcessOcrPdfDirectoryName()).andReturn("processtitle_pdf").anyTimes();
-        EasyMock.expect(configurationHelper.getProcessImagesSourceDirectoryName()).andReturn("processtitle_source").anyTimes();
-        EasyMock.expect(configurationHelper.getProcessImportDirectoryName()).andReturn("import").anyTimes();
+        EasyMock.expect(configurationHelper.getProcessOcrAltoDirectoryName()).andReturn("processtitle_xml").anyTimes();
         EasyMock.expect(configurationHelper.getScriptsFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.expect(configurationHelper.getGoobiFolder()).andReturn(resourcesFolder).anyTimes();
         EasyMock.replay(configurationHelper);
         PowerMock.replay(ConfigurationHelper.class);
         PowerMock.mockStatic(VariableReplacer.class);
-        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("master_processtitle_media");
-        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("processtitle_xml");
-        EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("").anyTimes();
+
+        // for each issue
+        for (int i = 0; i < 14; i++) {
+            // variable replacer for mets parameter
+            EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("mets parameter").times(14);
+
+            // current identifier
+            EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject()))
+                    .andAnswer(
+                            new IAnswer<String>() {
+                                @Override
+                                public String answer() throws Throwable {
+                                    return EasyMock.getCurrentArgument(0);
+                                }
+                            })
+                    .times(2);
+
+            // media and ocr folder
+            EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("processtitle_media");
+            EasyMock.expect(VariableReplacer.simpleReplace(EasyMock.anyString(), EasyMock.anyObject())).andReturn("processtitle_xml");
+        }
         List<MatchResult> results = new ArrayList<>();
         EasyMock.expect(VariableReplacer.findRegexMatches(EasyMock.anyString(), EasyMock.anyString())).andReturn(results).anyTimes();
         PowerMock.replay(VariableReplacer.class);
@@ -211,7 +250,7 @@ public class NewspaperExportPluginTest {
 
         Process proc = new Process();
         proc.setId(1);
-        proc.setTitel("process title");
+        proc.setTitel("processTitle");
         Ruleset r = new Ruleset();
         r.setDatei("ruleset_newspaper.xml");
         r.setTitel("ruleset_newspaper.xml");
@@ -221,6 +260,9 @@ public class NewspaperExportPluginTest {
         prefs.loadPrefs(resourcesFolder + "ruleset_newspaper.xml");
         Fileformat ff = new MetsMods(prefs);
         ff.read(metaTarget.toString());
+
+        // TODO person, corporate, group
+        // TODO supplements
 
         PowerMock.mockStatic(MetadatenHelper.class);
         EasyMock.expect(MetadatenHelper.getMetaFileType(EasyMock.anyString())).andReturn("mets").anyTimes();
@@ -249,6 +291,7 @@ public class NewspaperExportPluginTest {
         images.setSuffix("tif");
         images.setName("DEFAULT");
         images.setProject(project);
+        images.setUseOriginalFiles(true);
         fileGroups.add(images);
         ProjectFileGroup alto = new ProjectFileGroup();
         alto.setPath("$(meta.CatalogIDDigital)_xml/");

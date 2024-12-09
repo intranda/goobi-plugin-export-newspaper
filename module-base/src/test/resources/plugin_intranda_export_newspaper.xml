@@ -3,8 +3,8 @@
         <!-- individual export setting per project -->
         <project>*</project>
         <export>
-            <images>false</images>
-            <fulltext>false</fulltext>
+            <images>true</images>
+            <fulltext>true</fulltext>
             <exportFolder>/tmp/export/</exportFolder>
             <exportImageFolder>/tmp/export/$(meta.CatalogIDDigital)_tif/</exportImageFolder>
             <exportAltoFolder>/tmp/export/$(meta.CatalogIDDigital)_alto/</exportAltoFolder>
