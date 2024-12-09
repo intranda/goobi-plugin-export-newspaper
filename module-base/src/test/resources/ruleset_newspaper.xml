@@ -479,11 +479,11 @@
     <Name>newspaperSizeSourcePrint</Name>
     <language name="de">newspaperSizeSourcePrint</language>
   </MetadataType>
-  <MetadataType>
+  <MetadataType type="person">
     <Name>newspaperEditor</Name>
     <language name="de">newspaperEditor</language>
   </MetadataType>
-  <MetadataType>
+  <MetadataType type="corporate">
     <Name>newspaperCorporateEditor</Name>
     <language name="de">newspaperCorporateEditor</language>
   </MetadataType>
@@ -2086,62 +2086,6 @@
         <separateEntries>false</separateEntries>
         <separator>,</separator>
       </Person>
-      <!-- Other person <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag> <firstname>c</firstname>
-          <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <field>
-          <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1>
-          <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/ctg/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>,</separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/cmp/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/lbt/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/oth/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/rcp/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/dgs/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/pat/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/hnr/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>,</separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/ctb/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/dte/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>OtherPerson</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/cns/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> -->
       <Person>
         <Name>OtherPerson</Name>
         <field>
@@ -2292,12 +2236,6 @@
         <InternalName>BibliographicCitation</InternalName>
         <WriteXPath>./mods:mods/mods:identifier[@type='VD-ID']</WriteXPath>
       </Metadata>
-      <!--
-      <Metadata>
-        <InternalName>TitleDocMain</InternalName>
-        <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
-      </Metadata>
--->
       <Metadata>
         <InternalName>MainTitle</InternalName>
         <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
@@ -2613,7 +2551,21 @@
         <InternalName>_purl</InternalName>
         <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type="purl"]</WriteXPath>
       </Metadata>
-
+      <Metadata>
+        <InternalName>newspaperEditor</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:name[@type='personal'][mods:role/mods:roleTerm="edt"[@authority='marcrelator'][@type='code']]
+        </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperCorporateEditor</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:name[@type='corporate'][mods:role/mods:roleTerm="edt"[@authority='marcrelator'][@type='code']]</WriteXPath>
+        <MainNameXPath>./mods:namePart</MainNameXPath>
+        <SubNameXPath>./mods:namePart</SubNameXPath>
+        <PartNameXPath>./mods:namePart</PartNameXPath>
+      </Metadata>
       <Metadata>
         <InternalName>newspaperUseAndReproductionLicense</InternalName>
         <ValueCondition>^PDM$</ValueCondition>
@@ -2678,6 +2630,8 @@
         <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:titleInfo/#mods:subTitle</WriteXPath>
       </Metadata>
 
+
+mods:relatedItem type="host"
       <!-- END NEWSPAPER EXPORT: mods mapping -->
 
 
