@@ -19,6 +19,8 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.SubnodeConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.commons.io.filefilter.FileFileFilter;
 import org.easymock.EasyMock;
 import org.easymock.IAnswer;
 import org.goobi.beans.Process;
@@ -27,6 +29,9 @@ import org.goobi.beans.ProjectFileGroup;
 import org.goobi.beans.Ruleset;
 import org.goobi.beans.Step;
 import org.goobi.production.enums.PluginType;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -41,6 +46,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.config.ConfigurationHelper;
 import de.sub.goobi.helper.VariableReplacer;
+import de.sub.goobi.helper.XmlTools;
 import de.sub.goobi.metadaten.MetadatenHelper;
 import de.sub.goobi.persistence.managers.MetadataManager;
 import ugh.dl.Fileformat;
@@ -51,6 +57,9 @@ import ugh.fileformats.mets.MetsMods;
 @PrepareForTest({ MetadatenHelper.class, VariableReplacer.class, ConfigurationHelper.class, ConfigPlugins.class, MetadataManager.class })
 @PowerMockIgnore({ "javax.management.*", "javax.xml.*", "org.xml.*", "org.w3c.*", "javax.net.ssl.*", "jdk.internal.reflect.*" })
 public class NewspaperExportPluginTest {
+
+    private static final Namespace modsNamespace = Namespace.getNamespace("mods", "http://www.loc.gov/mods/v3");
+    private static final Namespace metsNamespace = Namespace.getNamespace("mets", "http://www.loc.gov/METS/");
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -134,10 +143,177 @@ public class NewspaperExportPluginTest {
         assertTrue(plugin.isExportImages());
     }
 
-    //    @Test
-    public void testExport() throws Exception {
+    @Test
+    public void testExportFiles() throws Exception {
         NewspaperExportPlugin plugin = new NewspaperExportPlugin();
         plugin.startExport(process);
+
+        // destination folder contains 13 issues, 13 alto folder, 13 image folder
+        String[] files = exportFolder.list(FileFileFilter.INSTANCE);
+        String[] folders = exportFolder.list(DirectoryFileFilter.INSTANCE);
+        assertEquals(13, files.length);
+        assertEquals(26, folders.length);
+
+        // 4 files in any folder
+        String[] filesInFolder = new File(exportFolder, folders[0]).list();
+        assertEquals(4, filesInFolder.length);
+    }
+
+    @Test
+    public void testExportMetadata() throws Exception {
+        NewspaperExportPlugin plugin = new NewspaperExportPlugin();
+        plugin.startExport(process);
+
+        // open first issue
+        String filename = "301877785_1867-01-03_2.xml";
+        Document doc = XmlTools.readDocumentFromFile(Paths.get(exportFolder.toString(), filename));
+        Element mets = doc.getRootElement();
+
+        Element mods = mets.getChild("dmdSec", metsNamespace)
+                .getChild("mdWrap", metsNamespace)
+                .getChild("xmlData", metsNamespace)
+                .getChild("mods", modsNamespace);
+
+        String recordIdentifier = null;
+        String purl = null;
+        String partName = null;
+        String orderValue = null;
+        String number = null;
+        String language = null;
+        String dateIssued = null;
+        String typeOfResource = null;
+        String accessCondition = null;
+        String zdbIdDigital = null;
+        String zdbIdAnalogue = null;
+        String newspaperPPN = null;
+        String newspaperTitle = null;
+        String subtitle = null;
+        String person = null;
+        String corporate = null;
+
+        String shelfLocator = null;
+        String physicalLocation = null;
+        String place = null;
+        String publisher = null;
+        String start = null;
+        String end = null;
+        String frequency = null;
+        List<Element> elements = mods.getChildren();
+        for (Element element : elements) {
+            switch (element.getName()) {
+                case "recordInfo":
+                    recordIdentifier = element.getChildText("recordIdentifier", modsNamespace);
+                    break;
+                case "identifier":
+                    if ("purl".equals(element.getAttributeValue("type"))) {
+                        purl = element.getText();
+                    }
+                    break;
+                case "titleInfo":
+                    partName = element.getChildText("partName", modsNamespace);
+                    break;
+                case "part":
+                    orderValue = element.getAttributeValue("order");
+                    Element detail = element.getChild("detail", modsNamespace);
+                    if ("issue".equals(detail.getAttributeValue("type"))) {
+                        number = detail.getChildText("number", modsNamespace);
+                    }
+                    break;
+                case "relatedItem":
+                    List<Element> subElements = element.getChildren();
+                    for (Element sub : subElements) {
+                        switch (sub.getName()) {
+                            case "identifier":
+                                if ("zdb".equals(sub.getAttributeValue("type"))) {
+                                    zdbIdDigital = sub.getText();
+                                }
+                                break;
+                            case "titleInfo":
+                                newspaperTitle = sub.getChildText("title", modsNamespace);
+                                subtitle = sub.getChildText("subTitle", modsNamespace);
+                                break;
+                            case "name":
+                                if ("personal".equals(sub.getAttributeValue("type"))) {
+                                    person = sub.getChildText("displayForm", modsNamespace);
+                                } else {
+                                    corporate = sub.getChildText("namePart", modsNamespace);
+                                }
+                                break;
+
+                            case "originInfo":
+                                place = sub.getChild("place", modsNamespace).getChildText("placeTerm", modsNamespace);
+                                publisher = sub.getChildText("publisher", modsNamespace);
+                                List<Element> dates = sub.getChildren("dateIssued", modsNamespace);
+                                for (Element date : dates) {
+                                    if ("start".equals(date.getAttributeValue("point"))) {
+                                        start = date.getText();
+                                    } else {
+                                        end = date.getText();
+                                    }
+                                }
+                                frequency = sub.getChildText("frequency", modsNamespace);
+                                break;
+
+                            case "relatedItem":
+                                zdbIdAnalogue = sub.getChildText("identifier", modsNamespace);
+                                break;
+                            case "location":
+                                physicalLocation = sub.getChildText("physicalLocation", modsNamespace);
+                                shelfLocator = sub.getChildText("shelfLocator", modsNamespace);
+                                break;
+
+                            case "recordInfo":
+                                newspaperPPN = sub.getChildText("recordIdentifier", modsNamespace);
+                                break;
+                            default:
+                                // ignore other fields
+                        }
+                    }
+                    break;
+                case "language":
+                    language = element.getChildText("languageTerm", modsNamespace);
+                    break;
+                case "originInfo":
+                    dateIssued = element.getChildText("dateIssued", modsNamespace);
+                    break;
+                case "typeOfResource":
+                    typeOfResource = element.getText();
+                    break;
+                case "accessCondition":
+                    accessCondition = element.getText();
+                    break;
+                default:
+                    //ignore additional fields
+            }
+        }
+
+        assertEquals("301877785_1867-01-03_2", recordIdentifier);
+        assertEquals("https://viewer.example.org/piresolver?id=301877785_1867-01-03_2", purl);
+        assertEquals("Nro. 2.", partName);
+        assertEquals("2", orderValue);
+        assertEquals("2", number);
+
+        assertEquals("ger", language);
+        assertEquals("1867-01-03", dateIssued);
+        assertEquals("text", typeOfResource);
+        assertEquals("Public Domain Mark 1.0", accessCondition);
+
+        assertEquals("3201144-1", zdbIdDigital);
+        assertEquals("1486830-1", zdbIdAnalogue);
+        assertEquals("St. Ingberter Anzeiger", newspaperTitle);
+        assertEquals("Publikation amtlicher Bekanntmachungen ; aelteste Zeitung im Bezirksamt St. Ingbert", subtitle);
+        assertEquals("Editor, Editor", person);
+        assertEquals("Sankt Ingbert", corporate);
+        assertEquals("SUB Göttingen", physicalLocation);
+        assertEquals("Zt 23-3456", shelfLocator);
+
+        assertEquals("St. Ingbert", place);
+        assertEquals("Demetz", publisher);
+        assertEquals("1867", start);
+        assertEquals("1934", end);
+        assertEquals("daily", frequency);
+        assertEquals("301877785", newspaperPPN);
+
     }
 
     private XMLConfiguration getConfig() {
@@ -147,6 +323,7 @@ public class NewspaperExportPluginTest {
         try {
             config.load(resourcesFolder + file);
         } catch (ConfigurationException e) {
+            // nothing
         }
         config.setReloadingStrategy(new FileChangedReloadingStrategy());
         // overwrite export destination with
