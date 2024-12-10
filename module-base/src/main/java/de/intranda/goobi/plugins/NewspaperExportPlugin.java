@@ -159,8 +159,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         //
         MetadataType resourceType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/resourceType"));
         //
-        MetadataType anchorIdType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorId"));
-        MetadataType anchorZDBIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/anchorZDBIdDigital"));
         //
         DocStructType issueType = prefs.getDocStrctTypeByName(globalSettings.getString("/docstruct/issue"));
         DocStructType pageType = prefs.getDocStrctTypeByName("page");
@@ -204,7 +202,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         }
 
         if (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier)) {
-            problems.add("Export aborted, ZDB id or record id are missing");
+            problems.add("Export aborted, ZDB id or record id is missing");
             return false;
         }
 
@@ -254,21 +252,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             String dateValue = null;
             String resource = null;
             String purl = null;
-            String analogIssueZdbId = null;
-            String digitalIssueZdbId = null;
-            String anchorId = null;
 
             for (Metadata md : issue.getAllMetadata()) {
-                if (md.getType().equals(anchorZDBIdDigitalType)) {
-                    digitalIssueZdbId = md.getValue();
-                }
-                if (md.getType().equals(zdbIdAnalogType)) {
-                    analogIssueZdbId = md.getValue();
-                }
-
-                if (md.getType().equals(anchorIdType)) {
-                    anchorId = md.getValue();
-                }
 
                 if (md.getType().equals(identifierType)) {
                     issueIdentifier = md.getValue();
@@ -332,16 +317,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 md.setValue(accessCondition);
                 issue.addMetadata(md);
             }
-            if (StringUtils.isBlank(analogIssueZdbId) && StringUtils.isNotBlank(zdbIdAnalog)) {
-                Metadata md = new Metadata(zdbIdAnalogType);
-                md.setValue(zdbIdAnalog);
-                issue.addMetadata(md);
-            }
-            if (StringUtils.isBlank(digitalIssueZdbId) && StringUtils.isNotBlank(zdbIdDigital)) {
-                Metadata md = new Metadata(anchorZDBIdDigitalType);
-                md.setValue(zdbIdDigital);
-                issue.addMetadata(md);
-            }
 
             if (StringUtils.isBlank(issueIdentifier)) {
                 issueIdentifier = identifier + "_" + dateValue + "_" + issueSortingNumber;
@@ -358,12 +333,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             if (StringUtils.isBlank(purl)) {
                 Metadata md = new Metadata(purlType);
                 md.setValue(piResolverUrl + issueIdentifier);
-                issue.addMetadata(md);
-            }
-
-            if (StringUtils.isBlank(anchorId)) {
-                Metadata md = new Metadata(anchorIdType);
-                md.setValue(identifier);
                 issue.addMetadata(md);
             }
 

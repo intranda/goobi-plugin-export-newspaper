@@ -696,19 +696,19 @@
     <metadata num="1o">TypeOfResource</metadata>
 
     <!-- newspaper metadata -->
-    <metadata DefaultDisplay="true" num="1m">newspaperTitleDocMain</metadata>
-    <metadata DefaultDisplay="true" num="1o">newspaperTitleDocSub1</metadata>
-    <metadata DefaultDisplay="true" num="1o">newspaperPlaceOfPublication</metadata>
-    <metadata DefaultDisplay="true" num="1o">newspaperPublisherName</metadata>
-    <metadata DefaultDisplay="true" num="1o">newspaperPublicationStart</metadata>
-    <metadata DefaultDisplay="true" num="1o">newspaperPublicationEnd</metadata>   
-    <metadata DefaultDisplay="true" num="1o">newspaperCatalogIDSource</metadata>
-    <metadata DefaultDisplay="true" num="1m">newspaperCatalogIDDigital</metadata>
-    <metadata DefaultDisplay="true" num="*">newspaperSizeSourcePrint</metadata>
+    <metadata num="1o">newspaperTitleDocMain</metadata>
+    <metadata num="1o">newspaperTitleDocSub1</metadata>
+    <metadata num="1o">newspaperPlaceOfPublication</metadata>
+    <metadata num="1o">newspaperPublisherName</metadata>
+    <metadata num="1o">newspaperPublicationStart</metadata>
+    <metadata num="1o">newspaperPublicationEnd</metadata>   
+    <metadata num="1o">newspaperCatalogIDSource</metadata>
+    <metadata num="1o">newspaperCatalogIDDigital</metadata>
+    <metadata num="*">newspaperSizeSourcePrint</metadata>
+    <metadata num="*">newspaperCatalogIDPeriodicalDB</metadata>
+    <metadata num="1o">newspaperCatalogIDPeriodicalDBDigital</metadata>
     <metadata num="1o">newspaperURN</metadata>
-    <metadata DefaultDisplay="true" num="1m">newspaperCatalogIDPeriodicalDB</metadata>
-    <metadata DefaultDisplay="true" num="1m">newspaperCatalogIDPeriodicalDBDigital</metadata>
-    <metadata DefaultDisplay="true" num="1m">newspaperUseAndReproductionLicense</metadata>
+    <metadata  num="1o">newspaperUseAndReproductionLicense</metadata>
     <metadata num="1o">newspaperPublicationFrequency</metadata>
     <metadata num="*">newspaperEditor</metadata>
     <metadata num="*">newspaperCorporateEditor</metadata>
@@ -1282,18 +1282,6 @@
         <fieldReplacement>s/^(.+?)[ ]*[:;,].*$/$1/g</fieldReplacement>
         <separateEntries>true</separateEntries>
       </Metadata>
-      <!--
-      <Metadata>
-          <Name>PublicationRun</Name>
-          <field>
-              <fieldMainTag>362</fieldMainTag>
-              <fieldSubTag>a</fieldSubTag>
-              <fieldInd1>any</fieldInd1>
-              <fieldInd2>any</fieldInd2>
-          </field>
-          <separateEntries>true</separateEntries>
-      </Metadata>
--->
       <Metadata>
         <Name>PublicationRun</Name>
         <field>
@@ -1870,43 +1858,6 @@
         <separateEntries>false</separateEntries>
         <separator>,</separator>
       </Person>
-      <!-- Printer <Person> <Name>Printer</Name> <field> <fieldMainTag>100</fieldMainTag> <firstname>c</firstname>
-          <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <field>
-          <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1>
-          <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/prt/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>Printer</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/mfr/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>Printer</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/obl/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>Printer</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/pbl/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>,</separator> </Person> <Person> <Name>Printer</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/dst/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>Photographer</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/pht/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> <Person> <Name>Editor</Name> <field> <fieldMainTag>100</fieldMainTag>
-          <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion> <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2>
-          </field> <field> <fieldMainTag>700</fieldMainTag> <firstname>c</firstname> <firstname>b</firstname> <expansion>a</expansion>
-          <fieldInd1>any</fieldInd1> <fieldInd2>any</fieldInd2> </field> <identifierField>0</identifierField> <identifierConditionField>/DE-588/</identifierConditionField>
-          <identifierReplacement>s/\(.+\)//g</identifierReplacement> <conditionField>4</conditionField> <conditionValue>/edt/</conditionValue>
-          <separateEntries>false</separateEntries> <separator>, </separator> </Person> -->
-      <!-- Illustrator -->
       <Person>
         <Name>IllustratorArtist</Name>
         <field>
@@ -2460,14 +2411,7 @@
         <InternalName>Event</InternalName>
         <WriteXPath>./mods:mods/#mods:note[@type='event']</WriteXPath>
       </Metadata>
-      <Metadata>
-        <InternalName>CatalogIDPeriodicalDB</InternalName>
-        <WriteXPath>./mods:mods/mods:relatedItem[@type='original']/#mods:identifier[@type='zdb']</WriteXPath>
-      </Metadata>
-      <Metadata>
-        <InternalName>CatalogIDPeriodicalDBDigital</InternalName>
-        <WriteXPath>./mods:mods/#mods:identifier[@type='zdb']</WriteXPath>
-      </Metadata>
+     
       <Metadata>
         <InternalName>TypeOfResource</InternalName>
         <WriteXPath>./mods:mods/mods:typeOfResource</WriteXPath>
@@ -2623,10 +2567,6 @@
         <InternalName>newspaperURN</InternalName>
         <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type="urn"]</WriteXPath>
       </Metadata>
-      <Metadata>
-        <InternalName>_purl</InternalName>
-        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type="purl"]</WriteXPath>
-      </Metadata>
 
     <!-- location -->
       <Group>
@@ -2705,7 +2645,10 @@
 
     <!-- recordInfo -->
 
-
+      <Metadata>
+        <InternalName>newspaperCatalogIDDigital</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:recordInfo[@source="zdb-ppn"]/mods:recordIdentifier</WriteXPath>
+      </Metadata>
 
 
       <!-- END NEWSPAPER EXPORT: mods mapping -->

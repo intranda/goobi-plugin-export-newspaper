@@ -67,9 +67,6 @@
         <language>DocLanguage</language>
         <licence>UseAndReproductionLicense</licence>
         <resourceType>TypeOfResource</resourceType>
-        <anchorId>AnchorID</anchorId>
-        <anchorTitle>AnchorTitle</anchorTitle>
-        <anchorZDBIdDigital>AnchorCatalogIDPeriodicalDBDigital</anchorZDBIdDigital>
     </metadata>
     <docstruct>
         <issue>ExportNewspaperIssue</issue>
