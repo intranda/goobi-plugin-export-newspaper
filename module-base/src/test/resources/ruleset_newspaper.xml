@@ -978,102 +978,6 @@
         <Name>Periodical</Name>
       </DocStruct>
       <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Ei</picaContent>
-        <Name>Invitation</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Ti</picaContent>
-        <Name>Ticket</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Fe</picaContent>
-        <Name>Festschrift</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>In</picaContent>
-        <Name>Insertion</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Br</picaContent>
-        <Name>Brochure</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Po</picaContent>
-        <Name>Poster</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Pb</picaContent>
-        <Name>ProgrammeBook</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Pi</picaContent>
-        <Name>ProgrammeIssue</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Pp</picaContent>
-        <Name>Programme</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Pn</picaContent>
-        <Name>ProgrammeNote</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Pr</picaContent>
-        <Name>Prospect</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Cr</picaContent>
-        <Name>ConcertReview</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Re</picaContent>
-        <Name>Review</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Sp</picaContent>
-        <Name>SeasonPreview</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Tb</picaContent>
-        <Name>Textbook</Name>
-      </DocStruct>
-      <DocStruct>
-        <picaMainTag>002@</picaMainTag>
-        <picaSubTag>0</picaSubTag>
-        <picaContent>Vo</picaContent>
-        <Name>Preview</Name>
-      </DocStruct>
-      <DocStruct>
         <Name>Newspaper</Name>
         <picaMainTag>002@</picaMainTag>
         <picaSubTag>0</picaSubTag>
@@ -2685,23 +2589,23 @@
       </DocStruct>
       <DocStruct>
         <InternalName>PeriodicalVolume</InternalName>
-        <MetsType>PeriodicalVolume</MetsType>
+        <MetsType>volume</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Appendix</InternalName>
-        <MetsType>Appendix</MetsType>
+        <MetsType>appendix</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>PeriodicalPart</InternalName>
-        <MetsType>PeriodicalPart</MetsType>
+        <MetsType>part</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Advertising</InternalName>
-        <MetsType>Advertising</MetsType>
+        <MetsType>advertising</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableDescription</InternalName>
-        <MetsType>TableDescription</MetsType>
+        <MetsType>description</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IllustrationDescription</InternalName>
@@ -2709,7 +2613,7 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Chapter</InternalName>
-        <MetsType>Chapter</MetsType>
+        <MetsType>chapter</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Periodical</InternalName>
@@ -2717,71 +2621,71 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Prepage</InternalName>
-        <MetsType>Prepage</MetsType>
+        <MetsType>prepage</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Errata</InternalName>
-        <MetsType>Errata</MetsType>
+        <MetsType>corrigenda</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Index</InternalName>
-        <MetsType>Index</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TitlePage</InternalName>
-        <MetsType>TitlePage</MetsType>
+        <MetsType>title_page</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>OtherDocStrct</InternalName>
-        <MetsType>OtherDocStrct</MetsType>
+        <MetsType>other</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Bibliography</InternalName>
-        <MetsType>Bibliography</MetsType>
+        <MetsType>bibliography</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>SheetMusic</InternalName>
-        <MetsType>SheetMusic</MetsType>
+        <MetsType>musical_notation</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Dedication</InternalName>
-        <MetsType>Dedication</MetsType>
+        <MetsType>dedication</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>CurriculumVitae</InternalName>
-        <MetsType>CurriculumVitae</MetsType>
+        <MetsType>curriculum_vitae</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Preface</InternalName>
-        <MetsType>Preface</MetsType>
+        <MetsType>preface</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Supplement</InternalName>
-        <MetsType>Supplement</MetsType>
+        <MetsType>supplement</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>PeriodicalIssue</InternalName>
-        <MetsType>PeriodicalIssue</MetsType>
+        <MetsType>issue</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Introduction</InternalName>
-        <MetsType>Introduction</MetsType>
+        <MetsType>introduction</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Imprint</InternalName>
-        <MetsType>Imprint</MetsType>
+        <MetsType>imprint</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ContainedWork</InternalName>
-        <MetsType>ContainedWork</MetsType>
+        <MetsType>contained_work</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>AttachedWork</InternalName>
-        <MetsType>AttachedWork</MetsType>
+        <MetsType>contained_work</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>PartOfWork</InternalName>
-        <MetsType>PartOfWork</MetsType>
+        <MetsType>part</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>MultiVolumeWork</InternalName>
@@ -2793,167 +2697,99 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Obituary</InternalName>
-        <MetsType>Obituary</MetsType>
+        <MetsType>obituary</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Figure</InternalName>
-        <MetsType>Figure</MetsType>
+        <MetsType>figure</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Table</InternalName>
-        <MetsType>Table</MetsType>
+        <MetsType>table</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Map</InternalName>
-        <MetsType>Map</MetsType>
+        <MetsType>map</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Theses</InternalName>
-        <MetsType>Theses</MetsType>
+        <MetsType>theses</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Headword</InternalName>
-        <MetsType>Headword</MetsType>
+        <MetsType>headword</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Letter</InternalName>
-        <MetsType>Letter</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Headword</InternalName>
-        <MetsType>Headword</MetsType>
+        <MetsType>letter</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Addendum</InternalName>
-        <MetsType>Addendum</MetsType>
+        <MetsType>addendum</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Cover</InternalName>
-        <MetsType>Cover</MetsType>
+        <MetsType>cover</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Remarks</InternalName>
-        <MetsType>Remarks</MetsType>
+        <MetsType>remarks</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ListOfMaps</InternalName>
-        <MetsType>ListOfMaps</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ListOfIllustrations</InternalName>
-        <MetsType>ListOfIllustrations</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ListOfTables</InternalName>
-        <MetsType>ListOfTables</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableOfLiteratureRefs</InternalName>
-        <MetsType>TableOfLiteratureRefs</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableOfContents</InternalName>
-        <MetsType>TableOfContents</MetsType>
+        <MetsType>contents</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableOfAbbreviations</InternalName>
-        <MetsType>TableOfAbbreviations</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexAuthor</InternalName>
-        <MetsType>IndexAuthor</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexOverall</InternalName>
-        <MetsType>IndexOverall</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexPersons</InternalName>
-        <MetsType>IndexPersons</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexLocation</InternalName>
-        <MetsType>IndexLocation</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexSubject</InternalName>
-        <MetsType>IndexSubject</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexSpecial</InternalName>
-        <MetsType>IndexSpecial</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexVolume</InternalName>
-        <MetsType>IndexVolume</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexOfChronology</InternalName>
-        <MetsType>IndexOfChronology</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Invitation</InternalName>
-        <MetsType>Invitation</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Ticket</InternalName>
-        <MetsType>Ticket</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Festschrift</InternalName>
-        <MetsType>Festschrift</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Insertion</InternalName>
-        <MetsType>Insertion</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Brochure</InternalName>
-        <MetsType>Brochure</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Poster</InternalName>
-        <MetsType>Poster</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Programme</InternalName>
-        <MetsType>Programme</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ProgrammeBook</InternalName>
-        <MetsType>ProgrammeBook</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ProgrammeIssue</InternalName>
-        <MetsType>ProgrammeIssue</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ProgrammeNote</InternalName>
-        <MetsType>ProgrammeNote</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Prospect</InternalName>
-        <MetsType>Prospect</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ConcertReview</InternalName>
-        <MetsType>ConcertReview</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Review</InternalName>
-        <MetsType>Review</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>SeasonPreview</InternalName>
-        <MetsType>SeasonPreview</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Textbook</InternalName>
-        <MetsType>Textbook</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Preview</InternalName>
-        <MetsType>Preview</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Newspaper</InternalName>
