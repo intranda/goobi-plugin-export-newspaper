@@ -290,7 +290,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
 
             }
-            // copy metadata from anchor into the issue
+            // create default metadata, if missing
             if (StringUtils.isBlank(issueTitle) && StringUtils.isNotBlank(issueLabel)) {
                 try {
                     Metadata md = new Metadata(mainTitleType);
@@ -362,8 +362,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 copyMetadata("newspaper", newspaper, newIssue);
                 issueDigDoc.setLogicalDocStruct(newIssue);
 
-                // TODO add supplements
-
                 // create physSequence
                 DocStruct physicalDocstruct = issueDigDoc.createDocStruct(oldPhysical.getType());
                 issueDigDoc.setPhysicalDocStruct(physicalDocstruct);
@@ -386,6 +384,32 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     }
                 }
 
+                // add supplements
+                if (issue.getAllChildren() != null) {
+                    for (DocStruct oldSupplement : issue.getAllChildren()) {
+                        // create supplement, add it to new issue
+                        DocStruct newSupplement = createDocstruct(oldSupplement.getType(), issueDigDoc);
+                        newIssue.addChild(newSupplement);
+                        // copy metadata
+                        copyMetadata("", oldSupplement, newSupplement);
+                        // create page references
+                        if (oldSupplement.getAllToReferences() != null) {
+                            for (Reference ref : oldSupplement.getAllToReferences()) {
+                                DocStruct oldPage = ref.getTarget();
+                                String filename = Paths.get(oldPage.getImageName()).getFileName().toString();
+                                // find filename in new physSequence
+                                for (DocStruct page : physicalDocstruct.getAllChildren()) {
+                                    if (page.getImageName().equals(filename)) {
+                                        newSupplement.addReferenceTo(page, "logical_physical");
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // create filegroups
                 boolean useOriginalFiles = false;
 
                 if (myFilegroups != null && !myFilegroups.isEmpty()) {
@@ -447,6 +471,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 String issueName = Paths.get(tmpExportFolder.toString(), issueIdentifier + ".xml").toString();
                 issueExport.write(issueName);
 
+                // export files
                 if (exportImages) {
                     String imagesFolder = process.getImagesTifDirectory(false);
                     String exportFolder = projectSettings.getString("/export/exportImageFolder")

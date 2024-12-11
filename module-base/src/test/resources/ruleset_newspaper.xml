@@ -2217,7 +2217,7 @@
         <WriteXPath>./mods:mods/mods:identifier[@type='VD-ID']</WriteXPath>
       </Metadata>
       <Metadata>
-        <InternalName>MainTitle</InternalName>
+        <InternalName>TitleDocMain</InternalName>
         <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
       </Metadata>
       <Metadata>
@@ -2647,7 +2647,7 @@
 
       <Metadata>
         <InternalName>newspaperCatalogIDDigital</InternalName>
-        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:recordInfo[@source="zdb-ppn"]/mods:recordIdentifier</WriteXPath>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:recordInfo/mods:recordIdentifier[@source="zdb-ppn"]</WriteXPath>
       </Metadata>
 
 

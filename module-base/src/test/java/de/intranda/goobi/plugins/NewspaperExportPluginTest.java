@@ -61,6 +61,8 @@ public class NewspaperExportPluginTest {
     private static final Namespace modsNamespace = Namespace.getNamespace("mods", "http://www.loc.gov/mods/v3");
     private static final Namespace metsNamespace = Namespace.getNamespace("mets", "http://www.loc.gov/METS/");
 
+    private static final Namespace xlinkNamespace = Namespace.getNamespace("xlink", "http://www.w3.org/1999/xlink");
+
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
     private File tempFolder;
@@ -176,6 +178,7 @@ public class NewspaperExportPluginTest {
 
         String recordIdentifier = null;
         String purl = null;
+        String issueTitle = null;
         String partName = null;
         String orderValue = null;
         String number = null;
@@ -210,6 +213,7 @@ public class NewspaperExportPluginTest {
                     }
                     break;
                 case "titleInfo":
+                    issueTitle = element.getChildText("title", modsNamespace);
                     partName = element.getChildText("partName", modsNamespace);
                     break;
                 case "part":
@@ -289,6 +293,8 @@ public class NewspaperExportPluginTest {
 
         assertEquals("301877785_1867-01-03_2", recordIdentifier);
         assertEquals("https://viewer.example.org/piresolver?id=301877785_1867-01-03_2", purl);
+
+        assertEquals("Ausgabe vom Donnerstag, den 03. Januar 1867.", issueTitle);
         assertEquals("Nro. 2.", partName);
         assertEquals("2", orderValue);
         assertEquals("2", number);
@@ -313,7 +319,62 @@ public class NewspaperExportPluginTest {
         assertEquals("1934", end);
         assertEquals("daily", frequency);
         assertEquals("301877785", newspaperPPN);
+    }
 
+    @Test
+    public void testExportStructure() throws Exception {
+        NewspaperExportPlugin plugin = new NewspaperExportPlugin();
+        plugin.startExport(process);
+
+        // open first issue
+        String filename = "301877785_1867-01-03_2.xml";
+        Document doc = XmlTools.readDocumentFromFile(Paths.get(exportFolder.toString(), filename));
+        Element mets = doc.getRootElement();
+
+        // two dmdSec entries
+        List<Element> dmdSecs = mets.getChildren("dmdSec", metsNamespace);
+        assertEquals(2, dmdSecs.size());
+
+        // fileSec with 2 fileGrps
+
+        Element fileSec = mets.getChild("fileSec", metsNamespace);
+        List<Element> fileGrps = fileSec.getChildren();
+        assertEquals(2, fileGrps.size());
+
+        // first entry: DEFAULT,  second entry: FULLTEXT
+        assertEquals("DEFAULT", fileGrps.get(0).getAttributeValue("USE"));
+        assertEquals("FULLTEXT", fileGrps.get(1).getAttributeValue("USE"));
+        // four files in fileGrp
+        assertEquals(4, fileGrps.get(0).getChildren().size());
+
+        List<Element> structMaps = mets.getChildren("structMap", metsNamespace);
+        // logical: issue, supplement
+        Element logical = structMaps.get(0);
+        Element issue = logical.getChild("div", metsNamespace);
+        Element supplement = issue.getChild("div", metsNamespace);
+        assertEquals("issue", issue.getAttributeValue("TYPE"));
+        assertEquals("Ausgabe vom Donnerstag, den 03. Januar 1867.", issue.getAttributeValue("LABEL"));
+
+        assertEquals("supplement", supplement.getAttributeValue("TYPE"));
+        assertEquals("1. Beilage", supplement.getAttributeValue("LABEL"));
+
+        // physical: 4 pages
+        Element physical = structMaps.get(1);
+        Element physSequence = physical.getChild("div", metsNamespace);
+        List<Element> pages = physSequence.getChildren();
+        assertEquals(4, pages.size());
+        assertEquals("page", pages.get(0).getAttributeValue("TYPE"));
+
+        // 4 images linked to issue, 2 to supplement
+        Element structLink = mets.getChild("structLink", metsNamespace);
+        List<Element> smLinks = structLink.getChildren();
+        assertEquals(6, smLinks.size());
+        assertEquals("LOG_0000", smLinks.get(0).getAttributeValue("from", xlinkNamespace));
+        assertEquals("LOG_0000", smLinks.get(1).getAttributeValue("from", xlinkNamespace));
+        assertEquals("LOG_0000", smLinks.get(2).getAttributeValue("from", xlinkNamespace));
+        assertEquals("LOG_0000", smLinks.get(3).getAttributeValue("from", xlinkNamespace));
+        assertEquals("LOG_0001", smLinks.get(4).getAttributeValue("from", xlinkNamespace));
+        assertEquals("LOG_0001", smLinks.get(5).getAttributeValue("from", xlinkNamespace));
     }
 
     private XMLConfiguration getConfig() {
