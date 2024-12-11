@@ -250,6 +250,23 @@
          </mets:xmlData>
       </mets:mdWrap>
    </mets:dmdSec>
+   
+   <mets:dmdSec ID="DMDLOG_0015">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="TitleDocMain">1. Beilage</goobi:metadata>
+                     <goobi:metadata name="_ucc_id">1688459727746</goobi:metadata>
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   
+   
    <mets:dmdSec ID="DMDPHYS_0000">
       <mets:mdWrap MDTYPE="MODS">
          <mets:xmlData>
@@ -427,7 +444,9 @@
       <mets:div ID="LOG_0002" TYPE="Newspaper">
          <mets:mptr LOCTYPE="URL" xlink:href=""/>
          <mets:div DMDID="DMDLOG_0001" ID="LOG_0003" TYPE="NewspaperVolume">
-            <mets:div DMDID="DMDLOG_0002" ID="LOG_0004" TYPE="NewspaperIssue"/>
+            <mets:div DMDID="DMDLOG_0002" ID="LOG_0004" TYPE="NewspaperIssue">
+                <mets:div DMDID="DMDLOG_0015" ID="LOG_0017" TYPE="NewspaperSupplement"/>
+            </mets:div>
             <mets:div DMDID="DMDLOG_0003" ID="LOG_0005" TYPE="NewspaperIssue"/>
             <mets:div DMDID="DMDLOG_0004" ID="LOG_0006" TYPE="NewspaperIssue"/>
             <mets:div DMDID="DMDLOG_0005" ID="LOG_0007" TYPE="NewspaperIssue"/>
@@ -708,5 +727,8 @@
       <mets:smLink xlink:to="PHYS_0050" xlink:from="LOG_0016"/>
       <mets:smLink xlink:to="PHYS_0051" xlink:from="LOG_0016"/>
       <mets:smLink xlink:to="PHYS_0052" xlink:from="LOG_0016"/>
+      <mets:smLink xlink:to="PHYS_0003" xlink:from="LOG_0017"/>
+      <mets:smLink xlink:to="PHYS_0004" xlink:from="LOG_0017"/>
+      
    </mets:structLink>
 </mets:mets>
