@@ -5,7 +5,6 @@
         <export>
             <images>true</images>
             <fulltext>true</fulltext>
-            <subfolderPerIssue>true</subfolderPerIssue>
             <exportFolder>/tmp/export/</exportFolder>
             <exportImageFolder>/tmp/export/$(meta.CatalogIDDigital)_tif/</exportImageFolder>
             <exportAltoFolder>/tmp/export/$(meta.CatalogIDDigital)_alto/</exportAltoFolder>
@@ -34,10 +33,7 @@
                 mimetypeFromFilename="false" />
         </filegroups>
         <!-- mets parameter -->
-        <!-- if a field is empty or missing, project configuration is used -->
-        <metsPointerPath>https://viewer.example.org/sourcefile?id=$(meta.topstruct.CatalogIDDigital).xml</metsPointerPath>
-        <metsPointerPathAnchor>https://viewer.example.org/sourcefile?id=$(meta.CatalogIDDigital).xml</metsPointerPathAnchor>
-        <metsPointerAddFileExtension>true</metsPointerAddFileExtension>        
+
         <rightsOwner>Example institution</rightsOwner>
         <rightsOwnerLogo>https://viewer.example.org/resources/themes/reference/images/dfg_viewer_logo.png</rightsOwnerLogo>
         <rightsOwnerSiteURL />
@@ -50,8 +46,8 @@
         <rightsSponsor />
         <rightsSponsorLogo />
         <rightsSponsorSiteURL />
-        <purl/>
-        <contentIds/>
+        <purl />
+        <contentIds />
     </config>
     
     <!-- global metadata settings -->
@@ -68,19 +64,10 @@
         <issueNumber>CurrentNo</issueNumber>
         <sortNumber>CurrentNoSorting</sortNumber>
         <language>DocLanguage</language>
-        <location>PhysicalLocation</location>
         <licence>UseAndReproductionLicense</licence>
         <resourceType>TypeOfResource</resourceType>
-        <anchorId>AnchorID</anchorId>
-        <anchorTitle>AnchorTitle</anchorTitle>
-        <anchorZDBIdDigital>AnchorCatalogIDPeriodicalDBDigital</anchorZDBIdDigital>
     </metadata>
     <docstruct>
-        <newspaper>Newspaper</newspaper>
-        <year>Year</year>
-        <month>Month</month>
-        <day>Day</day>
-        <issue>NewspaperIssue</issue>
-        <newspaperStub>NewspaperStub</newspaperStub>
+        <issue>ExportNewspaperIssue</issue>
     </docstruct>
 </config_plugin>
