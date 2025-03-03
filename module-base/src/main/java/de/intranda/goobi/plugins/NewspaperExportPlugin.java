@@ -713,7 +713,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         v.setName(projectFileGroup.getName());
         v.setPathToFiles(variableRplacer.replace(projectFileGroup.getPath().replace("$(meta.CatalogIDDigital)", identifier)));
         v.setMimetype(projectFileGroup.getMimetype());
-        v.setFileSuffix(projectFileGroup.getSuffix().trim());
+        v.setFileSuffix(projectFileGroup.getSuffix());
         v.setFileExtensionsToIgnore(projectFileGroup.getIgnoreMimetypes());
         v.setIgnoreConfiguredMimetypeAndSuffix(projectFileGroup.isUseOriginalFiles());
         if ("PRESENTATION".equals(projectFileGroup.getName())) {
