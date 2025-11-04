@@ -3,6 +3,10 @@ title: Export for newspapers to the portal of the German Digital Library
 identifier: intranda_export_newspaper
 published: true
 description: Goobi Export Plugin to create the METS structure for import into the DDB newspaper portal
+keywords:
+    - Goobi workflow
+    - Plugin
+    - Export Plugin
 ---
 ## Introduction
 The plugin is used to create the METS structure for the import into the newspaper portal of the German Digital Library. A METS anchor file is created for the complete record of a newspaper, for each exported volume another METS anchor file is created and linked within the complete record. The year contains further structures for month and day.

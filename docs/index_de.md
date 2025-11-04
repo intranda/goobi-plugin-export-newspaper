@@ -3,6 +3,10 @@ title: Export für Zeitungen in das Portal der Deutschen Digitalen Bibliothek
 identifier: intranda_export_newspaper
 published: true
 description: Goobi Export Plugin zur Erstellung der METS Struktur für den Import in das Zeitungsportal der DDB
+keywords:
+    - Goobi workflow
+    - Plugin
+    - Export Plugin
 ---
 ## Einführung
 Das Plugin dient zur Erstellung der METS Struktur für den Import in das Zeitungsportal der Deutschen Digitalen Bibliothek. Dabei wird für die Gesamtaufnahme einer Zeitung eine METS-Anchor Datei erzeugt, für jeden exportierten Jahrgang wird eine weitere METS-Anchor Datei erzeugt und innerhalb der Gesamtaufnahme verlinkt. Der Jahrgang enthält weitere Strukturen für Monat und Tag.
