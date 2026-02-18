@@ -288,8 +288,18 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 if (md.getType().equals(accessConditionType)) {
                     issueLicence = md.getValue();
                 }
-
             }
+
+            if (StringUtils.isBlank(dateValue)) {
+                problems.add("Abort export, issue has no publication date");
+                return false;
+            }
+
+            if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
+                return false;
+            }
+
             // create default metadata, if missing
             if (StringUtils.isBlank(issueTitle) && StringUtils.isNotBlank(issueLabel)) {
                 try {
@@ -300,11 +310,16 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     log.info(e);
                 }
             }
-            if (StringUtils.isBlank(issueSortingNumber) && StringUtils.isNotBlank(issueNo) && StringUtils.isNumeric(issueNo)) {
+            // generate new values
+            if (StringUtils.isBlank(issueSortingNumber)) {
+                if (StringUtils.isNotBlank(issueNo) && StringUtils.isNumeric(issueNo)) {
+                    issueSortingNumber = issueNo;
+                } else {
+                    issueSortingNumber = dateValue.replace("-", "");
+                }
                 Metadata md = new Metadata(sortNumberType);
-                md.setValue(issueNo);
+                md.setValue(issueSortingNumber);
                 issue.addMetadata(md);
-                issueSortingNumber = issueNo;
             }
             if (StringUtils.isBlank(issueLanguage) && StringUtils.isNotBlank(language)) {
                 Metadata md = new Metadata(languageType);
@@ -334,16 +349,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 Metadata md = new Metadata(purlType);
                 md.setValue(piResolverUrl + issueIdentifier);
                 issue.addMetadata(md);
-            }
-
-            if (StringUtils.isBlank(dateValue)) {
-                problems.add("Abort export, issue has no publication date");
-                return false;
-            }
-
-            if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
-                return false;
             }
 
             // issue is valid, start export
