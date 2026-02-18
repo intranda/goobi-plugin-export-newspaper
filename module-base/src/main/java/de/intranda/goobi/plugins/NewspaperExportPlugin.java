@@ -185,10 +185,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             //  get identifier
             else if (md.getType().equals(identifierType)) {
                 identifier = md.getValue();
-            } else if (md.getType().equals(labelType)) {
-                titleLabel = md.getValue();
             } else if (md.getType().equals(mainTitleType)) {
                 mainTitle = md.getValue();
+            } else if (md.getType().equals(labelType)) {
+                titleLabel = md.getValue();
             } else if (md.getType().equals(languageType)) {
                 language = md.getValue();
             } else if (md.getType().equals(accessConditionType)) {
