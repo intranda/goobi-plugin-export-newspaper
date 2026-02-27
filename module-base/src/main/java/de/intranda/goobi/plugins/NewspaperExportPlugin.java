@@ -207,10 +207,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             //  get identifier
             else if (md.getType().equals(identifierType)) {
                 identifier = md.getValue();
-            } else if (md.getType().equals(labelType)) {
-                titleLabel = md.getValue();
             } else if (md.getType().equals(mainTitleType)) {
                 mainTitle = md.getValue();
+            } else if (md.getType().equals(labelType)) {
+                titleLabel = md.getValue();
             } else if (md.getType().equals(languageType)) {
                 language = md.getValue();
             } else if (md.getType().equals(locationType)) {
@@ -408,6 +408,17 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 }
 
             }
+
+            if (StringUtils.isBlank(dateValue)) {
+                problems.add("Abort export, issue has no publication date");
+                return false;
+            }
+
+            if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
+                return false;
+            }
+
             // copy metadata from anchor into the issue
             if (StringUtils.isBlank(issueTitle) && StringUtils.isNotBlank(issueLabel)) {
                 try {
@@ -418,12 +429,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     log.info(e);
                 }
             }
-            if (StringUtils.isBlank(issueSortingNumber) && StringUtils.isNotBlank(issueNo) && StringUtils.isNumeric(issueNo)) {
-                Metadata md = new Metadata(sortNumberType);
-                md.setValue(issueNo);
-                issue.addMetadata(md);
-                issueSortingNumber = issueNo;
-            }
+
             if (StringUtils.isBlank(issueLanguage) && StringUtils.isNotBlank(language)) {
                 Metadata md = new Metadata(languageType);
                 md.setValue(language);
@@ -449,6 +455,18 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             if (StringUtils.isBlank(digitalIssueZdbId) && StringUtils.isNotBlank(zdbIdDigital)) {
                 Metadata md = new Metadata(anchorZDBIdDigitalType);
                 md.setValue(zdbIdDigital);
+                issue.addMetadata(md);
+            }
+
+            // generate new values
+            if (StringUtils.isBlank(issueSortingNumber)) {
+                if (StringUtils.isNotBlank(issueNo) && StringUtils.isNumeric(issueNo)) {
+                    issueSortingNumber = issueNo;
+                } else {
+                    issueSortingNumber = dateValue.replace("-", "");
+                }
+                Metadata md = new Metadata(sortNumberType);
+                md.setValue(issueSortingNumber);
                 issue.addMetadata(md);
             }
 
@@ -480,16 +498,6 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 Metadata md = new Metadata(anchorTitleType);
                 md.setValue(titleLabel);
                 issue.addMetadata(md);
-            }
-
-            if (StringUtils.isBlank(dateValue)) {
-                problems.add("Abort export, issue has no publication date");
-                return false;
-            }
-
-            if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
-                return false;
             }
 
             if (StringUtils.isBlank(yearVolume.getOrderLabel())) {
