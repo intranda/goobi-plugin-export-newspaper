@@ -2,6 +2,10 @@
     <config>
         <!-- individual export setting per project -->
         <project>*</project>
+        <!-- can be 'simple' mode (export data as it is) or 
+        'ddb' mode (validate required fields, generate mandatory fields, enforce alto files, ...) -->
+        <mode>ddb</mode>
+        
         <export>
             <images>true</images>
             <fulltext>true</fulltext>

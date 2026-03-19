@@ -76,6 +76,9 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
     private Prefs prefs;
 
+    // can be 'ddb' or 'simple'
+    private String mode;
+
     @Override
     public boolean startExport(Process process) throws IOException, InterruptedException, DocStructHasNoTypeException, PreferencesException,
             WriteException, MetadataTypeNotAllowedException, ExportFileException, UghHelperException, ReadException, SwapException, DAOException,
@@ -112,6 +115,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 log.error(e1);
             }
         }
+        mode = projectSettings.getString("/mode", "ddb");
 
         exportImages = projectSettings.getBoolean("/export/images", false);
         exportFulltext = projectSettings.getBoolean("/export/fulltext", false);
@@ -201,8 +205,12 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             newspaper.addMetadata(md);
         }
 
-        if (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier)) {
+        if ("ddb".equals(mode) && (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier))) {
             problems.add("Export aborted, ZDB id or record id is missing");
+            return false;
+        }
+        if (StringUtils.isBlank(identifier)) {
+            problems.add("Export aborted, record id is missing");
             return false;
         }
 
@@ -295,7 +303,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 return false;
             }
 
-            if (!dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            if ("ddb".equals(mode) && !dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
                 return false;
             }
@@ -317,20 +325,44 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 } else {
                     issueSortingNumber = dateValue.replace("-", "");
                 }
-                Metadata md = new Metadata(sortNumberType);
-                md.setValue(issueSortingNumber);
-                issue.addMetadata(md);
+                try {
+                    Metadata md = new Metadata(sortNumberType);
+                    md.setValue(issueSortingNumber);
+                    issue.addMetadata(md);
+                } catch (UGHException e) {
+                    log.info(e);
+                    if ("ddb".equals(mode)) {
+                        problems.add("Cannot add created sort number to issue");
+                        return false;
+                    }
+                }
             }
             if (StringUtils.isBlank(issueLanguage) && StringUtils.isNotBlank(language)) {
-                Metadata md = new Metadata(languageType);
-                md.setValue(language);
-                issue.addMetadata(md);
+                try {
+                    Metadata md = new Metadata(languageType);
+                    md.setValue(language);
+                    issue.addMetadata(md);
+                } catch (UGHException e) {
+                    log.info(e);
+                    if ("ddb".equals(mode)) {
+                        problems.add("Cannot add language to issue");
+                        return false;
+                    }
+                }
             }
 
             if (StringUtils.isBlank(issueLicence) && StringUtils.isNotBlank(accessCondition)) {
-                Metadata md = new Metadata(accessConditionType);
-                md.setValue(accessCondition);
-                issue.addMetadata(md);
+                try {
+                    Metadata md = new Metadata(accessConditionType);
+                    md.setValue(accessCondition);
+                    issue.addMetadata(md);
+                } catch (UGHException e) {
+                    log.info(e);
+                    if ("ddb".equals(mode)) {
+                        problems.add("Cannot add license information to issue");
+                        return false;
+                    }
+                }
             }
 
             if (StringUtils.isBlank(issueIdentifier)) {
@@ -340,15 +372,31 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 issue.addMetadata(md);
             }
             if (StringUtils.isBlank(resource)) {
-                Metadata md = new Metadata(resourceType);
-                md.setValue("text");
-                issue.addMetadata(md);
+                try {
+                    Metadata md = new Metadata(resourceType);
+                    md.setValue("text");
+                    issue.addMetadata(md);
+                } catch (UGHException e) {
+                    log.info(e);
+                    if ("ddb".equals(mode)) {
+                        problems.add("Cannot add resource to issue");
+                        return false;
+                    }
+                }
             }
 
             if (StringUtils.isBlank(purl)) {
-                Metadata md = new Metadata(purlType);
-                md.setValue(piResolverUrl + issueIdentifier);
-                issue.addMetadata(md);
+                try {
+                    Metadata md = new Metadata(purlType);
+                    md.setValue(piResolverUrl + issueIdentifier);
+                    issue.addMetadata(md);
+                } catch (UGHException e) {
+                    log.info(e);
+                    if ("ddb".equals(mode)) {
+                        problems.add("Cannot add purl to issue");
+                        return false;
+                    }
+                }
             }
 
             // issue is valid, start export
@@ -500,12 +548,15 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     if (pages != null && !pages.isEmpty()) {
                         for (DocStruct page : pages) {
                             String filename = page.getImageName().substring(0, page.getImageName().indexOf(".")) + ".xml";
-                            Path imageDestination =
-                                    Paths.get(exportFolder, filename);
+                            Path altoSource = Paths.get(altoFolder, filename);
+                            if (!"ddb".equals(mode) && !StorageProvider.getInstance().isFileExists(altoSource)) {
+                                continue;
+                            }
+                            Path imageDestination = Paths.get(exportFolder, filename);
                             if (!StorageProvider.getInstance().isDirectory(imageDestination.getParent())) {
                                 StorageProvider.getInstance().createDirectories(imageDestination.getParent());
                             }
-                            StorageProvider.getInstance().copyFile(Paths.get(altoFolder, filename), imageDestination);
+                            StorageProvider.getInstance().copyFile(altoSource, imageDestination);
                         }
                     }
                 }
