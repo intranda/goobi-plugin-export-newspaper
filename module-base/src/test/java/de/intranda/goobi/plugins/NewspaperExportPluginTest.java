@@ -10,10 +10,13 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.SubnodeConfiguration;
@@ -49,7 +52,11 @@ import de.sub.goobi.helper.VariableReplacer;
 import de.sub.goobi.helper.XmlTools;
 import de.sub.goobi.metadaten.MetadatenHelper;
 import de.sub.goobi.persistence.managers.MetadataManager;
+import ugh.dl.DigitalDocument;
+import ugh.dl.DocStruct;
 import ugh.dl.Fileformat;
+import ugh.dl.Metadata;
+import ugh.dl.MetadataType;
 import ugh.dl.Prefs;
 import ugh.fileformats.mets.MetsMods;
 
@@ -375,6 +382,110 @@ public class NewspaperExportPluginTest {
         assertEquals("LOG_0000", smLinks.get(3).getAttributeValue("from", xlinkNamespace));
         assertEquals("LOG_0001", smLinks.get(4).getAttributeValue("from", xlinkNamespace));
         assertEquals("LOG_0001", smLinks.get(5).getAttributeValue("from", xlinkNamespace));
+    }
+
+    // --- purlPattern regex tests ---
+
+    @Test
+    public void testPurlPatternRegex_matchesAllLevels() {
+        String pattern = "http://example.com/{meta.newspaper.CatalogIDDigital}/vol/{meta.volume.CurrentNoSorting}/issue/{meta.issue.CurrentNo}";
+        Pattern regex = Pattern.compile("\\{meta\\.(newspaper|volume|issue)\\.([^}]+)\\}");
+        Matcher matcher = regex.matcher(pattern);
+
+        List<String> levels = new ArrayList<>();
+        List<String> names = new ArrayList<>();
+        while (matcher.find()) {
+            levels.add(matcher.group(1));
+            names.add(matcher.group(2));
+        }
+
+        assertEquals(3, levels.size());
+        assertEquals("newspaper", levels.get(0));
+        assertEquals("volume", levels.get(1));
+        assertEquals("issue", levels.get(2));
+        assertEquals("CatalogIDDigital", names.get(0));
+        assertEquals("CurrentNoSorting", names.get(1));
+        assertEquals("CurrentNo", names.get(2));
+    }
+
+    @Test
+    public void testPurlPatternRegex_noVariables() {
+        String pattern = "http://example.com/static";
+        Pattern regex = Pattern.compile("\\{meta\\.(newspaper|volume|issue)\\.([^}]+)\\}");
+        assertFalse(regex.matcher(pattern).find());
+    }
+
+    @Test
+    public void testPurlPatternRegex_ignoresUnknownLevel() {
+        // "other" and uppercase "NEWSPAPER" must not match
+        String pattern = "http://example.com/{meta.other.SomeField}/{meta.NEWSPAPER.Field}";
+        Pattern regex = Pattern.compile("\\{meta\\.(newspaper|volume|issue)\\.([^}]+)\\}");
+        assertFalse(regex.matcher(pattern).find());
+    }
+
+    @Test
+    public void testPurlPatternRegex_duplicateVariable() {
+        // same variable twice → two matches
+        String pattern = "{meta.issue.CurrentNo}-{meta.issue.CurrentNo}";
+        Pattern regex = Pattern.compile("\\{meta\\.(newspaper|volume|issue)\\.([^}]+)\\}");
+        Matcher matcher = regex.matcher(pattern);
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+            assertEquals("issue", matcher.group(1));
+            assertEquals("CurrentNo", matcher.group(2));
+        }
+        assertEquals(2, count);
+    }
+
+    // --- getMetadataValueFromDocstruct tests ---
+
+    @Test
+    public void testGetMetadataValueFromDocstruct_existingField() throws Exception {
+        DigitalDocument dd = new DigitalDocument();
+        DocStruct ds = dd.createDocStruct(prefs.getDocStrctTypeByName("Newspaper"));
+        MetadataType type = prefs.getMetadataTypeByName("CatalogIDDigital");
+        Metadata md = new Metadata(type);
+        md.setValue("301877785");
+        ds.addMetadata(md);
+
+        Method method = NewspaperExportPlugin.class.getDeclaredMethod("getMetadataValueFromDocstruct", DocStruct.class, String.class);
+        method.setAccessible(true);
+
+        assertEquals("301877785", (String) method.invoke(new NewspaperExportPlugin(), ds, "CatalogIDDigital"));
+    }
+
+    @Test
+    public void testGetMetadataValueFromDocstruct_missingField_returnsEmpty() throws Exception {
+        DigitalDocument dd = new DigitalDocument();
+        DocStruct ds = dd.createDocStruct(prefs.getDocStrctTypeByName("Newspaper"));
+        MetadataType type = prefs.getMetadataTypeByName("CatalogIDDigital");
+        Metadata md = new Metadata(type);
+        md.setValue("301877785");
+        ds.addMetadata(md);
+
+        Method method = NewspaperExportPlugin.class.getDeclaredMethod("getMetadataValueFromDocstruct", DocStruct.class, String.class);
+        method.setAccessible(true);
+
+        assertEquals("", (String) method.invoke(new NewspaperExportPlugin(), ds, "PublisherName"));
+    }
+
+    @Test
+    public void testGetMetadataValueFromDocstruct_multipleMetadata_returnsFirst() throws Exception {
+        DigitalDocument dd = new DigitalDocument();
+        DocStruct ds = dd.createDocStruct(prefs.getDocStrctTypeByName("NewspaperIssue"));
+        MetadataType type = prefs.getMetadataTypeByName("CurrentNo");
+        Metadata md1 = new Metadata(type);
+        md1.setValue("first");
+        ds.addMetadata(md1);
+        Metadata md2 = new Metadata(type);
+        md2.setValue("second");
+        ds.addMetadata(md2);
+
+        Method method = NewspaperExportPlugin.class.getDeclaredMethod("getMetadataValueFromDocstruct", DocStruct.class, String.class);
+        method.setAccessible(true);
+
+        assertEquals("first", (String) method.invoke(new NewspaperExportPlugin(), ds, "CurrentNo"));
     }
 
     private XMLConfiguration getConfig() {
