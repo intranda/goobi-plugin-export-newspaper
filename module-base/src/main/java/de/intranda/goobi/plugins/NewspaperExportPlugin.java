@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.SubnodeConfiguration;
@@ -77,7 +79,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     private Prefs prefs;
 
     // can be 'ddb' or 'simple'
-    private String mode;
+    private String exportMode;
+
+    // possible values: custom or default
+    private String purlMode;
+    private String purlPattern;
 
     @Override
     public boolean startExport(Process process) throws IOException, InterruptedException, DocStructHasNoTypeException, PreferencesException,
@@ -115,7 +121,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 log.error(e1);
             }
         }
-        mode = projectSettings.getString("/mode", "ddb");
+        exportMode = projectSettings.getString("/mode", "ddb");
 
         exportImages = projectSettings.getBoolean("/export/images", false);
         exportFulltext = projectSettings.getBoolean("/export/fulltext", false);
@@ -148,7 +154,10 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         MetadataType zdbIdAnalogType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbidanalog"));
         MetadataType zdbIdDigitalType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/zdbiddigital"));
         MetadataType purlType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/purl"));
-        //
+        // type can be custom or default
+        purlMode = globalSettings.getString("/metadata/purl/@type", "default");
+        purlPattern = globalSettings.getString("/metadata/purl/@pattern", "");
+
         MetadataType identifierType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/identifier"));
         MetadataType issueDateType = prefs.getMetadataTypeByName(globalSettings.getString("/metadata/issueDate"));
         //
@@ -205,7 +214,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             newspaper.addMetadata(md);
         }
 
-        if ("ddb".equals(mode) && (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier))) {
+        if ("ddb".equals(exportMode) && (StringUtils.isBlank(zdbIdAnalog) || StringUtils.isBlank(zdbIdDigital) || StringUtils.isBlank(identifier))) {
             problems.add("Export aborted, ZDB id or record id is missing");
             return false;
         }
@@ -303,7 +312,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 return false;
             }
 
-            if ("ddb".equals(mode) && !dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            if ("ddb".equals(exportMode) && !dateValue.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 problems.add("Issue date " + dateValue + " has the wrong format. Expected is YYYY-MM-DD");
                 return false;
             }
@@ -331,7 +340,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     issue.addMetadata(md);
                 } catch (UGHException e) {
                     log.info(e);
-                    if ("ddb".equals(mode)) {
+                    if ("ddb".equals(exportMode)) {
                         problems.add("Cannot add created sort number to issue");
                         return false;
                     }
@@ -344,7 +353,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     issue.addMetadata(md);
                 } catch (UGHException e) {
                     log.info(e);
-                    if ("ddb".equals(mode)) {
+                    if ("ddb".equals(exportMode)) {
                         problems.add("Cannot add language to issue");
                         return false;
                     }
@@ -358,7 +367,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     issue.addMetadata(md);
                 } catch (UGHException e) {
                     log.info(e);
-                    if ("ddb".equals(mode)) {
+                    if ("ddb".equals(exportMode)) {
                         problems.add("Cannot add license information to issue");
                         return false;
                     }
@@ -378,7 +387,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     issue.addMetadata(md);
                 } catch (UGHException e) {
                     log.info(e);
-                    if ("ddb".equals(mode)) {
+                    if ("ddb".equals(exportMode)) {
                         problems.add("Cannot add resource to issue");
                         return false;
                     }
@@ -386,13 +395,41 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             }
 
             if (StringUtils.isBlank(purl)) {
+                String url = null;
+                if ("custom".equalsIgnoreCase(purlMode)) {
+                    url = purlPattern;
+                    // find all variables
+
+                    Matcher matcher = Pattern.compile("\\{meta\\.(newspaper|volume|issue)\\.([^}]+)\\}").matcher(purlPattern);
+                    while (matcher.find()) {
+                        String metadataName = matcher.group(2);
+                        String value = null;
+                        switch (matcher.group(1)) {
+                            case "newspaper":
+                                value = getMetadataValueFromDocstruct(newspaper, metadataName);
+                                url = url.replace(matcher.group(), value);
+                                break;
+                            case "volume":
+                                value = getMetadataValueFromDocstruct(newspaperYear, metadataName);
+                                url = url.replace(matcher.group(), value);
+                                break;
+                            case "issue":
+                                value = getMetadataValueFromDocstruct(issue, metadataName);
+                                url = url.replace(matcher.group(), value);
+                                break;
+                        }
+                    }
+                } else {
+                    url = piResolverUrl + issueIdentifier;
+                }
+
                 try {
                     Metadata md = new Metadata(purlType);
-                    md.setValue(piResolverUrl + issueIdentifier);
+                    md.setValue(url);
                     issue.addMetadata(md);
                 } catch (UGHException e) {
                     log.info(e);
-                    if ("ddb".equals(mode)) {
+                    if ("ddb".equals(exportMode)) {
                         problems.add("Cannot add purl to issue");
                         return false;
                     }
@@ -549,7 +586,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         for (DocStruct page : pages) {
                             String filename = page.getImageName().substring(0, page.getImageName().indexOf(".")) + ".xml";
                             Path altoSource = Paths.get(altoFolder, filename);
-                            if (!"ddb".equals(mode) && !StorageProvider.getInstance().isFileExists(altoSource)) {
+                            if (!"ddb".equals(exportMode) && !StorageProvider.getInstance().isFileExists(altoSource)) {
                                 continue;
                             }
                             Path imageDestination = Paths.get(exportFolder, filename);
@@ -579,6 +616,16 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
         // delete targetDir
         StorageProvider.getInstance().deleteDir(tmpExportFolder);
         return true;
+    }
+
+    private String getMetadataValueFromDocstruct(DocStruct newspaper, String metadataName) {
+        for (Metadata md : newspaper.getAllMetadata()) {
+            if (md.getType().getName().equals(metadataName)) {
+                return md.getValue();
+
+            }
+        }
+        return "";
     }
 
     private List<ProjectFileGroup> getProjectFileGroups(SubnodeConfiguration projectSettings, List<ProjectFileGroup> defaultFilegroups) {

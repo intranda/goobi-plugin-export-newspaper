@@ -56,6 +56,16 @@
     
     <!-- global metadata settings -->
     <metadata>
+        <!-- type can be custom or default -->
+        <!-- pattern is needed, if custom is used -->
+        <!-- pattern can contain 3 types of variables:
+            {meta.newspaper.MetadataName} takes its value from the newspaper title
+            {meta.volume.MetadataName} takes its value from the year
+            {meta.issue.MetadataName} takes its value from the individual issue
+        -->
+        <!-- 
+        <purl type="custom" pattern="http://viewer.example.com/viewer/piresolver?id={meta.newspaper.CatalogIDDigital}&amp;field={meta.volume.Ark}&amp;otherField={meta.issue.CurrentNoSorting}">_purl</purl>    
+         -->
         <purl>_purl</purl>
         <zdbiddigital>CatalogIDPeriodicalDBDigital</zdbiddigital>
         <zdbidanalog>CatalogIDPeriodicalDB</zdbidanalog>
