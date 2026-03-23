@@ -64,8 +64,24 @@ The configuration of the plugin is done via the configuration file `plugin_intra
 
 Some global parameters are set in the first area `<export>`. Here you can specify whether images and ALTO should also be exported in addition to the METS files (`<exportImageFolder>, <exportAltoFolder>` `true`/`false`), to which directory the export should be carried out (`<exportFolder>`) and which resolvers should be written for the METS file (`<metsUrl>`) and the link to the published data (`<resolverUrl>`).
 
+The `<mode>` tag can be used to specify whether the stricter `ddb` mode or the simpler `simple` mode should be used. In `simple` mode, a number of validations and mandatory fields required for data import into the German Digital Library can be disabled.
+
 In the second area, you can make specifications that differ from the Goobi project settings. Filegroups and the individual fields of the project settings can be overwritten.
 
 In `<metadata>`, a range of metadata is defined that is used for validating and generating data.
+
+The `<purl>` element controls how the PURL for each issue is generated. In the default mode (`type="default"`), the PURL is composed of the configured `<resolverUrl>` and the issue identifier. In the custom mode (`type="custom"`), the `pattern` attribute is evaluated instead. The pattern may contain variables of the following three types, each replaced by the corresponding metadata value:
+
+| Variable | Source |
+|----------|--------|
+| `{meta.newspaper.MetadataName}` | Metadata from the newspaper title record |
+| `{meta.volume.MetadataName}` | Metadata from the volume (year) |
+| `{meta.issue.MetadataName}` | Metadata from the individual issue |
+
+Example:
+
+```xml
+<purl type="custom" pattern="https://viewer.example.com/piresolver?id={meta.newspaper.CatalogIDDigital}&amp;year={meta.volume.CurrentNoSorting}&amp;issue={meta.issue.CurrentNo}">_purl</purl>
+```
 
 The last area `<docstruct>` defines the internal name of the structure element to be generated.

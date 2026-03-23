@@ -63,8 +63,24 @@ Die Konfiguration des Plugins erfolgt über die Konfigurationsdatei `plugin_intr
 
 Im ersten Bereich `<export>` werden einige globale Parameter gesetzt. Hier wird festgelegt, ob neben den Metsdateien auch Bilder und ALTO exportiert werden sollen (`<exportImageFolder>, <exportAltoFolder>` `true`/`false`), in welches Verzeichnis der Export durchgeführt werden soll (`<exportFolder>`) und welche Resolver für die METS Datei (`<metsUrl>`) und den Link auf den veröffentlichten Datensatz (`<resolverUrl>`) geschrieben werden sollen.
 
+Mittels `<mode>` kann festgelegt werden, ob der striktere `ddb` Modus oder der einfache `simple` Modus genutzt werden soll. Bei simple können eine Reihe von Validierungen und Pflichtangaben außer Kraft gesetzt werden, die für den Datenimport in die Deutsche Digitale Bibliothek notwendig sind.
+
 Im zweiten Bereich können von den Projekteinstellungen abweichende Angaben gemacht werden. Dazu können sowohl filegroups überschrieben werden als die einzelnen Felder der Inhaltlichen Einstellungen.
 
 In `<metadata>` werden eine Reihe von Metadaten definiert, die für die Validierung und Generierung von Daten genutzt werden.
+
+Das Element `<purl>` steuert, wie der PURL für jede Ausgabe erzeugt wird. Im Standardmodus (`type="default"`) wird der PURL aus der konfigurierten `<resolverUrl>` und dem Identifier der Ausgabe zusammengesetzt. Im benutzerdefinierten Modus (`type="custom"`) wird stattdessen das Attribut `pattern` ausgewertet. Das Pattern kann Variablen der folgenden drei Typen enthalten, die jeweils durch den entsprechenden Metadatenwert ersetzt werden:
+
+| Variable | Quelle |
+|----------|--------|
+| `{meta.newspaper.MetadatenName}` | Metadatum der Gesamtaufnahme (Zeitungstitel) |
+| `{meta.volume.MetadatenName}` | Metadatum des Jahrgangs |
+| `{meta.issue.MetadatenName}` | Metadatum der einzelnen Ausgabe |
+
+Beispiel:
+
+```xml
+<purl type="custom" pattern="https://viewer.example.com/piresolver?id={meta.newspaper.CatalogIDDigital}&amp;year={meta.volume.CurrentNoSorting}&amp;issue={meta.issue.CurrentNo}">_purl</purl>
+```
 
 Der letzte Bereich `<docstruct>` definiert den internen Namen des zu erzeugende Strukturelements.
