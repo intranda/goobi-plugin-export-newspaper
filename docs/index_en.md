@@ -2,24 +2,17 @@
 title: Export for newspapers to the portal of the German Digital Library
 identifier: intranda_export_newspaper
 published: true
-description: Goobi Export Plugin to create the METS structure for import into the DDB newspaper portal
+description: Goobi Export Plugin to create the METS structure for import into the Goobi Viewer and the DDB newspaper portal
 keywords:
     - Goobi workflow
     - Plugin
     - Export Plugin
 ---
 ## Introduction
-The plugin is used to create the METS structure for the import into the newspaper portal of the German Digital Library. A METS anchor file is created for the complete record of a newspaper, for each exported volume another METS anchor file is created and linked within the complete record. The year contains further structures for month and day.
-
-Each output is created as individual METS files and linked in the METS anchor file of the vintage. The issue may contain further structural data such as article descriptions or supplements. The digitised images are also referenced here.
-
-[https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Gesamtaufnahme+Zeitung+1.0](https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Gesamtaufnahme+Zeitung+1.0)
-
-[https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0](https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0)
+The plugin is used to generate the METS structure for import into the German Digital Library’s newspaper portal. A separate METS/MODS file is created for each instance of the process.
+The output may contain additional structural data such as article descriptions or supplements. It also includes references to the digitised images.
 
 [https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0](https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0)
-
-
 
 
 ## Installation
@@ -43,69 +36,53 @@ In addition, there is a configuration file that must be located in the following
 
 
 ## Overview and functionality
+
+To activate the plugin, it must be activated for a task in the workflow. This is done as shown in the following screenshot by selecting the `intranda_export_newspaper` plugin from the list of installed plugins.
+![Integration des Plugins in den Workflow](screen1_en.png)
+
+As this plugin should usually be executed automatically, the step should be configured as automatic in the workflow. In addition, the task must be marked as an export step.
+
 Once the plugin has been fully installed and set up, it is usually run automatically within the workflow, so there is no manual interaction with the user. Instead, the workflow invokes the plugin in the background and performs the following tasks:
 
-A separate METS file is created for each output, linking the images and OCR data associated with the output. The output can have further sub-elements such as articles or inserts.
+* Reading the metadata
+* Validation of whether the document type is a newspaper
+* Validate whether all mandatory metadata such as ZDB IDs, newspaper identifier, license, publication date, numbers for each issue have been filled in
+* Checking whether generatable metadata already exists or needs to be created like identifier of the individual issues, sorting number based on the issue number
+* Generation of missing mandatory metadata
+* Generate the METS/MODS structure for the individual issue
+* Copy the metadata of the issue to the new file
+* Transferring the metadata of the newspaper year and the newspaper record to the new file. To do this, there must be a field of the same name with the prefix ‘newspaper’ in the ruleset for each metadata that is to be copied from the newspaper record and a metadata with the prefix ‘year’ for each metadata from the volume and this must be permitted in the export issue element. Metadata for which there is no equivalent with the prefix will not be included in the export.
+* Generation of the file groups for the images linked in the issue. The settings from the project configuration are used, or different data from the configuration file if, for example, a delivery to another portal is planned in addition to the regular export.
+* Save the file in the configured folder
+* If configured, copy the images and ALTO data to separate subfolders for each output
 
-The individual issues are then combined into one METS file for the year. The METS files of the issues are linked within a structure for month and day.
-
-The last step is to check whether a record with the metadata of the entire issue exists in the target directory. If not, a METS file is created, otherwise the year is entered into the structure data of the overall recording.
-
-To put the plugin into operation, it must be activated for a task in the workflow. This is done as shown in the following screenshot by selecting the `plugin intranda_export_newspaper` from the list of installed plugins.
-
-![Integration of the plugin into the workflow](screen1_en.png)
-
-Since this plugin is usually to be executed automatically, the task should be configured as automatic in the workflow. Furthermore, the task must be marked as an export step.
-
-In addition, there must be another regular export step so that the linked images and ALTO files can be delivered via the Goobi viewer interfaces.
 
 
 ## Configuration
 The configuration of the plugin is done via the configuration file `plugin_intranda_export_newspaper.xml` and can be adjusted during operation. The following is an example configuration file:
 
+{{CONFIG_CONTENT}}
+
+Some global parameters are set in the first area `<export>`. Here you can specify whether images and ALTO should also be exported in addition to the METS files (`<exportImageFolder>, <exportAltoFolder>` `true`/`false`), to which directory the export should be carried out (`<exportFolder>`) and which resolvers should be written for the METS file (`<metsUrl>`) and the link to the published data (`<resolverUrl>`).
+
+The `<mode>` tag can be used to specify whether the stricter `ddb` mode or the simpler `simple` mode should be used. In `simple` mode, a number of validations and mandatory fields required for data import into the German Digital Library can be disabled.
+
+In the second area, you can make specifications that differ from the Goobi project settings. Filegroups and the individual fields of the project settings can be overwritten.
+
+In `<metadata>`, a range of metadata is defined that is used for validating and generating data.
+
+The `<purl>` element controls how the PURL for each issue is generated. In the default mode (`type="default"`), the PURL is composed of the configured `<resolverUrl>` and the issue identifier. In the custom mode (`type="custom"`), the `pattern` attribute is evaluated instead. The pattern may contain variables of the following three types, each replaced by the corresponding metadata value:
+
+| Variable | Source |
+|----------|--------|
+| `{meta.newspaper.MetadataName}` | Metadata from the newspaper title record |
+| `{meta.volume.MetadataName}` | Metadata from the volume (year) |
+| `{meta.issue.MetadataName}` | Metadata from the individual issue |
+
+Example:
+
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<config_plugin>
-    <export>
-        <images>false</images>
-        <subfolderPerIssue>false</subfolderPerIssue>
-        <exportFolder>/tmp/export/</exportFolder>
-        <metsUrl>https://viewer.example.org/viewer/metsresolver?id=</metsUrl>
-        <resolverUrl>https://viewer.org/viewer/piresolver?id=</resolverUrl>
-    </export>
-    <metadata>
-        <purl>_purl</purl>
-        <zdbiddigital>CatalogIDPeriodicalDBDigital</zdbiddigital>
-        <zdbidanalog>CatalogIDPeriodicalDB</zdbidanalog>
-        <identifier>CatalogIDDigital</identifier>
-        <issueDate>DateIssued</issueDate>
-        <yearDate>CurrentNoSorting</yearDate>
-        <titleLabel>TitleDocMain</titleLabel>
-        <modsTitle>MainTitle</modsTitle>
-        <volumeNumber>VolumeNo</volumeNumber>
-        <issueNumber>CurrentNo</issueNumber>
-        <sortNumber>CurrentNoSorting</sortNumber>
-        <language>DocLanguage</language>
-        <location>PhysicalLocation</location>
-        <licence>UseAndReproductionLicense</licence>
-        <resourceType>TypeOfResource</resourceType>
-        <anchorId>AnchorID</anchorId>
-        <anchorTitle>AnchorTitle</anchorTitle>
-        <anchorZDBIdDigital>AnchorCatalogIDPeriodicalDBDigital</anchorZDBIdDigital>
-    </metadata>
-    <docstruct>
-        <newspaper>Newspaper</newspaper>
-        <year>Year</year>
-        <month>Month</month>
-        <day>Day</day>
-        <issue>NewspaperIssue</issue>
-        <newspaperStub>NewspaperStub</newspaperStub>
-    </docstruct>
-</config_plugin>
+<purl type="custom" pattern="https://viewer.example.com/piresolver?id={meta.newspaper.CatalogIDDigital}&amp;year={meta.volume.CurrentNoSorting}&amp;issue={meta.issue.CurrentNo}">_purl</purl>
 ```
 
-In the first section `<export>` some global parameters are set. Here it is determined whether images are to be exported in addition to the METS files (`<images>` `true`/`false`), whether these are to be exported per issue or per year and linked in the data sets (`<subfolderPerIssue>` `true`/`false`), to which directory the export should be made (`<exportFolder>`) and which resolvers should be written for the METS file (`<metsUrl>`) and the link to the published record (`<resolverUrl>`).
-
-In the second section `<metadata>` a set of metadata is defined. These fields must exist in the rule set and are partly copied from the overall record to the individual outputs during the export.
-
-The third section `<docstruct>` defines some structural elements to be generated. These must also be configured in the rule set.
+The last area `<docstruct>` defines the internal name of the structure element to be generated.

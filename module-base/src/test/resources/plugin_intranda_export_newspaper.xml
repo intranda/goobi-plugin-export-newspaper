@@ -2,10 +2,6 @@
     <config>
         <!-- individual export setting per project -->
         <project>*</project>
-        <!-- can be 'simple' mode (export data as it is) or 
-        'ddb' mode (validate required fields, generate mandatory fields, enforce alto files, ...) -->
-        <mode>ddb</mode>
-        
         <export>
             <images>true</images>
             <fulltext>true</fulltext>
@@ -15,13 +11,14 @@
         </export>
         <metsUrl addFileExtension="true">https://viewer.example.org/sourcefile?id=</metsUrl>
         <resolverUrl>https://viewer.example.org/piresolver?id=</resolverUrl>
-        
+
+
         <!-- file groups -->
         <!-- if no file group is set, the file groups from the project configuration are used -->
         <filegroups>
             <filegroup
                 name="DEFAULT"
-                path="https://viewer.example.org/content/$(meta.CatalogIDDigital)/1000/0/"
+                path="$(meta.CatalogIDDigital)_tif/"
                 mimetype=""
                 suffix=""
                 foldername=""
@@ -29,7 +26,7 @@
                 mimetypeFromFilename="true" />
             <filegroup
                 name="FULLTEXT"
-                path="https://viewer.example.org/api/v1/records/$(meta.CatalogIDDigital)/files/alto/"
+                path="$(meta.CatalogIDDigital)_alto/"
                 mimetype="xml/alto"
                 suffix="xml"
                 foldername="getOcrDirectory"
@@ -53,19 +50,9 @@
         <purl />
         <contentIds />
     </config>
-    
+
     <!-- global metadata settings -->
     <metadata>
-        <!-- type can be custom or default -->
-        <!-- pattern is needed, if custom is used -->
-        <!-- pattern can contain 3 types of variables:
-            {meta.newspaper.MetadataName} takes its value from the newspaper title
-            {meta.volume.MetadataName} takes its value from the year
-            {meta.issue.MetadataName} takes its value from the individual issue
-        -->
-        <!-- 
-        <purl type="custom" pattern="http://viewer.example.com/viewer/piresolver?id={meta.newspaper.CatalogIDDigital}&amp;field={meta.volume.Ark}&amp;otherField={meta.issue.CurrentNoSorting}">_purl</purl>    
-         -->
         <purl>_purl</purl>
         <zdbiddigital>CatalogIDPeriodicalDBDigital</zdbiddigital>
         <zdbidanalog>CatalogIDPeriodicalDB</zdbidanalog>
@@ -84,10 +71,4 @@
     <docstruct>
         <issue>ExportNewspaperIssue</issue>
     </docstruct>
-    
-    
-    <identifierMapping enable="false">
-        <mappingFolder>/tmp/export/</mappingFolder>
-        <urlPrefix>https://viewer.goobi.io/viewer/image/</urlPrefix>        
-    </identifierMapping>
 </config_plugin>

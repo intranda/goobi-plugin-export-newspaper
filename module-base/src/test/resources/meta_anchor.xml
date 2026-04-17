@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets OBJID="" xsi:schemaLocation="http://www.loc.gov/standards/premis/ http://www.loc.gov/standards/premis/v2/premis-v2-0.xsd http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd http://www.loc.gov/METS/ http://www.loc.gov/standards/mets/mets.xsd http://www.loc.gov/standards/mix/ http://www.loc.gov/standards/mix/mix.xsd" xmlns:mets="http://www.loc.gov/METS/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:goobi="http://meta.goobi.org/v1.5.1/" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <mets:metsHdr CREATEDATE="2024-12-06T12:49:19Z">
+      <mets:agent OTHERTYPE="SOFTWARE" ROLE="CREATOR" TYPE="OTHER">
+         <mets:name>Goobi -  - 2024-12-04T13:04:50Z</mets:name>
+      </mets:agent>
+   </mets:metsHdr>
+   <mets:dmdSec ID="DMDLOG_0000">
+      <mets:mdWrap MDTYPE="MODS">
+         <mets:xmlData>
+            <mods:mods>
+               <mods:extension>
+                  <goobi:goobi>
+                     <goobi:metadata name="TitleDocMain">St. Ingberter Anzeiger</goobi:metadata>
+                     <goobi:metadata name="MainTitle">St. Ingberter Anzeiger</goobi:metadata>
+                     <goobi:metadata name="TitleDocMainShort">St. Ingberter Anzeiger</goobi:metadata>
+                     <goobi:metadata name="TitleDocSub1">Publikation amtlicher Bekanntmachungen ; aelteste Zeitung im Bezirksamt St. Ingbert</goobi:metadata>
+                     <goobi:metadata name="PlaceOfPublication">St. Ingbert</goobi:metadata>
+                     <goobi:metadata name="PublisherName">Demetz</goobi:metadata>
+                     <goobi:metadata name="DocLanguage">ger</goobi:metadata>
+                     <goobi:metadata name="PublicationStart">1867</goobi:metadata>
+                     <goobi:metadata name="PublicationEnd">1934</goobi:metadata>
+                     <goobi:metadata name="CatalogIDSource">301877785</goobi:metadata>
+                     <goobi:metadata name="CatalogIDDigital">301877785</goobi:metadata>
+                     <goobi:metadata name="singleDigCollection">DefaultCollection</goobi:metadata>
+                     <goobi:metadata name="_dateDigitization">2024</goobi:metadata>
+                     <goobi:metadata name="_placeOfElectronicOrigin">Stadtarchiv St. Ingbert</goobi:metadata>
+                     <goobi:metadata name="_electronicEdition">[Electronic ed.]</goobi:metadata>
+                     <goobi:metadata name="_electronicPublisher">Stadtarchiv St. Ingbert</goobi:metadata>
+                     <goobi:metadata name="_digitalOrigin">reformatted digital</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDB">1486830-1</goobi:metadata>
+                     <goobi:metadata name="CatalogIDPeriodicalDBDigital">3201144-1</goobi:metadata>
+                     <goobi:metadata name="UseAndReproductionLicense">PDM</goobi:metadata>
+                     <goobi:metadata name="PublicationFrequency">daily</goobi:metadata>
+                     <goobi:metadata name="Editor" type="person">
+                         <goobi:lastName>Editor</goobi:lastName>
+                         <goobi:firstName>Editor</goobi:firstName>
+                         <goobi:displayName>Editor, Editor</goobi:displayName>
+                     </goobi:metadata>
+                     <goobi:metadata name="CorporateEditor" type="corporate">
+                        <goobi:mainName>Sankt Ingbert</goobi:mainName>
+                        <goobi:subName/>
+                     </goobi:metadata>
+                     <goobi:metadata name="Location" type="group">
+                        <goobi:metadata name="physicalLocation">SUB Göttingen</goobi:metadata>
+                        <goobi:metadata name="shelfLocator">Zt 23-3456</goobi:metadata>
+                     </goobi:metadata>                     
+                  </goobi:goobi>
+               </mods:extension>
+            </mods:mods>
+         </mets:xmlData>
+      </mets:mdWrap>
+   </mets:dmdSec>
+   <mets:structMap TYPE="LOGICAL">
+      <mets:div DMDID="DMDLOG_0000" ID="LOG_0000" TYPE="Newspaper">
+         <mets:div ID="LOG_0001" TYPE="NewspaperVolume">
+            <mets:mptr LOCTYPE="URL" xlink:href=""/>
+         </mets:div>
+      </mets:div>
+   </mets:structMap>
+</mets:mets>

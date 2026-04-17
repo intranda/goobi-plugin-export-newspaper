@@ -104,13 +104,10 @@
     <Name>CatalogIDPeriodicalDBDigital</Name>
     <language name="de">ZeitschriftenDB-ID Digital</language>
   </MetadataType>
-
   <MetadataType>
     <Name>AnchorCatalogIDPeriodicalDBDigital</Name>
     <language name="de">ZeitschriftenDB-ID Digital</language>
   </MetadataType>
-
-
   <MetadataType>
     <Name>TitleDocMain</Name>
     <language name="de">Haupttitel</language>
@@ -255,10 +252,19 @@
     <language name="de">Zeitungstitel</language>
     <language name="en">Newspaper title</language>
   </MetadataType>
-
   <MetadataType>
     <Name>PublicationRun</Name>
     <language name="de">ErscheinungsVerlauf</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PublicationStart</Name>
+    <language name="de">erstes Erscheinungsjahr</language>
+    <language name="en">First year of publication</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PublicationEnd</Name>
+    <language name="de">letztes Erscheinungsjahr</language>
+    <language name="en">Last year of publication</language>
   </MetadataType>
   <MetadataType>
     <Name>FormatSourcePrint</Name>
@@ -289,11 +295,16 @@
     <language name="de">Alle Autoren u. Beteiligte (orig.)</language>
     <language name="en">All creators (original version)</language>
   </MetadataType>
-  <MetadataType type="person">
+  <MetadataType normdata="true" type="person">
     <Name>Editor</Name>
     <language name="en">Editor</language>
     <language name="de">Herausgeber</language>
   </MetadataType>
+  <MetadataType normdata="true" type="corporate">
+    <Name>CorporateEditor</Name>
+    <language name="en">Corporate editor</language>
+    <language name="de">Heausgebendes Organ</language>
+  </MetadataType>  
   <MetadataType type="person">
     <Name>Author</Name>
     <language name="de">Autor</language>
@@ -360,7 +371,6 @@
     <language name="de">digitalOrigin</language>
     <language name="en">digitalOrigin</language>
   </MetadataType>
-
   <MetadataType>
     <Name>PartName</Name>
     <language name="de">Ausgabename</language>
@@ -375,18 +385,143 @@
     <Name>DateIssued</Name>
     <language name="de">Erscheinungsdatum</language>
     <language name="en">Date issued</language>
+    <validationExpression>^(\d{4}(-\d{2}){0,2})$</validationExpression>
   </MetadataType>
-
   <MetadataType>
     <Name>TypeOfResource</Name>
     <language name="de">Ressourcentyp</language>
     <language name="en">TypeOfResource</language>
   </MetadataType>
+  <MetadataType>
+    <Name>_COORDS</Name>
+    <language name="de">Koordinaten</language>
+    <language name="en">Coordinates</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>_SHAPE</Name>
+    <language name="de">Form</language>
+    <language name="en">Shape</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>PublicationFrequency</Name>
+    <language name="de">Erscheinungsfrequenz</language>
+    <language name="en">publication frequency</language>
+  </MetadataType>
+
+
+  <!-- START metadata for newspaper export -->
+  <MetadataType>
+    <Name>newspaperPublicationFrequency</Name>
+    <language name="de">newspaperPublicationFrequency</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperTitleDocMain</Name>
+    <language name="de">newspaperTitleDocMain</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperTitleDocMainShort</Name>
+    <language name="de">newspaperTitleDocMainShort</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperTitleDocSub1</Name>
+    <language name="de">newspaperTitleDocSub1</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperTitleDocParallel</Name>
+    <language name="de">newspaperTitleDocParallel</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperPlaceOfPublication</Name>
+    <language name="de">newspaperPlaceOfPublication</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperPublisherName</Name>
+    <language name="de">newspaperPublisherName</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperPublicationRun</Name>
+    <language name="de">newspaperPublicationRun</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperCatalogIDSource</Name>
+    <language name="de">newspaperCatalogIDSource</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperCatalogIDDigital</Name>
+    <language name="de">newspaperCatalogIDDigital</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperURN</Name>
+    <language name="de">newspaperURN</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperCatalogIDPeriodicalDB</Name>
+    <language name="de">newspaperCatalogIDPeriodicalDB</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperCatalogIDPeriodicalDBDigital</Name>
+    <language name="de">newspaperCatalogIDPeriodicalDBDigital</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperUseAndReproductionLicense</Name>
+    <language name="de">newspaperUseAndReproductionLicense</language>
+  </MetadataType>
+
+  <MetadataType>
+    <Name>newspaperPublicationStart</Name>
+    <language name="de">newspaperPublicationStart</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperPublicationEnd</Name>
+    <language name="de">newspaperPublicationEnd</language>
+  </MetadataType>
+  <MetadataType>
+    <Name>newspaperSizeSourcePrint</Name>
+    <language name="de">newspaperSizeSourcePrint</language>
+  </MetadataType>
+  <MetadataType type="person">
+    <Name>newspaperEditor</Name>
+    <language name="de">newspaperEditor</language>
+  </MetadataType>
+  <MetadataType type="corporate">
+    <Name>newspaperCorporateEditor</Name>
+    <language name="de">newspaperCorporateEditor</language>
+  </MetadataType>
+  
+    <MetadataType>
+        <Name>physicalLocation</Name>
+        <language name="de">Standort</language>
+        <language name="en">Physical location</language>
+    </MetadataType>
+    
+    <MetadataType>
+        <Name>shelfLocator</Name>
+        <language name="de">Signatur</language>
+        <language name="en">Shelflocator</language>
+    </MetadataType>  
+    
+    <Group>
+        <Name>Location</Name>
+        <language name="de">Exemplardaten</language>
+        <language name="en">Local information</language>
+        <metadata DefaultDisplay="true" num="1o">physicalLocation</metadata>
+        <metadata DefaultDisplay="true" num="1o">shelfLocator</metadata>
+    </Group>  
+    <Group>
+        <Name>newspaperLocation</Name>
+        <language name="de">Exemplardaten</language>
+        <language name="en">Local information</language>
+        <metadata DefaultDisplay="true" num="1o">physicalLocation</metadata>
+        <metadata DefaultDisplay="true" num="1o">shelfLocator</metadata>
+    </Group>  
+  <!-- END metadata for newspaper export -->
+
   <DocStrctType>
     <Name>page</Name>
     <language name="de">Seite</language>
     <language name="en">page</language>
     <language name="rusdml">page</language>
+    <allowedchildtype>area</allowedchildtype>
     <metadata num="1m">physPageNumber</metadata>
     <metadata num="1m">logicalPageNumber</metadata>
     <metadata num="1o">_urn</metadata>
@@ -409,83 +544,22 @@
     <metadata num="1o">PhysicalLocation</metadata>
     <metadata num="1o">_urn</metadata>
   </DocStrctType>
-
-
-  <DocStrctType>
-    <Name>Year</Name>
-    <language name="de">Year</language>
-    <language name="en">Year</language>
-    <allowedchildtype>Month</allowedchildtype>
-    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
-    <metadata DefaultDisplay="true" num="1m">MainTitle</metadata>
-    <metadata num="*">TitleDocMainShort</metadata>
-    <metadata DefaultDisplay="true" num="1o">shelfmarksource</metadata>
-    <metadata num="1o">DateIssued</metadata>
-    <metadata DefaultDisplay="true" num="1m">CatalogIDDigital</metadata>
-    <metadata num="*">CatalogIDSource</metadata>
-    <metadata DefaultDisplay="true" num="+">singleDigCollection</metadata>
-    <metadata DefaultDisplay="true" num="1m">VolumeNo</metadata>
-    <metadata DefaultDisplay="true" num="1m">CurrentNoSorting</metadata>
-    <metadata num="*">_ucc_id</metadata>
-    <metadata num="1o">_dateDigitization</metadata>
-    <metadata num="1o">_placeOfElectronicOrigin</metadata>
-    <metadata num="1o">_electronicEdition</metadata>
-    <metadata num="1o">_electronicPublisher</metadata>
-    <metadata num="1o">_digitalOrigin</metadata>
-    <metadata num="1o">copyrightimageset</metadata>
-    <metadata num="1o">FormatSourcePrint</metadata>
-    <metadata num="1o">SizeSourcePrint</metadata>
-    <metadata DefaultDisplay="true" num="*">DocLanguage</metadata>
-    <metadata num="*">PhysicalLocation</metadata>
-    <metadata num="1m">URN</metadata>
-    <metadata num="1o">_urn</metadata>
-    <metadata num="1o">TypeOfResource</metadata>
-  </DocStrctType>
-
-
-  <DocStrctType>
-    <Name>NewspaperStub</Name>
-    <language name="de">Zeitung</language>
-    <language name="en">Newspaper</language>
-    <allowedchildtype>Year</allowedchildtype>
-    <metadata DefaultDisplay="true" num="1o">TitleDocMain</metadata>
-
-  </DocStrctType>
-
-  <DocStrctType>
-    <Name>Month</Name>
-    <language name="de">Month</language>
-    <language name="en">Month</language>
-    <allowedchildtype>Day</allowedchildtype>
-    <metadata num="1o">TitleDocMain</metadata>
-
-  </DocStrctType>
-
-  <DocStrctType>
-    <Name>Day</Name>
-    <language name="de">Day</language>
-    <language name="en">Day</language>
-    <allowedchildtype>NewspaperIssue</allowedchildtype>
-    <metadata num="1o">TitleDocMain</metadata>
-
-  </DocStrctType>
-
-
   <DocStrctType anchor="true">
     <Name>Newspaper</Name>
     <language name="de">Zeitung</language>
     <language name="en">Newspaper</language>
     <allowedchildtype>NewspaperVolume</allowedchildtype>
-    <allowedchildtype>Year</allowedchildtype>
     <metadata DefaultDisplay="true" num="1m">TitleDocMain</metadata>
     <metadata DefaultDisplay="true" num="1m">MainTitle</metadata>
     <metadata DefaultDisplay="true" num="1o">TitleDocMainShort</metadata>
     <metadata DefaultDisplay="true" num="1o">TitleDocSub1</metadata>
     <metadata DefaultDisplay="true" num="1o">TitleDocParallel</metadata>
-    <metadata DefaultDisplay="true" num="1o">PlaceOfPublication</metadata>
-    <metadata DefaultDisplay="true" num="1o">PublisherName</metadata>
+    <metadata DefaultDisplay="true" num="1m">PlaceOfPublication</metadata>
+    <metadata DefaultDisplay="true" num="1m">PublisherName</metadata>
     <metadata DefaultDisplay="true" num="1m">DocLanguage</metadata>
-    <metadata DefaultDisplay="true" num="1o">PublicationRun</metadata>
+    <metadata num="1o">PublicationRun</metadata>
+    <metadata DefaultDisplay="true" num="1o">PublicationStart</metadata>
+    <metadata DefaultDisplay="true" num="1o">PublicationEnd</metadata>    
     <metadata DefaultDisplay="true" num="1o">CatalogIDSource</metadata>
     <metadata DefaultDisplay="true" num="1m">CatalogIDDigital</metadata>
     <metadata DefaultDisplay="true" num="+">singleDigCollection</metadata>
@@ -503,6 +577,11 @@
     <metadata DefaultDisplay="true" num="1m">CatalogIDPeriodicalDBDigital</metadata>
     <metadata DefaultDisplay="true" num="1m">UseAndReproductionLicense</metadata>
     <metadata num="1o">TypeOfResource</metadata>
+    <metadata num="1o">PublicationFrequency</metadata>    
+    <metadata num="*">Editor</metadata>
+    <metadata num="*">CorporateEditor</metadata>
+    <group num="*">Location</group>    
+    
   </DocStrctType>
   <DocStrctType>
     <Name>NewspaperEdition</Name>
@@ -519,7 +598,6 @@
     <Name>NewspaperIssue</Name>
     <language name="de">Ausgabe</language>
     <language name="en">NewspaperIssue</language>
-    <!-- <allowedchildtype>NewspaperEdition</allowedchildtype> -->
     <allowedchildtype>NewspaperSupplement</allowedchildtype>
     <metadata num="1o">CatalogIDDigital</metadata>
     <metadata DefaultDisplay="true" num="1o">PartNumber</metadata>
@@ -574,22 +652,72 @@
     <metadata num="1o">_electronicEdition</metadata>
     <metadata num="1o">_electronicPublisher</metadata>
     <metadata num="1o">_digitalOrigin</metadata>
-    <!-- Automatisch eingefügt für das Update auf Goobi 2.2 -->
     <metadata num="1o">copyrightimageset</metadata>
     <metadata num="1o">FormatSourcePrint</metadata>
     <metadata num="1o">SizeSourcePrint</metadata>
     <metadata DefaultDisplay="true" num="*">DocLanguage</metadata>
     <metadata num="*">PhysicalLocation</metadata>
-
     <metadata num="1o">TypeOfResource</metadata>
     <metadata num="1o">URN</metadata>
     <metadata num="1o">_urn</metadata>
+  </DocStrctType>
+  <DocStrctType>
+    <Name>area</Name>
+    <language name="de">Region</language>
+    <language name="en">Area</language>
+    <metadata num="1o">_urn</metadata>
+    <metadata num="1o">_COORDS</metadata>
+    <metadata num="1o">_SHAPE</metadata>
+    <metadata num="1m">physPageNumber</metadata>
+    <metadata num="1m">logicalPageNumber</metadata>
+  </DocStrctType>
+
+  <!-- docstruct for newspaper export -->
+  <DocStrctType>
+    <Name>ExportNewspaperIssue</Name>
+    <language name="de">Ausgabe</language>
+    <language name="en">NewspaperIssue</language>
+    <allowedchildtype>NewspaperSupplement</allowedchildtype>
+    <!-- issue metadata-->
+    <metadata num="1o">CatalogIDDigital</metadata>
+    <metadata DefaultDisplay="true" num="1o">PartNumber</metadata>
+    <metadata DefaultDisplay="true" num="1o">DateIssued</metadata>
+    <metadata num="*">CurrentNo</metadata>
+    <metadata DefaultDisplay="true" num="1m">CurrentNoSorting</metadata>
+    <metadata num="1o">TitleDocMain</metadata>
+    <metadata num="*">DocLanguage</metadata>
+    <metadata num="*">singleDigCollection</metadata>
+    <metadata num="*">_ucc_id</metadata>
+    <metadata num="1o">UseAndReproductionLicense</metadata>
+    <metadata num="1o">CatalogIDPeriodicalDB</metadata>
+    <metadata num="1o">AnchorCatalogIDPeriodicalDBDigital</metadata>
+    <metadata num="1o">_purl</metadata>
+    <metadata num="*">PhysicalLocation</metadata>
+    <metadata num="1o">TypeOfResource</metadata>
+
+    <!-- newspaper metadata -->
+    <metadata num="1o">newspaperTitleDocMain</metadata>
+    <metadata num="1o">newspaperTitleDocSub1</metadata>
+    <metadata num="1o">newspaperPlaceOfPublication</metadata>
+    <metadata num="1o">newspaperPublisherName</metadata>
+    <metadata num="1o">newspaperPublicationStart</metadata>
+    <metadata num="1o">newspaperPublicationEnd</metadata>   
+    <metadata num="1o">newspaperCatalogIDSource</metadata>
+    <metadata num="1o">newspaperCatalogIDDigital</metadata>
+    <metadata num="*">newspaperSizeSourcePrint</metadata>
+    <metadata num="*">newspaperCatalogIDPeriodicalDB</metadata>
+    <metadata num="1o">newspaperCatalogIDPeriodicalDBDigital</metadata>
+    <metadata num="1o">newspaperURN</metadata>
+    <metadata  num="1o">newspaperUseAndReproductionLicense</metadata>
+    <metadata num="1o">newspaperPublicationFrequency</metadata>
+    <metadata num="*">newspaperEditor</metadata>
+    <metadata num="*">newspaperCorporateEditor</metadata>
+    <group num="*">newspaperLocation</group>    
   </DocStrctType>
 
 
   <!-- DO NOT CHANGE!! -->
   <Formats>
-
     <!-- ##########################################################################
 			 ##  The PicaPlus Section                                                ##
 			 ########################################################################## -->
@@ -598,29 +726,29 @@
 				 ##  Person elements                                                     ##
 				 ########################################################################## -->
       <Person>
+        <Name>Author</Name>
         <picaMainTag>028A</picaMainTag>
-        <Name>Author</Name>
         <picaSubTag type="firstname">D</picaSubTag>
         <picaSubTag type="lastname">A</picaSubTag>
         <picaSubTag type="identifier">7</picaSubTag>
       </Person>
       <Person>
+        <Name>Author</Name>
         <picaMainTag>028B</picaMainTag>
-        <Name>Author</Name>
         <picaSubTag type="firstname">D</picaSubTag>
         <picaSubTag type="lastname">A</picaSubTag>
         <picaSubTag type="identifier">7</picaSubTag>
       </Person>
       <Person>
-        <picaMainTag>028C</picaMainTag>
         <Name>OtherPerson</Name>
+        <picaMainTag>028C</picaMainTag>
         <picaSubTag type="firstname">D</picaSubTag>
         <picaSubTag type="lastname">A</picaSubTag>
         <picaSubTag type="identifier">7</picaSubTag>
       </Person>
       <Person>
-        <picaMainTag>028F</picaMainTag>
         <Name>Honoree</Name>
+        <picaMainTag>028F</picaMainTag>
         <picaSubTag type="firstname">D</picaSubTag>
         <picaSubTag type="lastname">A</picaSubTag>
         <picaSubTag type="identifier">7</picaSubTag>
@@ -711,7 +839,6 @@
         <picaSubTag>0</picaSubTag>
         <Name>CatalogIDDigital</Name>
       </Metadata>
-
       <Metadata>
         <picaMainTag>039I</picaMainTag>
         <picaSubTag>9</picaSubTag>
@@ -722,7 +849,6 @@
         <picaMainTag>002@</picaMainTag>
         <picaSubTag>x</picaSubTag>
       </Metadata>
-
       <Metadata>
         <picaMainTag>007S</picaMainTag>
         <picaSubTag>0</picaSubTag>
@@ -733,6 +859,11 @@
         <picaSubTag>a</picaSubTag>
         <Name>Event</Name>
       </Metadata>
+      <Metadata>
+        <Name>PublicationFrequency</Name>
+        <picaMainTag>018@</picaMainTag>
+        <picaSubTag>a</picaSubTag>
+      </Metadata>      
       <!-- Automatisch eingefügt für das Update auf Goobi 2.2 -->
       <Metadata>
         <Name>copyrightimageset</Name>
@@ -823,6 +954,30 @@
         <Name>Monograph</Name>
       </DocStruct>
       <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Ob</picaContent>
+        <Name>Periodical</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Oj</picaContent>
+        <Name>ContainedWork</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Aj</picaContent>
+        <Name>ContainedWork</Name>
+      </DocStruct>
+      <DocStruct>
+        <picaMainTag>002@</picaMainTag>
+        <picaSubTag>0</picaSubTag>
+        <picaContent>Ab</picaContent>
+        <Name>Periodical</Name>
+      </DocStruct>
+      <DocStruct>
         <Name>Newspaper</Name>
         <picaMainTag>002@</picaMainTag>
         <picaSubTag>0</picaSubTag>
@@ -835,8 +990,6 @@
         <picaContent>Ab</picaContent>
       </DocStruct>
     </PicaPlus>
-
-
     <Marc>
       <Metadata>
         <!-- internal metadata name -->
@@ -851,7 +1004,6 @@
           <fieldInd1>any</fieldInd1>
           <fieldInd2>any</fieldInd2>
         </field>
-
         <!-- The <subfield> for the identifier -->
         <identifierField>0</identifierField>
         <!-- check if identifier matches the condition. This is needed because all identifier are written to field
@@ -901,6 +1053,28 @@
         </field>
         <separateEntries>true</separateEntries>
       </Metadata>
+      <Metadata>
+        <Name>PublicationStart</Name>
+        <field>
+          <fieldMainTag>008</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/.{7}(.{4}).*/$1/g</fieldReplacement>
+        <separateEntries>true</separateEntries>
+      </Metadata>
+      <Metadata>
+        <Name>PublicationEnd</Name>
+        <field>
+          <fieldMainTag>008</fieldMainTag>
+          <fieldSubTag>a</fieldSubTag>
+          <fieldInd1>any</fieldInd1>
+          <fieldInd2>any</fieldInd2>
+        </field>
+        <fieldReplacement>s/.{11}(.{4}).*/$1/g</fieldReplacement>
+        <separateEntries>true</separateEntries>
+      </Metadata>      
       <Metadata>
         <Name>PlaceOfPublication</Name>
         <field>
@@ -988,8 +1162,6 @@
         <conditionValue>/DE-600/</conditionValue>
         <separateEntries>true</separateEntries>
       </Metadata>
-
-
       <Metadata>
         <Name>PublisherName</Name>
         <field>
@@ -1014,18 +1186,6 @@
         <fieldReplacement>s/^(.+?)[ ]*[:;,].*$/$1/g</fieldReplacement>
         <separateEntries>true</separateEntries>
       </Metadata>
-      <!--
-      <Metadata>
-          <Name>PublicationRun</Name>
-          <field>
-              <fieldMainTag>362</fieldMainTag>
-              <fieldSubTag>a</fieldSubTag>
-              <fieldInd1>any</fieldInd1>
-              <fieldInd2>any</fieldInd2>
-          </field>
-          <separateEntries>true</separateEntries>
-      </Metadata>
--->
       <Metadata>
         <Name>PublicationRun</Name>
         <field>
@@ -1037,8 +1197,6 @@
         <fieldReplacement>s/.*, \[*([0-9]+)\??\]*/$1/g</fieldReplacement>
         <separateEntries>true</separateEntries>
       </Metadata>
-
-
       <Metadata>
         <Name>CatalogIDPredecessor</Name>
         <field>
@@ -1812,7 +1970,6 @@
         <separateEntries>false</separateEntries>
         <separator>,</separator>
       </Person>
-
       <Person>
         <Name>OtherPerson</Name>
         <field>
@@ -1898,6 +2055,7 @@
         <leader6>m</leader6>
         <leader7>m</leader7>
       </DocStruct>
+      <!-- TODO prüfen -->
       <DocStruct>
         <Name>Newspaper</Name>
         <leader6>a</leader6>
@@ -1908,8 +2066,6 @@
         <field008_21 />
       </DocStruct>
     </Marc>
-
-
     <!-- ##########################################################################
 			 ##  METS/MODS                                                           ##
 			 ########################################################################## -->
@@ -1932,10 +2088,9 @@
         <InternalName>URN</InternalName>
         <WriteXPath>./mods:mods/#mods:identifier[@type='urn']</WriteXPath>
       </Metadata>
-
       <Metadata>
         <InternalName>datedigit</InternalName>
-        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateCaptured[@encoding='iso8601']</WriteXPath>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType='publication']/#mods:dateCaptured[@encoding='iso8601']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>singleDigCollection</InternalName>
@@ -1965,21 +2120,14 @@
         <InternalName>BibliographicCitation</InternalName>
         <WriteXPath>./mods:mods/mods:identifier[@type='VD-ID']</WriteXPath>
       </Metadata>
-      <!--
       <Metadata>
         <InternalName>TitleDocMain</InternalName>
-        <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
-      </Metadata>
--->
-      <Metadata>
-        <InternalName>MainTitle</InternalName>
         <WriteXPath>./mods:mods/mods:titleInfo/#mods:title</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>PartNumber</InternalName>
         <WriteXPath>./mods:mods/mods:titleInfo/#mods:partName</WriteXPath>
       </Metadata>
-
       <Metadata>
         <InternalName>TitleDocSub1</InternalName>
         <WriteXPath>./mods:mods/mods:titleInfo/#mods:subTitle</WriteXPath>
@@ -2012,32 +2160,29 @@
         <InternalName>AnchorCatalogIDPeriodicalDBDigital</InternalName>
         <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type='zdb']</WriteXPath>
       </Metadata>
-
       <Metadata>
         <InternalName>DocLanguage</InternalName>
         <WriteXPath>./mods:mods/#mods:language/mods:languageTerm[@type='code'][@authority='iso639-2b']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>PlaceOfPublication</InternalName>
-        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:place/mods:placeTerm[@type='text']</WriteXPath>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType='publication']/#mods:place/mods:placeTerm[@type='text']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>PublicationYear</InternalName>
-        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateIssued[@encoding='iso8601'][@keyDate='yes']</WriteXPath>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType='publication']/#mods:dateIssued[@encoding='iso8601'][@keyDate='yes']</WriteXPath>
       </Metadata>
-
       <Metadata>
         <InternalName>DateIssued</InternalName>
-        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateIssued[@encoding='iso8601'][@keyDate='yes']</WriteXPath>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType='publication']/#mods:dateIssued[@encoding='iso8601'][@keyDate='yes']</WriteXPath>
       </Metadata>
-
       <Metadata>
         <InternalName>PublisherName</InternalName>
-        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:publisher</WriteXPath>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType='publication']/#mods:publisher</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>PublicationRun</InternalName>
-        <WriteXPath>./mods:mods/mods:originInfo[@eventType="publication"]/#mods:dateOther</WriteXPath>
+        <WriteXPath>./mods:mods/mods:originInfo[@eventType='publication']/#mods:dateOther</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>IdentifierRelatedWork</InternalName>
@@ -2071,7 +2216,7 @@
         <InternalName>Author</InternalName>
         <MODSName>Person</MODSName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="aut"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2080,7 +2225,7 @@
         <InternalName>OtherPerson</InternalName>
         <MODSName>Person</MODSName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="oth"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2089,7 +2234,7 @@
         <InternalName>Editor</InternalName>
         <MODSName>Person</MODSName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="edt"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2097,7 +2242,7 @@
       <Metadata>
         <InternalName>IllustratorArtist</InternalName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="ill"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2105,7 +2250,7 @@
       <Metadata>
         <InternalName>Photographer</InternalName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="pht"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2113,16 +2258,15 @@
       <Metadata>
         <InternalName>Printer</InternalName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="prt"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
-
       </Metadata>
       <Metadata>
         <InternalName>Translator</InternalName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="trl"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2130,7 +2274,7 @@
       <Metadata>
         <InternalName>Creator</InternalName>
         <WriteXPath>./mods:mods/#mods:name[@type='personal'][mods:role/mods:roleTerm="cre"[@authority='marcrelator'][@type='code']]
-                </WriteXPath>
+        </WriteXPath>
         <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
         <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
         <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
@@ -2171,86 +2315,249 @@
         <InternalName>Event</InternalName>
         <WriteXPath>./mods:mods/#mods:note[@type='event']</WriteXPath>
       </Metadata>
-
-      <Metadata>
-        <InternalName>CatalogIDPeriodicalDB</InternalName>
-        <WriteXPath>./mods:mods/mods:relatedItem[@type='original']/#mods:identifier[@type='zdb']</WriteXPath>
-      </Metadata>
-      <Metadata>
-        <InternalName>CatalogIDPeriodicalDBDigital</InternalName>
-        <WriteXPath>./mods:mods/#mods:identifier[@type='zdb']</WriteXPath>
-      </Metadata>
-
-
+     
       <Metadata>
         <InternalName>TypeOfResource</InternalName>
         <WriteXPath>./mods:mods/mods:typeOfResource</WriteXPath>
       </Metadata>
-
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^PDM$/</ValueCondition>
+        <ValueCondition>^PDM$</ValueCondition>
         <ValueRegExp>s/PDM/Public Domain Mark 1.0/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/publicdomain/mark/1.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC0$/</ValueCondition>
+        <ValueCondition>^CC0$</ValueCondition>
         <ValueRegExp>s/CC0/CC0 1.0 Universal (CC0 1.0) Public Domain Dedication/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/publicdomain/zero/1.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC BY$/</ValueCondition>
+        <ValueCondition>^CC BY$</ValueCondition>
         <ValueRegExp>s/CC BY/Attribution 4.0 International (CC BY 4.0)/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by/4.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC BY-SA$/</ValueCondition>
+        <ValueCondition>^CC BY-SA$</ValueCondition>
         <ValueRegExp>s/CC BY-SA/Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-sa/4.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC BY-ND$/</ValueCondition>
+        <ValueCondition>^CC BY-ND$</ValueCondition>
         <ValueRegExp>s/CC BY-ND/Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nd/4.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC BY-NC$/</ValueCondition>
+        <ValueCondition>^CC BY-NC$</ValueCondition>
         <ValueRegExp>s/CC BY-NC/Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc/4.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC BY-NC-SA$/</ValueCondition>
+        <ValueCondition>^CC BY-NC-SA$</ValueCondition>
         <ValueRegExp>s/CC BY-NC-SA/Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc-sa/4.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^CC BY-NC-ND$/</ValueCondition>
+        <ValueCondition>^CC BY-NC-ND$</ValueCondition>
         <ValueRegExp>s/CC BY-NC-ND/Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc-nd/4.0/']</WriteXPath>
       </Metadata>
       <Metadata>
         <InternalName>UseAndReproductionLicense</InternalName>
-        <ValueCondition>/^reserved$/</ValueCondition>
+        <ValueCondition>^reserved$</ValueCondition>
         <ValueRegExp>s/reserved/In Copyright 1.0/</ValueRegExp>
         <WriteXPath>./mods:mods/#mods:accessCondition[@type='use and reproduction'][@href='https://rightsstatements.org/vocab/InC/1.0/']</WriteXPath>
       </Metadata>
 
 
-      <!-- Do NOT map this metadata field. -->
-      <!--Metadata>
-				<InternalName>CreatorsAllOrigin</InternalName>
-				<MODSName skipping="yes">xxx</MODSName>
-			</Metadata-->
-      <!-- ##########################################################################
-                 ##  Declare the mapping between DocStructs - physical and logical       ##
-                 ########################################################################## -->
+      <!-- BEGIN NEWSPAPER EXPORT: mods mapping -->
+      
+      <!-- titleInfo -->
+       <Metadata>
+        <InternalName>newspaperTitleDocMain</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:titleInfo/#mods:title</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperTitleDocSub1</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:titleInfo/#mods:subTitle</WriteXPath>
+      </Metadata>
+
+       <!-- name -->
+      <Metadata>
+        <InternalName>newspaperEditor</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:name[@type='personal'][mods:role/mods:roleTerm="edt"[@authority='marcrelator'][@type='code']]
+        </WriteXPath>
+        <FirstnameXPath>./mods:namePart[@type='given']</FirstnameXPath>
+        <LastnameXPath>./mods:namePart[@type='family']</LastnameXPath>
+        <DisplayNameXPath>./mods:displayForm</DisplayNameXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperCorporateEditor</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:name[@type='corporate'][mods:role/mods:roleTerm="edt"[@authority='marcrelator'][@type='code']]</WriteXPath>
+        <MainNameXPath>./mods:namePart</MainNameXPath>
+        <SubNameXPath>./mods:namePart</SubNameXPath>
+        <PartNameXPath>./mods:namePart</PartNameXPath>
+      </Metadata>      
+
+        <!-- typeOfResource -->
+      <Metadata>
+        <InternalName>newspaperTypeOfResource</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:typeOfResource</WriteXPath>
+      </Metadata>
+      
+      <!-- genre -->
+      
+      <!-- originInfo -->
+      <Metadata>
+        <InternalName>newspaperPlaceOfPublication</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:originInfo[@eventType='publication']/#mods:place/mods:placeTerm[@type='text']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperPublisherName</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:originInfo/#mods:publisher</WriteXPath>
+      </Metadata>      
+      <Metadata>
+        <InternalName>newspaperPublicationStart</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:originInfo/#mods:dateIssued[@point='start'][@encoding='iso8601']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperPublicationEnd</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:originInfo/#mods:dateIssued[@point='end'][@encoding='iso8601']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperPublicationFrequency</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:originInfo/#mods:frequency</WriteXPath>
+      </Metadata>
+      
+      <!-- language -->
+      <Metadata>
+        <InternalName>DocLanguage</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:language/mods:languageTerm[@type='code'][@authority='iso639-2b']</WriteXPath>
+      </Metadata>
+     
+      <!-- phyiscalDescription -->   
+      
+      <!-- abstract -->
+      
+      <!-- tableOfContents -->
+      
+      <!-- targetAudience -->
+      
+      <!-- note -->
+      
+      <!-- classification -->
+      
+      
+      <!-- relatedItem -->
+      
+      <Metadata>
+        <InternalName>newspaperCatalogIDPeriodicalDB</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:relatedItem[@type="original"]/#mods:identifier[@type="zdb"]</WriteXPath>
+      </Metadata>
+      
+      <!-- identifier -->
+      
+      <Metadata>
+        <InternalName>newspaperCatalogIDPeriodicalDBDigital</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type="zdb"]</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperURN</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:identifier[@type="urn"]</WriteXPath>
+      </Metadata>
+
+    <!-- location -->
+      <Group>
+          <InternalName>newspaperLocation</InternalName>
+          <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:location</WriteXPath>
+          <Metadata>
+              <InternalName>physicalLocation</InternalName>
+              <WriteXPath>./mods:physicalLocation</WriteXPath>
+          </Metadata>
+          <Metadata>
+              <InternalName>shelfLocator</InternalName>
+              <WriteXPath>./mods:shelfLocator</WriteXPath>
+          </Metadata>
+      </Group>
+      
+      <!-- accessCondition -->
+      
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^PDM$</ValueCondition>
+        <ValueRegExp>s/PDM/Public Domain Mark 1.0/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/publicdomain/mark/1.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC0$</ValueCondition>
+        <ValueRegExp>s/CC0/CC0 1.0 Universal (CC0 1.0) Public Domain Dedication/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/publicdomain/zero/1.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC BY$</ValueCondition>
+        <ValueRegExp>s/CC BY/Attribution 4.0 International (CC BY 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC BY-SA$</ValueCondition>
+        <ValueRegExp>s/CC BY-SA/Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-sa/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC BY-ND$</ValueCondition>
+        <ValueRegExp>s/CC BY-ND/Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nd/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC BY-NC$</ValueCondition>
+        <ValueRegExp>s/CC BY-NC/Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC BY-NC-SA$</ValueCondition>
+        <ValueRegExp>s/CC BY-NC-SA/Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc-sa/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^CC BY-NC-ND$</ValueCondition>
+        <ValueRegExp>s/CC BY-NC-ND/Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@xlink:href='https://creativecommons.org/licenses/by-nc-nd/4.0/']</WriteXPath>
+      </Metadata>
+      <Metadata>
+        <InternalName>newspaperUseAndReproductionLicense</InternalName>
+        <ValueCondition>^reserved$</ValueCondition>
+        <ValueRegExp>s/reserved/In Copyright 1.0/</ValueRegExp>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:accessCondition[@type='use and reproduction'][@href='https://rightsstatements.org/vocab/InC/1.0/']</WriteXPath>
+      </Metadata>
+
+    <!-- part -->
+
+    <!-- extension -->
+
+    <!-- recordInfo -->
+
+      <Metadata>
+        <InternalName>newspaperCatalogIDDigital</InternalName>
+        <WriteXPath>./mods:mods/mods:relatedItem[@type='host']/#mods:recordInfo/mods:recordIdentifier[@source="zdb-ppn"]</WriteXPath>
+      </Metadata>
+
+
+      <!-- END NEWSPAPER EXPORT: mods mapping -->
+
+
       <!-- DO NOT CHANGE!! -->
       <DocStruct>
         <InternalName>BoundBook</InternalName>
@@ -2282,23 +2589,23 @@
       </DocStruct>
       <DocStruct>
         <InternalName>PeriodicalVolume</InternalName>
-        <MetsType>PeriodicalVolume</MetsType>
+        <MetsType>volume</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Appendix</InternalName>
-        <MetsType>Appendix</MetsType>
+        <MetsType>appendix</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>PeriodicalPart</InternalName>
-        <MetsType>PeriodicalPart</MetsType>
+        <MetsType>part</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Advertising</InternalName>
-        <MetsType>Advertising</MetsType>
+        <MetsType>advertising</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableDescription</InternalName>
-        <MetsType>TableDescription</MetsType>
+        <MetsType>description</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IllustrationDescription</InternalName>
@@ -2306,7 +2613,7 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Chapter</InternalName>
-        <MetsType>Chapter</MetsType>
+        <MetsType>chapter</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Periodical</InternalName>
@@ -2314,71 +2621,71 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Prepage</InternalName>
-        <MetsType>Prepage</MetsType>
+        <MetsType>prepage</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Errata</InternalName>
-        <MetsType>Errata</MetsType>
+        <MetsType>corrigenda</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Index</InternalName>
-        <MetsType>Index</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TitlePage</InternalName>
-        <MetsType>TitlePage</MetsType>
+        <MetsType>title_page</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>OtherDocStrct</InternalName>
-        <MetsType>OtherDocStrct</MetsType>
+        <MetsType>other</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Bibliography</InternalName>
-        <MetsType>Bibliography</MetsType>
+        <MetsType>bibliography</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>SheetMusic</InternalName>
-        <MetsType>SheetMusic</MetsType>
+        <MetsType>musical_notation</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Dedication</InternalName>
-        <MetsType>Dedication</MetsType>
+        <MetsType>dedication</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>CurriculumVitae</InternalName>
-        <MetsType>CurriculumVitae</MetsType>
+        <MetsType>curriculum_vitae</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Preface</InternalName>
-        <MetsType>Preface</MetsType>
+        <MetsType>preface</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Supplement</InternalName>
-        <MetsType>Supplement</MetsType>
+        <MetsType>supplement</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>PeriodicalIssue</InternalName>
-        <MetsType>PeriodicalIssue</MetsType>
+        <MetsType>issue</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Introduction</InternalName>
-        <MetsType>Introduction</MetsType>
+        <MetsType>introduction</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Imprint</InternalName>
-        <MetsType>Imprint</MetsType>
+        <MetsType>imprint</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ContainedWork</InternalName>
-        <MetsType>ContainedWork</MetsType>
+        <MetsType>contained_work</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>AttachedWork</InternalName>
-        <MetsType>AttachedWork</MetsType>
+        <MetsType>contained_work</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>PartOfWork</InternalName>
-        <MetsType>PartOfWork</MetsType>
+        <MetsType>part</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>MultiVolumeWork</InternalName>
@@ -2390,182 +2697,108 @@
       </DocStruct>
       <DocStruct>
         <InternalName>Obituary</InternalName>
-        <MetsType>Obituary</MetsType>
+        <MetsType>obituary</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Figure</InternalName>
-        <MetsType>Figure</MetsType>
+        <MetsType>figure</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Table</InternalName>
-        <MetsType>Table</MetsType>
+        <MetsType>table</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Map</InternalName>
-        <MetsType>Map</MetsType>
+        <MetsType>map</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Theses</InternalName>
-        <MetsType>Theses</MetsType>
+        <MetsType>theses</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Headword</InternalName>
-        <MetsType>Headword</MetsType>
+        <MetsType>headword</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Letter</InternalName>
-        <MetsType>Letter</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Headword</InternalName>
-        <MetsType>Headword</MetsType>
+        <MetsType>letter</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Addendum</InternalName>
-        <MetsType>Addendum</MetsType>
+        <MetsType>addendum</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Cover</InternalName>
-        <MetsType>Cover</MetsType>
+        <MetsType>cover</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Remarks</InternalName>
-        <MetsType>Remarks</MetsType>
+        <MetsType>remarks</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ListOfMaps</InternalName>
-        <MetsType>ListOfMaps</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ListOfIllustrations</InternalName>
-        <MetsType>ListOfIllustrations</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>ListOfTables</InternalName>
-        <MetsType>ListOfTables</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableOfLiteratureRefs</InternalName>
-        <MetsType>TableOfLiteratureRefs</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableOfContents</InternalName>
-        <MetsType>TableOfContents</MetsType>
+        <MetsType>contents</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>TableOfAbbreviations</InternalName>
-        <MetsType>TableOfAbbreviations</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexAuthor</InternalName>
-        <MetsType>IndexAuthor</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexOverall</InternalName>
-        <MetsType>IndexOverall</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexPersons</InternalName>
-        <MetsType>IndexPersons</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexLocation</InternalName>
-        <MetsType>IndexLocation</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexSubject</InternalName>
-        <MetsType>IndexSubject</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexSpecial</InternalName>
-        <MetsType>IndexSpecial</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexVolume</InternalName>
-        <MetsType>IndexVolume</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>IndexOfChronology</InternalName>
-        <MetsType>IndexOfChronology</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Invitation</InternalName>
-        <MetsType>Invitation</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Ticket</InternalName>
-        <MetsType>Ticket</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Festschrift</InternalName>
-        <MetsType>Festschrift</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Insertion</InternalName>
-        <MetsType>Insertion</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Brochure</InternalName>
-        <MetsType>Brochure</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Poster</InternalName>
-        <MetsType>Poster</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Programme</InternalName>
-        <MetsType>Programme</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ProgrammeBook</InternalName>
-        <MetsType>ProgrammeBook</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ProgrammeIssue</InternalName>
-        <MetsType>ProgrammeIssue</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ProgrammeNote</InternalName>
-        <MetsType>ProgrammeNote</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Prospect</InternalName>
-        <MetsType>Prospect</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>ConcertReview</InternalName>
-        <MetsType>ConcertReview</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Review</InternalName>
-        <MetsType>Review</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>SeasonPreview</InternalName>
-        <MetsType>SeasonPreview</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Textbook</InternalName>
-        <MetsType>Textbook</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Preview</InternalName>
-        <MetsType>Preview</MetsType>
+        <MetsType>index</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>Newspaper</InternalName>
-        <MetsType>newspaper</MetsType>
-      </DocStruct>
-
-      <DocStruct>
-        <InternalName>NewspaperStub</InternalName>
         <MetsType>newspaper</MetsType>
       </DocStruct>
       <DocStruct>
         <InternalName>NewspaperVolume</InternalName>
         <MetsType>volume</MetsType>
       </DocStruct>
-
       <DocStruct>
         <InternalName>NewspaperEdition</InternalName>
         <MetsType>edition</MetsType>
@@ -2579,16 +2812,8 @@
         <MetsType>supplement</MetsType>
       </DocStruct>
       <DocStruct>
-        <InternalName>Year</InternalName>
-        <MetsType>year</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Month</InternalName>
-        <MetsType>month</MetsType>
-      </DocStruct>
-      <DocStruct>
-        <InternalName>Day</InternalName>
-        <MetsType>day</MetsType>
+        <InternalName>ExportNewspaperIssue</InternalName>
+        <MetsType>issue</MetsType>
       </DocStruct>
     </METS>
   </Formats>

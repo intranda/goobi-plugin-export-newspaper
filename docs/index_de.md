@@ -9,13 +9,9 @@ keywords:
     - Export Plugin
 ---
 ## Einführung
-Das Plugin dient zur Erstellung der METS Struktur für den Import in das Zeitungsportal der Deutschen Digitalen Bibliothek. Dabei wird für die Gesamtaufnahme einer Zeitung eine METS-Anchor Datei erzeugt, für jeden exportierten Jahrgang wird eine weitere METS-Anchor Datei erzeugt und innerhalb der Gesamtaufnahme verlinkt. Der Jahrgang enthält weitere Strukturen für Monat und Tag.
 
-Jede Ausgabe wird als einzelne METS Dateien erstellt und in der METS-Anchor Datei des Jahrgangs verlinkt. Die Ausgabe kann weitere Strukturdaten wie Artikelbeschreibungen oder Beilagen enthalten. Hier wird auch auf die digitalisierten Bilder verwiesen.
-
-[https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Gesamtaufnahme+Zeitung+1.0](https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Gesamtaufnahme+Zeitung+1.0)
-
-[https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0](https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Jahrgang+Zeitung+1.0)
+Das Plugin dient zur Erstellung der METS Struktur für den Import in das Zeitungsportal der Deutschen Digitalen Bibliothek. Dabei wird wird für jede Ausgabe des Vorgangs eine eigene METS/MODS Datei erstellt.
+Die Ausgabe kann weitere Strukturdaten wie Artikelbeschreibungen oder Beilagen enthalten. Hier wird auch auf die digitalisierten Bilder verwiesen.
 
 [https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0](https://wiki.deutsche-digitale-bibliothek.de/display/DFD/Ausgabe+Zeitung+1.0)
 
@@ -47,63 +43,47 @@ Zur Inbetriebnahme des Plugins muss dieses für eine Aufgabe im Workflow aktivie
 
 Da dieses Plugin üblicherweise automatisch ausgeführt werden soll, sollte der Arbeitsschritt im Workflow als automatisch konfiguriert werden. Darüber hinaus muss die Aufgabe als Export-Schritt markiert sein.
 
-Daneben muss es noch einen weiteren, regulären Export Schritt geben, damit die verlinkten Bilder und ALTO Dateien über die Schnittstellen des Goobi viewers ausgeliefert werden können.
+Nachdem das Plugin vollständig installiert und eingerichtet wurde, wird es üblicherweise automatisch innerhalb des Workflows ausgeführt, so dass keine manuelle Interaktion mit dem Nutzer erfolgt. Stattdessen erfolgt der Aufruf des Plugins durch den Workflow im Hintergrund und führt die folgenden Arbeiten nacheinander durch:
 
-Nachdem das Plugin vollständig installiert und eingerichtet wurde, wird es üblicherweise automatisch innerhalb des Workflows ausgeführt, so dass keine manuelle Interaktion mit dem Nutzer erfolgt. Stattdessen erfolgt der Aufruf des Plugins durch den Workflow im Hintergrund und führt die folgenden Arbeiten durch:
-
-Für jede Ausgabe wird eine eigene METS Datei erstellt, die zur Ausgabe gehörenden Bilder und OCR Daten verlinkt. Die Ausgabe kann weitere Unterelemente wie Artikel oder Beilagen haben.
-
-Die einzelnen Ausgaben werden dann in einer METS Datei für den Jahrgang zusammengefasst. Die METS Dateien der Ausgaben sind innerhalb einer Struktur für Monat und Tag verlinkt.
-
-Als letztes wird geprüft, ob im Zielverzeichnis ein Datensatz mit den Metadaten der Gesamtaufnahme existiert. Wenn nicht, wird eine METS Datei erstellt, ansonsten wird der Jahrgang in die Strukturdaten der Gesamtaufnahme eingetragen.
+* Lesen der Metadaten
+* Validierung, ob es sich um eine Zeitung handelt
+* Validierung, ob alle Pflichtmetadaten wie ZDB ID für A- und O-Aufnahme, Identifier der Zeitung, Nutzungslizenz, Erscheinungsdatum, Nummern für jede Ausgabe ausgefüllt sind
+* Prüfung, ob generierbare Metadaten bereits vorliegen oder erstellt werden müssen (Identifier der einzelnen Ausgaben, Sortiernummer basierend auf der Ausgabennummer)
+* Generierung von noch fehlenden Pflichtmetadaten
+* Erzeugen der METS/MODS Struktur für die Ausgabe
+* Kopieren der Metadaten der Ausgabe Zeitschrift in die neue Datei
+* Überführen der Metadaten des Zeitungsjahrgangs und der Gesamtaufnahme in die neue Datei. Dazu muss es im Regelatz für jedes Metadatum, dass aus der Gesamtaufnahme übernommen werden soll, ein gleichnamiges Feld mit dem Präfix "newspaper" und für jedes Metadatum aus dem Jahrgang ein Metadatum mit dem Präfix "year" geben und im Issue erlaubt sein. Metadaten, bei denen kein Äquivalent mit dem Präfix existiert, werden beim Export nicht übernommen.
+* Generierung der Dateigruppen für die in der Ausgabe verlinkten Bilder. Dabei werden entwieder die Einstellungen aus der Projektkonfiguration genutzt, oder davon abweichende Daten aus der Konfigurationsdatei, falls zum Beispiel neben dem regulären Export noch eine Lieferung an ein anderes Portal geplant ist.
+* Speichern der Datei im konfigurierten Ordner
+* falls konfiguriert, kopieren der Bilder und ALTO Daten in eigene Unterordner pro Ausgabe
 
 
 ## Konfiguration
 Die Konfiguration des Plugins erfolgt über die Konfigurationsdatei `plugin_intranda_export_newspaper.xml` und kann im laufenden Betrieb angepasst werden. Im folgenden ist eine beispielhafte Konfigurationsdatei aufgeführt:
 
+{{CONFIG_CONTENT}}
+
+
+Im ersten Bereich `<export>` werden einige globale Parameter gesetzt. Hier wird festgelegt, ob neben den Metsdateien auch Bilder und ALTO exportiert werden sollen (`<exportImageFolder>, <exportAltoFolder>` `true`/`false`), in welches Verzeichnis der Export durchgeführt werden soll (`<exportFolder>`) und welche Resolver für die METS Datei (`<metsUrl>`) und den Link auf den veröffentlichten Datensatz (`<resolverUrl>`) geschrieben werden sollen.
+
+Mittels `<mode>` kann festgelegt werden, ob der striktere `ddb` Modus oder der einfache `simple` Modus genutzt werden soll. Bei simple können eine Reihe von Validierungen und Pflichtangaben außer Kraft gesetzt werden, die für den Datenimport in die Deutsche Digitale Bibliothek notwendig sind.
+
+Im zweiten Bereich können von den Projekteinstellungen abweichende Angaben gemacht werden. Dazu können sowohl filegroups überschrieben werden als die einzelnen Felder der Inhaltlichen Einstellungen.
+
+In `<metadata>` werden eine Reihe von Metadaten definiert, die für die Validierung und Generierung von Daten genutzt werden.
+
+Das Element `<purl>` steuert, wie der PURL für jede Ausgabe erzeugt wird. Im Standardmodus (`type="default"`) wird der PURL aus der konfigurierten `<resolverUrl>` und dem Identifier der Ausgabe zusammengesetzt. Im benutzerdefinierten Modus (`type="custom"`) wird stattdessen das Attribut `pattern` ausgewertet. Das Pattern kann Variablen der folgenden drei Typen enthalten, die jeweils durch den entsprechenden Metadatenwert ersetzt werden:
+
+| Variable | Quelle |
+|----------|--------|
+| `{meta.newspaper.MetadatenName}` | Metadatum der Gesamtaufnahme (Zeitungstitel) |
+| `{meta.volume.MetadatenName}` | Metadatum des Jahrgangs |
+| `{meta.issue.MetadatenName}` | Metadatum der einzelnen Ausgabe |
+
+Beispiel:
+
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<config_plugin>
-    <export>
-        <images>false</images>
-        <subfolderPerIssue>false</subfolderPerIssue>
-        <exportFolder>/tmp/export/</exportFolder>
-        <metsUrl>https://viewer.example.org/viewer/metsresolver?id=</metsUrl>
-        <resolverUrl>https://viewer.org/viewer/piresolver?id=</resolverUrl>
-    </export>
-    <metadata>
-        <purl>_purl</purl>
-        <zdbiddigital>CatalogIDPeriodicalDBDigital</zdbiddigital>
-        <zdbidanalog>CatalogIDPeriodicalDB</zdbidanalog>
-        <identifier>CatalogIDDigital</identifier>
-        <issueDate>DateIssued</issueDate>
-        <yearDate>CurrentNoSorting</yearDate>
-        <titleLabel>TitleDocMain</titleLabel>
-        <modsTitle>MainTitle</modsTitle>
-        <volumeNumber>VolumeNo</volumeNumber>
-        <issueNumber>CurrentNo</issueNumber>
-        <sortNumber>CurrentNoSorting</sortNumber>
-        <language>DocLanguage</language>
-        <location>PhysicalLocation</location>
-        <licence>UseAndReproductionLicense</licence>
-        <resourceType>TypeOfResource</resourceType>
-        <anchorId>AnchorID</anchorId>
-        <anchorTitle>AnchorTitle</anchorTitle>
-        <anchorZDBIdDigital>AnchorCatalogIDPeriodicalDBDigital</anchorZDBIdDigital>
-    </metadata>
-    <docstruct>
-        <newspaper>Newspaper</newspaper>
-        <year>Year</year>
-        <month>Month</month>
-        <day>Day</day>
-        <issue>NewspaperIssue</issue>
-        <newspaperStub>NewspaperStub</newspaperStub>
-    </docstruct>
-</config_plugin>
+<purl type="custom" pattern="https://viewer.example.com/piresolver?id={meta.newspaper.CatalogIDDigital}&amp;year={meta.volume.CurrentNoSorting}&amp;issue={meta.issue.CurrentNo}">_purl</purl>
 ```
 
-Im ersten Bereich `<export>` werden einige globale Parameter gesetzt. Hier wird festgelegt, ob neben den Metsdateien auch Bilder exportiert werden sollen (`<images>` `true`/`false`), ob diese pro Ausgabe oder pro Jahrgang exportiert und in den Datensätzen verlinkt werden (`<subfolderPerIssue>` `true`/`false`), in welches Verzeichnis der Export durchgeführt werden soll (`<exportFolder>`) und welche Resolver für die METS Datei (`<metsUrl>`) und den Link auf den veröffentlichten Datensatz (`<resolverUrl>`) geschrieben werden sollen.
-
-Im zweiten Bereich `<metadata>` werden eine Reihe von Metadaten definiert. Diese Felder müssen im Regelsatz existieren und werden zum Teil während des Exports von der Gesamtaufnahme in die einzelnen Ausgaben kopiert.
-
-Der dritte Bereich `<docstruct>` definiert einige zu erzeugende Strukturelemente. Diese müssen ebenfalls im Regelsatz konfiguriert sein.
+Der letzte Bereich `<docstruct>` definiert den internen Namen des zu erzeugende Strukturelements.
