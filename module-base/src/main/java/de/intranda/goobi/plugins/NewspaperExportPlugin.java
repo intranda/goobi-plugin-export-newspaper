@@ -1,6 +1,7 @@
 package de.intranda.goobi.plugins;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -81,6 +82,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
     // can be 'ddb' or 'simple'
     private String exportMode;
 
+    // create a mapping file with old and new identifier for each image
+    private boolean writeIdentifierMappingFile = false;
+    private String identifierMappingFileFolderName;
+    private String identifierMappingFilePrefix;
+
     // possible values: custom or default
     private String purlMode;
     private String purlPattern;
@@ -121,6 +127,11 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 log.error(e1);
             }
         }
+
+        writeIdentifierMappingFile = globalSettings.getBoolean("/identifierMapping/@enabled", false);
+        identifierMappingFileFolderName = globalSettings.getString("/identifierMapping/mappingFolder");
+        identifierMappingFilePrefix = globalSettings.getString("/identifierMapping/urlPrefix");
+
         exportMode = projectSettings.getString("/mode", "ddb");
 
         exportImages = projectSettings.getBoolean("/export/images", false);
@@ -225,6 +236,7 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
 
         String sortNumber = null;
         String issueNumber = null;
+        String volumeIdentifier = null;
 
         for (Metadata md : newspaperYear.getAllMetadata()) {
             // get current year
@@ -242,6 +254,9 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             if (accessCondition == null && md.getType().equals(accessConditionType)) {
                 accessCondition = md.getValue();
             }
+            if (md.getType().equals(identifierType)) {
+                volumeIdentifier = md.getValue();
+            }
         }
 
         if (StringUtils.isBlank(sortNumber) && StringUtils.isNotBlank(issueNumber) && StringUtils.isNumeric(issueNumber)) {
@@ -253,6 +268,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                 log.info(e);
             }
         }
+
+        List<String> identifierMappingLines = new ArrayList<>();
 
         // check all issues
         for (DocStruct issue : issues) {
@@ -462,6 +479,19 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                         DocStruct oldPage = ref.getTarget();
                         String filename = Paths.get(oldPage.getImageName()).getFileName().toString();
 
+                        if (writeIdentifierMappingFile) {
+                            String orderNumber = "";
+                            for (Metadata md : oldPage.getAllMetadata()) {
+                                if ("physPageNumber".equals(md.getType().getName())) {
+                                    orderNumber = md.getValue();
+                                }
+                            }
+
+                            String oldUrl = identifierMappingFilePrefix + volumeIdentifier + "/" + orderNumber + "/";
+                            String newUrl = identifierMappingFilePrefix + issueIdentifier + "/" + orderNumber + "/";
+                            identifierMappingLines.add(oldUrl + " : " + newUrl);
+                        }
+
                         DocStruct newPage = createDocstruct(pageType, issueDigDoc);
                         copyMetadata("", oldPage, newPage);
                         if (newPage != null) {
@@ -601,6 +631,15 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
             } catch (TypeNotAllowedAsChildException e) {
                 log.error(e);
             }
+        }
+
+        if (writeIdentifierMappingFile && !identifierMappingLines.isEmpty()) {
+            Path mappingFolder = Paths.get(identifierMappingFileFolderName);
+            if (!StorageProvider.getInstance().isDirectory(mappingFolder)) {
+                StorageProvider.getInstance().createDirectories(mappingFolder);
+            }
+            Path mappingFile = mappingFolder.resolve(volumeIdentifier + ".txt");
+            Files.write(mappingFile, identifierMappingLines, StandardCharsets.UTF_8);
         }
 
         // update/save generated data in goobi process

@@ -84,4 +84,10 @@
     <docstruct>
         <issue>ExportNewspaperIssue</issue>
     </docstruct>
+    
+    
+    <identifierMapping enable="false">
+        <mappingFolder>/tmp/export/</mappingFolder>
+        <urlPrefix>https://viewer.goobi.io/viewer/image/</urlPrefix>        
+    </identifierMapping>
 </config_plugin>
