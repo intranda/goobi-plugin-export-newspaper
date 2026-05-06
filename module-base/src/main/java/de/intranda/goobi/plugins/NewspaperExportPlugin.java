@@ -403,8 +403,8 @@ public class NewspaperExportPlugin implements IExportPlugin, IPlugin {
                     md.setValue("text");
                     issue.addMetadata(md);
                 } catch (UGHException e) {
-                    log.info(e);
                     if ("ddb".equals(exportMode)) {
+                        log.info(e);
                         problems.add("Cannot add resource to issue");
                         return false;
                     }
